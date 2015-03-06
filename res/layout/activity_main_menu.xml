@@ -1,0 +1,89 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.obigrocery.MainMenu" >
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:text="Obi Grocery App"
+        android:textSize="25sp" />
+
+    <Button
+        android:id="@+id/newGroceryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="24dp"
+        android:text="New Grocery List"
+        android:onClick="gotoNew" />
+
+    <Button
+        android:id="@+id/settingsButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/helpButton"
+        android:layout_alignBottom="@+id/helpButton"
+        android:layout_alignRight="@+id/textView1"
+        android:text="Settings"
+        android:onClick="gotoSettings" />
+
+    <Button
+        android:id="@+id/exitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/settingsButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="23dp"
+        android:text="Exit"
+        android:onClick="exitApp" />
+
+    <Button
+        android:id="@+id/loadGroceryButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/newGroceryButton"
+        android:layout_below="@+id/newGroceryButton"
+        android:layout_marginTop="18dp"
+        android:onClick="gotoLoad"
+        android:text="Load Grocery List" />
+
+    <Button
+        android:id="@+id/inputPurchasedButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:onClick="gotoPurchased"
+        android:text="Input Purchased Items" />
+
+    <Button
+        android:id="@+id/genReportButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/loadGroceryButton"
+        android:layout_below="@+id/inputPurchasedButton"
+        android:layout_marginTop="24dp"
+        android:onClick="gotoReports"
+        android:text="Generate Report" />
+
+    <Button
+        android:id="@+id/helpButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/genReportButton"
+        android:layout_marginTop="25dp"
+        android:layout_toLeftOf="@+id/settingsButton"
+        android:onClick="gotoHelp"
+        android:text="Help" />
+
+</RelativeLayout>
