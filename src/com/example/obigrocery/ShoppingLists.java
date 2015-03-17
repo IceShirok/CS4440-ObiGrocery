@@ -1,24 +1,23 @@
 package com.example.obigrocery;
 
 import android.support.v7.app.ActionBarActivity;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MainMenu extends ActionBarActivity {
+public class ShoppingLists extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main_menu);
+        setContentView(R.layout.activity_shopping_lists);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.main_menu, menu);
+        getMenuInflater().inflate(R.menu.shopping_lists, menu);
         return true;
     }
 
@@ -33,31 +32,11 @@ public class MainMenu extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    
-    public void gotoNew(View view) {
-        Intent i = new Intent(getApplicationContext(), NewGroceryList.class);
-        startActivity(i);
-    }
-    
-    public void gotoLoad(View view) {
-        Intent i = new Intent(getApplicationContext(), ShoppingLists.class);
-        startActivity(i);
-    }
-    
-    public void gotoPurchased(View view) {
-        System.out.println("Not implemented yet");
-    }
-    
-    public void gotoReports(View view) {
-        System.out.println("Not implemented yet");
-    }
-    
-    public void gotoHelp(View view) {
-        Intent i = new Intent(getApplicationContext(), HelpScreen.class);
-        startActivity(i);
-    }
 
-    public void exitApp(View view) {
-        System.exit(0);
+    /*
+     * Return to menu
+     */
+    public void returnToMenu(View view) {
+        finish();
     }
 }

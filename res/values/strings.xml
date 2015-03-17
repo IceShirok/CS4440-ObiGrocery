@@ -7,5 +7,6 @@
     <string name="title_activity_help_screen">HelpScreen</string>
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_new_grocery_list">NewGroceryList</string>
+    <string name="title_activity_shopping_lists">ShoppingLists</string>
 
 </resources>

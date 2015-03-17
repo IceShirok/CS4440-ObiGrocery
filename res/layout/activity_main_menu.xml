@@ -29,26 +29,6 @@
         android:onClick="gotoNew" />
 
     <Button
-        android:id="@+id/settingsButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/helpButton"
-        android:layout_alignBottom="@+id/helpButton"
-        android:layout_alignRight="@+id/textView1"
-        android:text="Settings"
-        android:onClick="gotoSettings" />
-
-    <Button
-        android:id="@+id/exitButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/settingsButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="23dp"
-        android:text="Exit"
-        android:onClick="exitApp" />
-
-    <Button
         android:id="@+id/loadGroceryButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -80,10 +60,20 @@
         android:id="@+id/helpButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/exitButton"
         android:layout_below="@+id/genReportButton"
-        android:layout_marginTop="25dp"
-        android:layout_toLeftOf="@+id/settingsButton"
+        android:layout_marginTop="19dp"
         android:onClick="gotoHelp"
         android:text="Help" />
+
+    <Button
+        android:id="@+id/exitButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/helpButton"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:onClick="exitApp"
+        android:text="Exit" />
 
 </RelativeLayout>

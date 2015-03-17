@@ -28,7 +28,16 @@
         </activity>
         <activity
             android:name=".NewGroceryList"
-            android:label="@string/title_activity_new_grocery_list" >
+            android:label="@string/title_activity_new_grocery_list"
+            android:windowSoftInputMode="adjustResize" >
+        </activity>
+        <activity
+            android:name=".ShoppingLists"
+            android:label="@string/title_activity_shopping_lists" >
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings" >
         </activity>
     </application>
 
