@@ -6,7 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.obigrocery.NewGroceryList" >
+    tools:context="com.example.obigrocery.screen.NewGroceryList" >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -20,7 +20,7 @@
             android:text="Add New Shopping List" />
 
         <EditText
-            android:id="@+id/productName"
+            android:id="@+id/listTextbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"

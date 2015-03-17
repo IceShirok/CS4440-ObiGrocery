@@ -1,23 +1,29 @@
-package com.example.obigrocery;
+package com.example.obigrocery.activities;
+
+import com.example.obigrocery.R;
+import com.example.obigrocery.R.id;
+import com.example.obigrocery.R.layout;
+import com.example.obigrocery.R.menu;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class ShoppingLists extends ActionBarActivity {
+public class HelpScreen extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shopping_lists);
+        setContentView(R.layout.activity_help_screen);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.shopping_lists, menu);
+        getMenuInflater().inflate(R.menu.help_screen, menu);
         return true;
     }
 
@@ -33,9 +39,6 @@ public class ShoppingLists extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /*
-     * Return to menu
-     */
     public void returnToMenu(View view) {
         finish();
     }

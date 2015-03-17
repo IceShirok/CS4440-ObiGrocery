@@ -6,74 +6,69 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.obigrocery.MainMenu" >
+    tools:context="com.example.obigrocery.screen.MainMenu" >
 
-    <TextView
-        android:id="@+id/textView1"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="23dp"
-        android:text="Obi Grocery App"
-        android:textSize="25sp" />
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/newGroceryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView1"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="24dp"
-        android:text="New Grocery List"
-        android:onClick="gotoNew" />
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="23dp"
+            android:text="Obi Grocery App"
+            android:textSize="25sp" />
 
-    <Button
-        android:id="@+id/loadGroceryButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/newGroceryButton"
-        android:layout_below="@+id/newGroceryButton"
-        android:layout_marginTop="18dp"
-        android:onClick="gotoLoad"
-        android:text="Load Grocery List" />
+        <Button
+            android:id="@+id/newGroceryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:onClick="gotoNew"
+            android:text="New Shopping List" />
 
-    <Button
-        android:id="@+id/inputPurchasedButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:onClick="gotoPurchased"
-        android:text="Input Purchased Items" />
+        <Button
+            android:id="@+id/loadGroceryButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="18dp"
+            android:onClick="gotoLoad"
+            android:text="Shopping Lists" />
 
-    <Button
-        android:id="@+id/genReportButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/loadGroceryButton"
-        android:layout_below="@+id/inputPurchasedButton"
-        android:layout_marginTop="24dp"
-        android:onClick="gotoReports"
-        android:text="Generate Report" />
+        <Button
+            android:id="@+id/inputPurchasedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="gotoPurchased"
+            android:text="Input Purchased Items" />
 
-    <Button
-        android:id="@+id/helpButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/exitButton"
-        android:layout_below="@+id/genReportButton"
-        android:layout_marginTop="19dp"
-        android:onClick="gotoHelp"
-        android:text="Help" />
+        <Button
+            android:id="@+id/genReportButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="24dp"
+            android:onClick="gotoReports"
+            android:text="Generate Report" />
 
-    <Button
-        android:id="@+id/exitButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/helpButton"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="14dp"
-        android:onClick="exitApp"
-        android:text="Exit" />
+        <Button
+            android:id="@+id/helpButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="19dp"
+            android:onClick="gotoHelp"
+            android:text="Help" />
+
+        <Button
+            android:id="@+id/exitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="14dp"
+            android:onClick="exitApp"
+            android:text="Exit" />
+
+    </LinearLayout>
 
 </RelativeLayout>

@@ -6,44 +6,55 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.obigrocery.ShoppingLists" >
+    tools:context="com.example.obigrocery.screen.ShoppingLists" >
 
-    <TextView
-        android:id="@+id/textView1"
+    <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Shopping Lists" />
+        android:orientation="vertical" >
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="44dp"
-        android:onClick="returnToMenu"
-        android:text="Return to Menu" />
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Shopping Lists"
+            android:textSize="25sp" />
 
-    <Button
-        android:id="@+id/Button01"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/button1"
-        android:layout_alignParentRight="true"
-        android:layout_marginBottom="18dp"
-        android:layout_marginRight="48dp"
-        android:text="Show List" />
+        <ListView
+            android:id="@+id/listView1"
+            android:layout_width="match_parent"
+            android:layout_height="270dp" >
+        </ListView>
 
-    <Button
-        android:id="@+id/button2"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/Button01"
-        android:layout_alignBottom="@+id/Button01"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_marginLeft="21dp"
-        android:text="Edit List" />
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <Button
+                android:id="@+id/showListButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="18dp"
+                android:layout_marginRight="48dp"
+                android:text="Show List" />
+
+            <Button
+                android:id="@+id/editListButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="21dp"
+                android:text="Edit List" />
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/menuButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="44dp"
+            android:onClick="returnToMenu"
+            android:text="Return to Menu" />
+
+    </LinearLayout>
 
 </RelativeLayout>
