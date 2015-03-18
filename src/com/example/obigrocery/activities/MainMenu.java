@@ -54,7 +54,8 @@ public class MainMenu extends ActionBarActivity {
     }
     
     public void gotoReports(View view) {
-        System.out.println("Not implemented yet");
+        Intent i = new Intent(getApplicationContext(), ReportSummaryActivity.class);
+        startActivity(i);
     }
     
     public void gotoHelp(View view) {
