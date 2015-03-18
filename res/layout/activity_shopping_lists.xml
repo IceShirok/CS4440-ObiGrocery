@@ -21,7 +21,8 @@
             android:textSize="25sp" />
 
         <ListView
-            android:id="@+id/listView1"
+            android:id="@+id/shoppingListView"
+            android:choiceMode="singleChoice"
             android:layout_width="match_parent"
             android:layout_height="270dp" >
         </ListView>
@@ -36,14 +37,16 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="18dp"
                 android:layout_marginRight="48dp"
-                android:text="Show List" />
+                android:text="Show List"
+                android:onClick="showList" />
 
             <Button
                 android:id="@+id/editListButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="21dp"
-                android:text="Edit List" />
+                android:text="Edit List"
+                android:onClick="editList" />
 
         </LinearLayout>
 

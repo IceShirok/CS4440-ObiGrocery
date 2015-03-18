@@ -13,24 +13,12 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Add New Shopping List" />
-
         <EditText
             android:id="@+id/listTextbox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:ems="10"
             android:text="Shopping List 1" />
-
-        <ListView
-            android:id="@+id/itemView"
-            android:layout_width="wrap_content"
-            android:layout_height="160dp" >
-        </ListView>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -109,51 +97,65 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:layout_height="wrap_content" >
 
-            <LinearLayout
+            <Button
+                android:id="@+id/addGroceryButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="addGroceryItem"
+                android:text="Add Item" />
+
+            <Button
+                android:id="@+id/Button01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="finishGroceryList"
+                android:text="Duplicate a List" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/itemView"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp" >
+        </ListView>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="86dp"
+                android:layout_height="wrap_content"
+                android:text="Category" />
+
+            <Spinner
+                android:id="@+id/categorySpinner"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
+                android:layout_height="36dp" />
 
-                <Button
-                    android:id="@+id/addGroceryButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="addGroceryItem"
-                    android:text="Add Item" />
+        </LinearLayout>
 
-                <Button
-                    android:id="@+id/Button01"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="finishGroceryList"
-                    android:text="Duplicate a List" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
-            </LinearLayout>
+            <Button
+                android:id="@+id/finishGroceryButton"
+                style="android:buttonStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:onClick="finishGroceryList"
+                android:text="Finish List" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" >
-
-                <Button
-                    android:id="@+id/finishGroceryButton"
-                    style="android:buttonStyle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:onClick="finishGroceryList"
-                    android:text="Finish List" />
-
-                <Button
-                    android:id="@+id/menuButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="38dp"
-                    android:onClick="returnToMenu"
-                    android:text="Menu" />
-
-            </LinearLayout>
-
+            <Button
+                android:id="@+id/menuButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="38dp"
+                android:onClick="returnToMenu"
+                android:text="Menu" />
         </LinearLayout>
 
     </LinearLayout>

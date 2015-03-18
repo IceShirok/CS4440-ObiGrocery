@@ -3,10 +3,6 @@ package com.example.obigrocery.adapters;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.obigrocery.R;
-import com.example.obigrocery.R.id;
-import com.example.obigrocery.R.layout;
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +11,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.TextView;
+
+import com.example.obigrocery.activities.R;
 
 public class ItemListAdapter<T> extends BaseAdapter implements ListAdapter {
     private List<T> list = new ArrayList<>();

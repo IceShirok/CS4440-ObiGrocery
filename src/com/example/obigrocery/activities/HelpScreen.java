@@ -1,13 +1,7 @@
 package com.example.obigrocery.activities;
 
-import com.example.obigrocery.R;
-import com.example.obigrocery.R.id;
-import com.example.obigrocery.R.layout;
-import com.example.obigrocery.R.menu;
-
-import android.support.v7.app.ActionBarActivity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
