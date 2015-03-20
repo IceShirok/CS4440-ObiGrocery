@@ -1,5 +1,6 @@
 package com.example.obigrocery.activities;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -105,11 +106,11 @@ public class NewGroceryList extends ActionBarActivity {
         // adds to list
         String itemName = null;
         int quantity = 0;
-        double price = 0;
+        BigDecimal price = null;
         String category = null;
         try {
             quantity = Integer.parseInt(quantityTextbox.getText().toString());
-            price = Double.parseDouble(priceTextbox.getText().toString());
+            price = new BigDecimal(priceTextbox.getText().toString());
             itemName = itemNameTextbox.getText().toString();
             category = categorySpinner.getSelectedItem().toString();
         } catch (NumberFormatException e) {
@@ -130,11 +131,14 @@ public class NewGroceryList extends ActionBarActivity {
     /*
      * Dynamic addition of list items
      */
-    private void addItemsToDisplay(String itemName, int quantity, double price, String category) {
-        // TODO change so arraylist hold POJO
+    private void addItemsToDisplay(String itemName, int quantity, BigDecimal price, String category) {
         ItemPOJO item = new ItemPOJO(itemName, price, quantity, category);
         adapter.add(item);
         itemsView.setAdapter(adapter);
+    }
+    
+    public void duplicateList(View view) {
+        // TODO implement
     }
 
     /*
@@ -182,6 +186,14 @@ public class NewGroceryList extends ActionBarActivity {
      * Return to menu, cancelling the list
      */
     public void returnToMenu(View view) {
+        cancelListConfirm();
+    }
+    
+    public void onBackPressed() {
+        cancelListConfirm();
+    }
+    
+    private void cancelListConfirm() {
         if (adapter.getList().size() > 0) {
             new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)

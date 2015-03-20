@@ -1,13 +1,17 @@
 package com.example.obigrocery.POJO;
 
+import java.math.BigDecimal;
+
 public class ItemPOJO {
     
     private String name;
-    private double price;
+    private BigDecimal price;
     private int quantity;
     private String category;
 
-    public ItemPOJO(String name, double price, int quantity, String category) {
+    public ItemPOJO(String name, BigDecimal price, int quantity, String category) {
+        // price should use BigDecimal for money stuff, not double
+        // this is due to floating point number's bad precision
         this.name = name;
         this.price = price;
         this.quantity = quantity;
@@ -17,7 +21,7 @@ public class ItemPOJO {
     public String getName() {
         return name;
     }
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
     public int getQuantity() {
@@ -29,7 +33,7 @@ public class ItemPOJO {
     public void setName(String name) {
         this.name = name;
     }
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
     public void setQuantity(int quantity) {
@@ -40,7 +44,7 @@ public class ItemPOJO {
     }
     
     public String toString() {
-        return name + "," + price + "," + quantity + "," + category;
+        return name + ": " + category + "\n\t" + quantity + " x $" + price;
     }
 
 }

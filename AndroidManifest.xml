@@ -42,6 +42,10 @@
             android:name=".ReportSummaryActivity"
             android:label="@string/title_activity_report_summary" >
         </activity>
+        <activity
+            android:name=".ShowShoppingLists"
+            android:label="@string/title_activity_show_shopping_lists" >
+        </activity>
     </application>
 
 </manifest>
