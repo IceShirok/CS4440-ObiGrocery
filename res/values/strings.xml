@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">ObiGrocery</string>
+    <string name="app_name">Obi Grocery</string>
     <string name="main_menu_welcome">Welcome!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_help_screen">HelpScreen</string>
+    <string name="title_activity_help_screen">Obi Grocery - Help</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_new_grocery_list">NewGroceryList</string>
-    <string name="title_activity_shopping_lists">ShoppingLists</string>
-    <string name="title_activity_report_summary">Report Summary</string>
-    <string name="title_activity_show_shopping_lists">Show Shopping List</string>
+    <string name="title_activity_new_grocery_list">Obi Grocery - New List</string>
+    <string name="title_activity_shopping_lists">Obi Grocery - Shopping Lists</string>
+    <string name="title_activity_report_summary">Obi Grocery - Report Summary</string>
+    <string name="title_activity_show_shopping_lists">Obi Grocery - Show Shopping List</string>
+    <string name="title_activity_shopping_category">ShoppingCategory</string>
 
 </resources>

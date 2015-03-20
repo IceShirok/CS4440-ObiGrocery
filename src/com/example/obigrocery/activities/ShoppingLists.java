@@ -11,6 +11,7 @@ import com.example.obigrocery.activities.R.menu;
 import com.example.obigrocery.adapters.ItemListAdapter;
 
 import android.support.v7.app.ActionBarActivity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -34,16 +35,22 @@ public class ShoppingLists extends ActionBarActivity {
         shoppingListView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long arg3) {
-                shoppingListView.setSelection(position);
-                System.out.println("Selected: " + (String)shoppingListView.getSelectedItem());
+                //shoppingListView.setSelection(position);
+                //System.out.println("Selected: " + (String)shoppingListView.getSelectedItem());
+
+                // TODO transfer information to next screen
+                adapter.getItem(position);
+                Intent i = new Intent(getApplicationContext(), ShowShoppingLists.class);
+                i.putExtra("SHOPPING_LIST_ID", position);
+                startActivity(i);
             }
         });
         
         List<String> list = new ArrayList<>();
         // TODO use db to populate list
-        list.add("Shopping List 1");
-        list.add("Shopping list 2");
-        list.add("Shopping list 3");
+        list.add("Shopping List 1\n\tNumber of items: 10");
+        list.add("Shopping list 2\n\tNumber of items: 10");
+        list.add("Shopping list 3\n\tNumber of items: 10");
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
         shoppingListView.setAdapter(adapter);
     }
@@ -71,10 +78,7 @@ public class ShoppingLists extends ActionBarActivity {
         String selected = (String)shoppingListView.getSelectedItem();
         System.out.println("Editing: " + selected);
         // TODO transfer to edit list screen, use db to populate
-    }
-    
-    public void showList(View view) {
-        // TODO transfer to show list screen, use db to populate
+        // TODO do this in showLists activity
     }
 
     /*
