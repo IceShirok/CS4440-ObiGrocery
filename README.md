@@ -8,6 +8,10 @@ A grocery list app that keeps track of your purchases and makes decisions like i
 * Generate reports based on category and timeframe
 * Determine regular vs. impulse purchases
 
+## For the Ambitious
+* Tutorial for app: https://github.com/amlcurran/ShowcaseView
+* OCR reader: https://github.com/GautamGupta/Simple-Android-OCR
+
 # Setting Up Android Environment
 Please read the following before starting.
 
