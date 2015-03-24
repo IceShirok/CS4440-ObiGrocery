@@ -12,26 +12,26 @@ import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
+import com.example.obigrocery.POJO.ItemPOJO;
 import com.example.obigrocery.activities.R;
 
-public class ItemListAdapter<T> extends BaseAdapter implements ListAdapter {
-    private List<T> list = new ArrayList<>();
-    private List<String> display = new ArrayList<>();
+public class ItemListAdapter extends BaseAdapter implements ListAdapter {
+    private List<ItemPOJO> list = new ArrayList<>();
+    private List<ItemPOJO> display = new ArrayList<>();
     private Context context;
 
-    public ItemListAdapter(List<T> list, Context context) {
-        this.list = list;
+    public ItemListAdapter(Context context) {
         this.context = context;
     }
 
     @Override
     public int getCount() {
-        return list.size();
+        return display.size();
     }
 
     @Override
-    public T getItem(int pos) {
-        return list.get(pos);
+    public ItemPOJO getItem(int pos) {
+        return display.get(pos);
     }
 
     @Override
@@ -41,13 +41,34 @@ public class ItemListAdapter<T> extends BaseAdapter implements ListAdapter {
         // just return 0 if your list items do not have an Id variable.
     }
 
-    public List<T> getList() {
+    public List<ItemPOJO> getList() {
         return list;
     }
     
-    public void add(T object) {
+    public void add(ItemPOJO object) {
         list.add(object);
-        display.add(object.toString());
+        display.add(object);
+        this.notifyDataSetChanged();
+    }
+    
+    public void displayCategory(String category) {
+        display.clear();
+        this.notifyDataSetChanged();
+        
+        ArrayList<ItemPOJO> temp = new ArrayList<>();
+        if(category.equalsIgnoreCase("all")) {
+            for(ItemPOJO item : list) {
+                temp.add(item);
+            }
+        } else {
+            for(ItemPOJO item : list) {
+                if(item.getCategory().equals(category)) {
+                    temp.add(item);
+                }
+            }
+        }
+        display = temp;
+        this.notifyDataSetChanged();
     }
 
     @Override
@@ -62,7 +83,7 @@ public class ItemListAdapter<T> extends BaseAdapter implements ListAdapter {
         // Handle TextView and display string from your list
         TextView listItemText = (TextView) view
                 .findViewById(R.id.list_item_string);
-        listItemText.setText(list.get(position).toString());
+        listItemText.setText(display.get(position).toString());
 
         Button deleteBtn = (Button) view.findViewById(R.id.delete_btn);
 
@@ -70,8 +91,8 @@ public class ItemListAdapter<T> extends BaseAdapter implements ListAdapter {
             @Override
             public void onClick(View v) {
                 // do something
-                list.remove(position); // or some other task
-                display.remove(position);
+                ItemPOJO item = display.remove(position);
+                list.remove(item); // or some other task
                 notifyDataSetChanged();
             }
         });

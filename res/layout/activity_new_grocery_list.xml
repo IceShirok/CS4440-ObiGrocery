@@ -61,7 +61,7 @@
                 android:layout_width="39dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.04"
-                android:text=" x "
+                android:text=" x         $"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <EditText
@@ -117,7 +117,7 @@
             android:text="Add Item" />
 
         <Button
-            android:id="@+id/Button01"
+            android:id="@+id/duplicateGroceryButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="duplicateList"

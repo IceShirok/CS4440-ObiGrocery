@@ -35,6 +35,10 @@ public class ShowShoppingLists extends ActionBarActivity {
             // TODO put a warning about this if list not found for some reason
         }
     }
+    
+    public void onBackPressed() {
+        finish();
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
