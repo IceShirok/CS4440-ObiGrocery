@@ -95,7 +95,6 @@ public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
             view = inflater.inflate(R.layout.layout_item_list, null);
         }
 
-        // Handle TextView and display string from your list
         TextView listItemText = (TextView) view
                 .findViewById(R.id.list_item_string);
         listItemText.setText(display.get(position).toString());
