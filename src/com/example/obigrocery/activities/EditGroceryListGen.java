@@ -7,6 +7,7 @@ import java.util.List;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -25,7 +26,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.example.obigrocery.POJO.ItemPOJO;
-import com.example.obigrocery.adapters.ItemListAdapter;
+import com.example.obigrocery.adapters.ItemListAdapterEdit;
 
 public class EditGroceryListGen extends ActionBarActivity {
 
@@ -40,7 +41,7 @@ public class EditGroceryListGen extends ActionBarActivity {
     protected Button finishGroceryButton;
     protected Button duplicateGroceryButton;
 
-    protected ItemListAdapter adapter;
+    protected ItemListAdapterEdit adapter;
 
     /******************************************************************
      * Instantiation of stuff into the app
@@ -56,9 +57,8 @@ public class EditGroceryListGen extends ActionBarActivity {
         finishGroceryButton = (Button) findViewById(R.id.finishGroceryButton);
         finishGroceryButton.setEnabled(false);
 
-        // TODO change this to "true" when implemented
         duplicateGroceryButton = (Button) findViewById(R.id.duplicateGroceryButton);
-        duplicateGroceryButton.setEnabled(false);
+        duplicateGroceryButton.setEnabled(true);
 
         listTextbox = (EditText) findViewById(R.id.listTextbox);
         listTextbox.addTextChangedListener(new TextWatcher() {
@@ -86,7 +86,7 @@ public class EditGroceryListGen extends ActionBarActivity {
 
         itemsView = (ListView) findViewById(R.id.itemView);
 
-        adapter = new ItemListAdapter(this);
+        adapter = new ItemListAdapterEdit(this);
         itemsView.setAdapter(adapter);
         itemsView.setClickable(true);
         itemsView.setOnItemClickListener(new OnItemClickListener() {
@@ -94,6 +94,7 @@ public class EditGroceryListGen extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
                 // TODO can edit item when clicked
+                // Fix this so it works
                 System.out.println("blah " + position);
                 editItemAlert(adapter.getItem(position).toString());
             }
@@ -102,6 +103,14 @@ public class EditGroceryListGen extends ActionBarActivity {
         populateCategories();
     }
     
+
+    /******************************************************************
+     * Helper methods for instantiations and listeners
+     ******************************************************************/
+    
+    /*
+     * Only allow items to be added if input is not blank and in specific category
+     */
     protected boolean enableAdd() {
         return itemNameTextbox.getText().length() > 0
                 && quantityTextbox.getText().length() > 0
@@ -110,7 +119,6 @@ public class EditGroceryListGen extends ActionBarActivity {
     }
 
     protected class AddGroceryWatcher implements TextWatcher {
-
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             addGroceryButton.setEnabled(enableAdd());
@@ -127,7 +135,7 @@ public class EditGroceryListGen extends ActionBarActivity {
 
     protected void populateCategories() {
         List<String> spinnerArray = new ArrayList<String>();
-        // TODO program to add from database
+        // TODO program to add categories from database
         spinnerArray.add("All");
         spinnerArray.add("Baked Goods");
         spinnerArray.add("Dairy");
@@ -141,6 +149,7 @@ public class EditGroceryListGen extends ActionBarActivity {
         categorySpinner = (Spinner) findViewById(R.id.categorySpinner);
         categorySpinner.setAdapter(adapter);
         this.categoryShift("All");
+        // TODO may want to make this a constant, since db won't have this option available
         
         categorySpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
@@ -157,7 +166,7 @@ public class EditGroceryListGen extends ActionBarActivity {
     }
 
     /******************************************************************
-     * Options menu
+     * Options menu (don't worry about this)
      ******************************************************************/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -219,6 +228,7 @@ public class EditGroceryListGen extends ActionBarActivity {
         }
         if (itemName != null) {
             addItemsToDisplay(itemName, quantity, price, category);
+            addItemsToDatabase(itemName, quantity, price, category);
             quantityTextbox.setText("");
             priceTextbox.setText("");
             itemNameTextbox.setText("");
@@ -233,34 +243,47 @@ public class EditGroceryListGen extends ActionBarActivity {
         itemsView.invalidateViews();
         itemsView.setAdapter(adapter);
     }
+
+    protected void addItemsToDatabase(String itemName, int quantity, BigDecimal price, String category) {
+        // TODO implement so item can be added to database
+    }
     
     public void duplicateList(View view) {
-        // TODO go to show shopping list, show the specific list to confirm, add items to list
+        // TODO implement the following below
+        Intent i = new Intent(getApplicationContext(), NewGroceryAll.class);
+        startActivity(i);
+        /*
+        get the list id from the previous activity
+        for (some data structure) {
+            addItemsToDisplay(itemName, quantity, price, category);
+        }
+        categoryShift("All");
+         */
     }
 
     
     /******************************************************************
-     * Done with all grocery list items, add everything to db, go to
-     * confirmation page
+     * Done, save anything else in db, go to confirmation page
      ******************************************************************/
     public void finishGroceryList(View view) {
         String listName = listTextbox.getText().toString();
 
-        // TODO also check database if list already exists
         if (listName != null && listName.length() > 0) {
             List<ItemPOJO> list = adapter.getList();
+            
+            // TODO can remove if needed, for testing purposes
             System.out.println("Print out finished list");
             System.out.println("Name: " + listName);
             for (ItemPOJO item : list) {
                 System.out.println("\tItem: " + item);
             }
-            // TODO put everything to database
-            // TODO goto list of shopping lists, or main menu with confirmation
+
+            // TODO put name to database
 
             new AlertDialog.Builder(this)
             .setIcon(android.R.drawable.ic_dialog_info)
             .setTitle("Confirmation")
-            .setMessage("List saved to database.")
+            .setMessage("List "+listName+" saved to database.")
             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -269,6 +292,7 @@ public class EditGroceryListGen extends ActionBarActivity {
             })
             .show();
         } else {
+            // TODO make this better
             String errorMessage = "Not a valid list name.";
 
             new AlertDialog.Builder(this)
@@ -293,6 +317,7 @@ public class EditGroceryListGen extends ActionBarActivity {
     }
     
     protected void cancelListConfirm() {
+        // TODO change this, since list is saved for every add, delete, update
         if (adapter.getList().size() > 0) {
             new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
@@ -313,6 +338,7 @@ public class EditGroceryListGen extends ActionBarActivity {
     }
     
     protected void editItemAlert(String info) {
+        // TODO finish this implementation
         AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
         alert.setTitle("Title");
@@ -323,16 +349,15 @@ public class EditGroceryListGen extends ActionBarActivity {
         alert.setView(input);
 
         alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-        public void onClick(DialogInterface dialog, int whichButton) {
-
-          // Do something with value!
-          }
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Do something with value!
+            }
         });
 
         alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-          public void onClick(DialogInterface dialog, int whichButton) {
-            // Canceled.
-          }
+            public void onClick(DialogInterface dialog, int whichButton) {
+                // Canceled.
+            }
         });
 
         alert.show();

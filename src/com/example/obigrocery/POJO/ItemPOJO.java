@@ -8,6 +8,7 @@ public class ItemPOJO {
     private BigDecimal price;
     private int quantity;
     private String category;
+    private boolean checked;
 
     public ItemPOJO(String name, BigDecimal price, int quantity, String category) {
         // price should use BigDecimal for money stuff, not double
@@ -42,9 +43,37 @@ public class ItemPOJO {
     public void setCategory(String category) {
         this.category = category;
     }
+    public boolean isChecked() {
+        return checked;
+    }
+    public void setChecked(boolean checked) {
+        this.checked = checked;
+    }
     
+    /*
+     * Used for display in app
+     */
+    @Override
     public String toString() {
         return name + ": " + category + "\n\t" + quantity + " x $" + price;
+    }
+    
+    @Override
+    public boolean equals(Object other) {
+        if(other == this) {
+            return true;
+        }
+        if(other == null) {
+            return false;
+        }
+        if(!(other instanceof ItemPOJO)) {
+            return false;
+        }
+        ItemPOJO that = (ItemPOJO)other;
+        return this.getName().equals(that.getName())
+                && this.getQuantity() == that.getQuantity()
+                && this.getPrice().equals(that.getPrice())
+                && this.getCategory().equals(that.getCategory());
     }
 
 }

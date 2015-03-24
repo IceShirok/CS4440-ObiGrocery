@@ -2,7 +2,7 @@ package com.example.obigrocery.adapters;
 
 import java.util.ArrayList;
 import java.util.List;
-
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +11,6 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.ListAdapter;
 import android.widget.TextView;
-
 import com.example.obigrocery.POJO.ItemPOJO;
 import com.example.obigrocery.activities.R;
 
@@ -20,6 +19,11 @@ public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
     protected List<ItemPOJO> display = new ArrayList<>();
     protected Context context;
 
+    /******************************************************************
+     * Model logic
+     * list - list of all items in the view
+     * display - list of current items displayed
+     ******************************************************************/
     public ItemListAdapterGen(Context context) {
         this.context = context;
     }
@@ -36,9 +40,8 @@ public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
 
     @Override
     public long getItemId(int pos) {
+        // not needed
         return 0;
-        //return list.get(pos).getId();
-        // just return 0 if your list items do not have an Id variable.
     }
 
     public List<ItemPOJO> getList() {
@@ -51,6 +54,14 @@ public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
         this.notifyDataSetChanged();
     }
     
+
+    /******************************************************************
+     * Display stuff
+     ******************************************************************/
+    
+    /*
+     * Used to change display based on item category
+     */
     public void displayCategory(String category) {
         display.clear();
         this.notifyDataSetChanged();
@@ -71,6 +82,10 @@ public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
         this.notifyDataSetChanged();
     }
 
+    /*
+     * Creates the view for the display
+     */
+    @SuppressLint("InflateParams")
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = convertView;
@@ -92,11 +107,20 @@ public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
             public void onClick(View v) {
                 // do something
                 ItemPOJO item = display.remove(position);
-                list.remove(item); // or some other task
+                list.remove(item);
+                removeFromDatabase(item);
                 notifyDataSetChanged();
             }
         });
 
         return view;
+    }
+    
+
+    /******************************************************************
+     * Remove item from database
+     ******************************************************************/
+    public void removeFromDatabase(ItemPOJO item) {
+        // TODO implement to remove item from database
     }
 }
