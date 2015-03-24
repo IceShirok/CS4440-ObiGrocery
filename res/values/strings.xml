@@ -12,5 +12,6 @@
     <string name="title_activity_show_shopping_lists">Obi Grocery - Show Shopping List</string>
     <string name="title_activity_shopping_category">Shopping Category</string>
     <string name="title_activity_edit_grocery_list">Obi Grocery - Edit Shopping List</string>
+    <string name="title_activity_check_purchased_items">Obi Grocery - Check Purchased Items</string>
 
 </resources>

@@ -3,16 +3,9 @@ package com.example.obigrocery.activities;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.obigrocery.POJO.ItemPOJO;
-import com.example.obigrocery.activities.R;
-import com.example.obigrocery.activities.R.id;
-import com.example.obigrocery.activities.R.layout;
-import com.example.obigrocery.activities.R.menu;
-import com.example.obigrocery.adapters.ItemListAdapter;
-
-import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,7 +14,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class ShoppingLists extends ActionBarActivity {
+public class ListShoppingListsGen extends ActionBarActivity {
     
     private ListView shoppingListView;
     private ArrayAdapter<String> adapter;
@@ -35,9 +28,6 @@ public class ShoppingLists extends ActionBarActivity {
         shoppingListView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long arg3) {
-                //shoppingListView.setSelection(position);
-                //System.out.println("Selected: " + (String)shoppingListView.getSelectedItem());
-
                 // TODO transfer information to next screen
                 adapter.getItem(position);
                 Intent i = new Intent(getApplicationContext(), ShowShoppingLists.class);

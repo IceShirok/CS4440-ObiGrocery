@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 
 public class MainMenu extends ActionBarActivity {
 
@@ -18,6 +19,9 @@ public class MainMenu extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
+        
+        Button genReportButton = (Button) findViewById(R.id.genReportButton);
+        genReportButton.setEnabled(false);
     }
 
     @Override
@@ -45,12 +49,13 @@ public class MainMenu extends ActionBarActivity {
     }
     
     public void gotoLoad(View view) {
-        Intent i = new Intent(getApplicationContext(), ShoppingLists.class);
+        Intent i = new Intent(getApplicationContext(), ListShoppingLists.class);
         startActivity(i);
     }
     
     public void gotoPurchased(View view) {
-        System.out.println("Not implemented yet");
+        Intent i = new Intent(getApplicationContext(), ListShoppingListsBuy.class);
+        startActivity(i);
     }
     
     public void gotoReports(View view) {
