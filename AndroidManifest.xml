@@ -58,6 +58,10 @@
             android:name=".ListShoppingListsBuy"
             android:label="@string/title_activity_show_shopping_lists" >
         </activity>
+        <activity
+            android:name=".ReportSummaries"
+            android:label="@string/title_activity_report_summaries" >
+        </activity>
     </application>
 
 </manifest>

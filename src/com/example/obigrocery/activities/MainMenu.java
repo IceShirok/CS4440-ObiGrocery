@@ -1,13 +1,8 @@
 package com.example.obigrocery.activities;
 
-import com.example.obigrocery.activities.R;
-import com.example.obigrocery.activities.R.id;
-import com.example.obigrocery.activities.R.layout;
-import com.example.obigrocery.activities.R.menu;
-
-import android.support.v7.app.ActionBarActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,8 +15,8 @@ public class MainMenu extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         
-        Button genReportButton = (Button) findViewById(R.id.genReportButton);
-        genReportButton.setEnabled(false);
+        Button helpButton = (Button) findViewById(R.id.helpButton);
+        helpButton.setEnabled(false);
     }
 
     @Override
@@ -59,7 +54,7 @@ public class MainMenu extends ActionBarActivity {
     }
     
     public void gotoReports(View view) {
-        Intent i = new Intent(getApplicationContext(), ReportSummaryActivity.class);
+        Intent i = new Intent(getApplicationContext(), ReportSummaries.class);
         startActivity(i);
     }
     
