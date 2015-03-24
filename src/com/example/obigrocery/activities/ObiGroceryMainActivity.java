@@ -8,7 +8,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class ObiGroceryMain extends ActionBarActivity {
+public class ObiGroceryMainActivity extends ActionBarActivity {
+
+    /******************************************************************
+     * Main menu for the app - woohoo!
+     ******************************************************************/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -18,6 +22,11 @@ public class ObiGroceryMain extends ActionBarActivity {
         Button helpButton = (Button) findViewById(R.id.helpButton);
         helpButton.setEnabled(false);
     }
+
+
+    /******************************************************************
+     * options stuff
+     ******************************************************************/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -37,6 +46,11 @@ public class ObiGroceryMain extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
+    
+
+    /******************************************************************
+     * Navigation to other activities
+     ******************************************************************/
     
     public void gotoNew(View view) {
         Intent i = new Intent(getApplicationContext(), NewGroceryList.class);

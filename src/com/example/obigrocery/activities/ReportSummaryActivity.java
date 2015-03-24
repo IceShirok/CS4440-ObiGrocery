@@ -16,6 +16,7 @@ public class ReportSummaryActivity extends ActionBarActivity {
         setContentView(R.layout.activity_report_summary);
 
         LineChart chart = (LineChart) findViewById(R.id.chart);
+        System.out.println(chart);
     }
 
     @Override
