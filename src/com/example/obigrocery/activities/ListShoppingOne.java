@@ -20,7 +20,7 @@ import android.widget.Spinner;
 import com.example.obigrocery.POJO.ItemPOJO;
 import com.example.obigrocery.adapters.ItemListAdapterShow;
 
-public class ShowShoppingLists extends ActionBarActivity {
+public class ListShoppingOne extends ActionBarActivity {
     
     private ItemListAdapterShow adapter;
     protected ListView itemsView;

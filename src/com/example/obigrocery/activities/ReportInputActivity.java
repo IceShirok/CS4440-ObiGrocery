@@ -8,7 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class ReportSummaries extends ActionBarActivity {
+public class ReportInputActivity extends ActionBarActivity {
     
     private int position;
     private final static int NUM_FRAGMENTS = 2;
@@ -45,24 +45,24 @@ public class ReportSummaries extends ActionBarActivity {
     /*
      * Fragment factory
      */
-    public ReportFragment getFragment(int position) {
+    public ReportFragmentGen getFragment(int position) {
         String title = null;
-        ReportFragment frag = null;
+        ReportFragmentGen frag = null;
         switch(position){
         case 0:
             title = "Obi Grocery - Pick a Date";
             this.setTitle(title);
-            frag = new DateFragment();
+            frag = new ReportDateFragment();
             break;
         case 1:
             title = "Obi Grocery - Pick a Category";
             this.setTitle(title);
-            frag = new CategoryFragment();
+            frag = new ReportCategoryFragment();
             break;
         default:
             title = "Obi Grocery - Pick a Date";
             this.setTitle(title);
-            frag = new DateFragment();
+            frag = new ReportDateFragment();
             break;
         }
         return frag;
@@ -91,8 +91,8 @@ public class ReportSummaries extends ActionBarActivity {
     }
     
     protected void transition(int position) {
-        ReportFragment newFragment = this.getFragment(position);
-        ReportFragment currentFragment = ((ReportFragment)getSupportFragmentManager().findFragmentById(R.id.container));
+        ReportFragmentGen newFragment = this.getFragment(position);
+        ReportFragmentGen currentFragment = ((ReportFragmentGen)getSupportFragmentManager().findFragmentById(R.id.container));
         if(currentFragment.allowTransition()) {
             Bundle args = new Bundle();
             //args.putInt(CategoryFragment.ARG_POSITION, 1);

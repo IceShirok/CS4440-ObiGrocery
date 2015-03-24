@@ -14,7 +14,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainMenu"
+            android:name=".ObiGroceryMain"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,7 +23,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".HelpScreen"
+            android:name=".HelpActivity"
             android:label="@string/title_activity_help_screen" >
         </activity>
         <activity
@@ -31,7 +31,7 @@
             android:label="@string/title_activity_new_grocery_list" >
         </activity>
         <activity
-            android:name=".ListShoppingLists"
+            android:name=".ListShoppingAll"
             android:label="@string/title_activity_shopping_lists" >
         </activity>
         <activity
@@ -43,7 +43,7 @@
             android:label="@string/title_activity_report_summary" >
         </activity>
         <activity
-            android:name=".ShowShoppingLists"
+            android:name=".ListShoppingOne"
             android:label="@string/title_activity_show_shopping_lists" >
         </activity>
         <activity
@@ -55,11 +55,11 @@
             android:label="@string/title_activity_check_purchased_items" >
         </activity>
         <activity
-            android:name=".ListShoppingListsBuy"
+            android:name=".CheckShoppingAll"
             android:label="@string/title_activity_show_shopping_lists" >
         </activity>
         <activity
-            android:name=".ReportSummaries"
+            android:name=".ReportInputActivity"
             android:label="@string/title_activity_report_summaries" >
         </activity>
     </application>

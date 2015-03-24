@@ -10,9 +10,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
 
-public class DateFragment extends ReportFragment {
+public class ReportDateFragment extends ReportFragmentGen {
 
-    public DateFragment() {
+    public ReportDateFragment() {
     }
 
     @Override

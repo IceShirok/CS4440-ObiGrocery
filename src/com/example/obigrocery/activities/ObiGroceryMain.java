@@ -8,7 +8,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
-public class MainMenu extends ActionBarActivity {
+public class ObiGroceryMain extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,22 +44,22 @@ public class MainMenu extends ActionBarActivity {
     }
     
     public void gotoLoad(View view) {
-        Intent i = new Intent(getApplicationContext(), ListShoppingLists.class);
+        Intent i = new Intent(getApplicationContext(), ListShoppingAll.class);
         startActivity(i);
     }
     
     public void gotoPurchased(View view) {
-        Intent i = new Intent(getApplicationContext(), ListShoppingListsBuy.class);
+        Intent i = new Intent(getApplicationContext(), CheckShoppingAll.class);
         startActivity(i);
     }
     
     public void gotoReports(View view) {
-        Intent i = new Intent(getApplicationContext(), ReportSummaries.class);
+        Intent i = new Intent(getApplicationContext(), ReportInputActivity.class);
         startActivity(i);
     }
     
     public void gotoHelp(View view) {
-        Intent i = new Intent(getApplicationContext(), HelpScreen.class);
+        Intent i = new Intent(getApplicationContext(), HelpActivity.class);
         startActivity(i);
     }
 

@@ -11,7 +11,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
-public class ListShoppingLists extends ListShoppingListsGen {
+public class ListShoppingAll extends ListShoppingGen {
     
     private ListView shoppingListView;
     private ArrayAdapter<String> adapter;
@@ -26,7 +26,7 @@ public class ListShoppingLists extends ListShoppingListsGen {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long arg3) {
                 adapter.getItem(position);
-                Intent i = new Intent(getApplicationContext(), ShowShoppingLists.class);
+                Intent i = new Intent(getApplicationContext(), ListShoppingOne.class);
                 i.putExtra("SHOPPING_LIST_ID", position);
                 startActivity(i);
             }

@@ -6,9 +6,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public abstract class ReportFragment extends Fragment {
+public class ReportCategoryFragment extends ReportFragmentGen {
 
-    public ReportFragment() {
+    public ReportCategoryFragment() {
     }
 
     @Override
@@ -17,8 +17,15 @@ public abstract class ReportFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_report_category, container, false);
         return rootView;
     }
-    
-    public abstract boolean allowTransition();
-    
-    public abstract String getErrorMessage();
+
+    @Override
+    public boolean allowTransition() {
+        // TODO Auto-generated method stub
+        return true;
+    }
+
+    @Override
+    public String getErrorMessage() {
+        return "Blah";
+    }
 }
