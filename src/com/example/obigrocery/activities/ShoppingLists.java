@@ -73,13 +73,6 @@ public class ShoppingLists extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    
-    public void editList(View view) {
-        String selected = (String)shoppingListView.getSelectedItem();
-        System.out.println("Editing: " + selected);
-        // TODO transfer to edit list screen, use db to populate
-        // TODO do this in showLists activity
-    }
 
     /*
      * Return to menu

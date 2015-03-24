@@ -10,56 +10,58 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.obigrocery.activities.ShowShoppingLists" >
 
-    <TextView
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
+        android:orientation="horizontal" >
 
-    <TabHost
-        android1:id="@android:id/tabhost"
-        android1:layout_width="match_parent"
-        android1:layout_height="match_parent" >
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="86dp"
+            android:layout_height="wrap_content"
+            android:text="Category" />
 
-        <LinearLayout
-            android1:layout_width="match_parent"
-            android1:layout_height="match_parent"
-            android1:orientation="vertical" >
+        <Spinner
+            android:id="@+id/categorySpinner"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_gravity="right" />
+    </LinearLayout>
 
-            <TabWidget
-                android1:id="@android:id/tabs"
-                android1:layout_width="match_parent"
-                android1:layout_height="wrap_content" >
-            </TabWidget>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp" >
+    </LinearLayout>
 
-            <FrameLayout
-                android1:id="@android:id/tabcontent"
-                android1:layout_width="match_parent"
-                android1:layout_height="match_parent" >
-				
-                <!--
-                <LinearLayout
-                    android1:id="@+id/tab1"
-                    android1:orientation="horizontal"
-                    android1:layout_width="match_parent"
-                    android1:layout_height="match_parent" >
-                </LinearLayout>
+    <ListView
+        android:id="@+id/itemView"
+        android:layout_width="wrap_content"
+        android:layout_height="140dp"
+        android1:layout_weight="0.86"
+        android:fadeScrollbars="false" >
 
-                <LinearLayout
-                    android1:id="@+id/tab2"
-                    android1:orientation="horizontal"
-                    android1:layout_width="match_parent"
-                    android1:layout_height="match_parent" >
-                </LinearLayout>
+    </ListView>
 
-                <LinearLayout
-                    android1:id="@+id/tab3"
-                    android1:orientation="horizontal"
-                    android1:layout_width="match_parent"
-                    android1:layout_height="match_parent" >
-                </LinearLayout>
-                -->
-            </FrameLayout>
-        </LinearLayout>
-    </TabHost>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/editListButton"
+            style="android:buttonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="editList"
+            android:text="Edit List" />
+
+        <Button
+            android:id="@+id/listButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="38dp"
+            android:onClick="returnToLists"
+            android:text="Back to Lists" />
+    </LinearLayout>
 
 </LinearLayout>

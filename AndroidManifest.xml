@@ -47,8 +47,8 @@
             android:label="@string/title_activity_show_shopping_lists" >
         </activity>
         <activity
-            android:name=".ShoppingCategory"
-            android:label="@string/title_activity_shopping_category" >
+            android:name=".EditGroceryList"
+            android:label="@string/title_activity_edit_grocery_list" >
         </activity>
     </application>
 

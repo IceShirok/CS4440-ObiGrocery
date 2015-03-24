@@ -63,11 +63,7 @@ public class EditGroceryListGen extends ActionBarActivity {
         listTextbox = (EditText) findViewById(R.id.listTextbox);
         listTextbox.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count,
-                    int after) {
-                // TODO Auto-generated method stub
-                
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before,
@@ -76,10 +72,7 @@ public class EditGroceryListGen extends ActionBarActivity {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-                // TODO Auto-generated method stub
-                
-            }
+            public void afterTextChanged(Editable s) {}
         });
         
         itemNameTextbox = (EditText) findViewById(R.id.itemNameTextbox);
@@ -95,12 +88,14 @@ public class EditGroceryListGen extends ActionBarActivity {
 
         adapter = new ItemListAdapter(this);
         itemsView.setAdapter(adapter);
+        itemsView.setClickable(true);
         itemsView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
                 // TODO can edit item when clicked
-                System.out.println("printing item " + position);
+                System.out.println("blah " + position);
+                editItemAlert(adapter.getItem(position).toString());
             }
         });
 
@@ -196,7 +191,7 @@ public class EditGroceryListGen extends ActionBarActivity {
     /******************************************************************
      * Adding stuff to the list
      ******************************************************************/
-    public void addGroceryItem(View view) {
+    public boolean addGroceryItem(View view) {
         // hides keyboard
         InputMethodManager imm = (InputMethodManager) getBaseContext()
                 .getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -227,7 +222,9 @@ public class EditGroceryListGen extends ActionBarActivity {
             quantityTextbox.setText("");
             priceTextbox.setText("");
             itemNameTextbox.setText("");
+            return true;
         }
+        return false;
     }
 
     protected void addItemsToDisplay(String itemName, int quantity, BigDecimal price, String category) {
@@ -313,5 +310,31 @@ public class EditGroceryListGen extends ActionBarActivity {
         } else {
             finish();
         }
+    }
+    
+    protected void editItemAlert(String info) {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setTitle("Title");
+        alert.setMessage("Message");
+
+        // Set an EditText view to get user input 
+        final EditText input = new EditText(this);
+        alert.setView(input);
+
+        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+        public void onClick(DialogInterface dialog, int whichButton) {
+
+          // Do something with value!
+          }
+        });
+
+        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+          public void onClick(DialogInterface dialog, int whichButton) {
+            // Canceled.
+          }
+        });
+
+        alert.show();
     }
 }

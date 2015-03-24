@@ -7,12 +7,11 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.obigrocery.POJO.ItemPOJO;
 import com.example.obigrocery.activities.R;
 
-public class ItemListAdapter extends ItemListAdapterGen {
+public class ItemListAdapterShow extends ItemListAdapterGen {
 
-    public ItemListAdapter(Context context) {
+    public ItemListAdapterShow(Context context) {
         super(context);
     }
 
@@ -31,16 +30,7 @@ public class ItemListAdapter extends ItemListAdapterGen {
         listItemText.setText(display.get(position).toString());
 
         Button deleteBtn = (Button) view.findViewById(R.id.delete_btn);
-
-        deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // do something
-                ItemPOJO item = display.remove(position);
-                list.remove(item); // or some other task
-                notifyDataSetChanged();
-            }
-        });
+        deleteBtn.setVisibility(View.GONE);
 
         return view;
     }
