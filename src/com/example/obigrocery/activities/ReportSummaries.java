@@ -1,20 +1,17 @@
 package com.example.obigrocery.activities;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentTransaction;
+import android.app.AlertDialog;
 import android.os.Bundle;
-import android.view.LayoutInflater;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.os.Build;
 
 public class ReportSummaries extends ActionBarActivity {
     
     private int position;
+    private final static int NUM_FRAGMENTS = 2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,9 +45,9 @@ public class ReportSummaries extends ActionBarActivity {
     /*
      * Fragment factory
      */
-    public Fragment getFragment(int position) {
+    public ReportFragment getFragment(int position) {
         String title = null;
-        Fragment frag = null;
+        ReportFragment frag = null;
         switch(position){
         case 0:
             title = "Obi Grocery - Pick a Date";
@@ -70,68 +67,52 @@ public class ReportSummaries extends ActionBarActivity {
         }
         return frag;
     }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class DateFragment extends Fragment {
-
-        public DateFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_report_dates, container, false);
-            return rootView;
-        }
-    }
-
-    /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class CategoryFragment extends Fragment {
-
-        public CategoryFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_report_category, container, false);
-            return rootView;
-        }
-    }
     
     public void prevSection(View view) {
         if(position-1 >= 0) {
             position--;
+            transition(position);
+        } else {
+            // do nothing
         }
-        transition(position);
-        System.out.println(position);
     }
     
     public void nextSection(View view) {
-        if(position+1 < 2) {
+        if(position+1 < NUM_FRAGMENTS) {
             position++;
+            transition(position);
+        } else {
+            this.generateReport();
         }
-        transition(position);
-        System.out.println(position);
+    }
+    
+    protected void generateReport() {
+        // TODO get info
     }
     
     protected void transition(int position) {
-        Fragment newFragment = this.getFragment(position);
-        Bundle args = new Bundle();
-        //args.putInt(CategoryFragment.ARG_POSITION, 1);
-        newFragment.setArguments(args);
-
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-
-        // Replace whatever is in the fragment_container view with this fragment,
-        // and add the transaction to the back stack so the user can navigate back
-        transaction.replace(R.id.container, newFragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
+        ReportFragment newFragment = this.getFragment(position);
+        ReportFragment currentFragment = ((ReportFragment)getSupportFragmentManager().findFragmentById(R.id.container));
+        if(currentFragment.allowTransition()) {
+            Bundle args = new Bundle();
+            //args.putInt(CategoryFragment.ARG_POSITION, 1);
+            newFragment.setArguments(args);
+    
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+    
+            // Replace whatever is in the fragment_container view with this fragment,
+            // and add the transaction to the back stack so the user can navigate back
+            transaction.replace(R.id.container, newFragment);
+            transaction.addToBackStack(null);
+            transaction.commit();
+        } else {
+            new AlertDialog.Builder(this)
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setTitle("Error")
+            .setMessage(currentFragment.getErrorMessage())
+            .setNeutralButton("OK", null)
+            .show();
+        }
     }
     
     public void onBackPressed() {
