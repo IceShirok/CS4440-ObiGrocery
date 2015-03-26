@@ -1,16 +1,12 @@
 package com.example.obigrocery.activities;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.AdapterView.OnItemClickListener;
 
 public class NewGroceryAll extends ListShoppingGen {
     
@@ -18,14 +14,13 @@ public class NewGroceryAll extends ListShoppingGen {
     private ArrayAdapter<String> adapter;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        System.out.println("new grocery list created");
-        setContentView(R.layout.activity_shopping_lists);
-        
+    protected void setInstructions() {
         TextView instructionText = (TextView) findViewById(R.id.instructionText);
         instructionText.setText("Instructions: select a list to import all items.");
-        
+    }
+
+    @Override
+    protected void setupListView() {
         shoppingListView = (ListView) findViewById(R.id.shoppingListView);
         shoppingListView.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -40,13 +35,5 @@ public class NewGroceryAll extends ListShoppingGen {
                 finish();
             }
         });
-        
-        List<String> list = new ArrayList<>();
-        // TODO use db to populate list
-        list.add("Shopping List 1\n\tNumber of items: 10");
-        list.add("Shopping list 2\n\tNumber of items: 10");
-        list.add("Shopping list 3\n\tNumber of items: 10");
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
-        shoppingListView.setAdapter(adapter);
     }
 }

@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 
 public class ListShoppingGen extends ActionBarActivity {
     
@@ -23,7 +24,17 @@ public class ListShoppingGen extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_lists);
-        
+        setInstructions();
+        setupListView();
+        populateList();
+    }
+    
+    protected void setInstructions() {
+        TextView instructionText = (TextView) findViewById(R.id.instructionText);
+        instructionText.setText("Instructions: select a list to view.");
+    }
+    
+    protected void setupListView() {
         shoppingListView = (ListView) findViewById(R.id.shoppingListView);
         shoppingListView.setOnItemClickListener(new OnItemClickListener() {
             @Override
@@ -35,7 +46,9 @@ public class ListShoppingGen extends ActionBarActivity {
                 startActivity(i);
             }
         });
-        
+    }
+    
+    protected void populateList() {
         List<String> list = new ArrayList<>();
         // TODO use db to populate list
         list.add("Shopping List 1\n\tNumber of items: 10");
