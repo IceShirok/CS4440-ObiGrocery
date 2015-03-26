@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.obigrocery.activities.R;
+import com.example.obigrocery.activities.global.ReportFragmentGen;
 
 public class ReportInputActivity extends ActionBarActivity {
     

@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.obigrocery.activities.R;
+import com.example.obigrocery.activities.global.ReportFragmentGen;
 
 public class ReportOptionFragment extends ReportFragmentGen {
 

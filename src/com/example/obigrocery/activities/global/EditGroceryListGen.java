@@ -1,7 +1,6 @@
-package com.example.obigrocery.activities;
+package com.example.obigrocery.activities.global;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,6 +29,7 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.example.obigrocery.POJO.ItemPOJO;
+import com.example.obigrocery.activities.R;
 import com.example.obigrocery.activities.newgrocery.NewGroceryAll;
 import com.example.obigrocery.adapters.ItemListAdapterGen;
 
@@ -139,21 +139,9 @@ public class EditGroceryListGen extends ActionBarActivity {
         itemsView.setAdapter(adapter);
         addGroceryButton.setEnabled(enableAdd());
     }
-    
-    protected List<String> getCategories() {
-        List<String> spinnerArray = new ArrayList<String>();
-        // TODO program to add categories from database
-        spinnerArray.add("Baked Goods");
-        spinnerArray.add("Dairy");
-        spinnerArray.add("Meats");
-        spinnerArray.add("Vegetables");
-        return spinnerArray;
-    }
 
     protected void populateCategories() {
-        List<String> spinnerArray = getCategories();
-        // note that "All" must be included
-        spinnerArray.add("All");
+        List<String> spinnerArray = CategoryPopulator.getCategories(true);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, spinnerArray);
@@ -321,7 +309,7 @@ public class EditGroceryListGen extends ActionBarActivity {
         pText.setText(item.getPrice().toString());
         final Spinner cText = (Spinner) dialoglayout.findViewById(R.id.categorySpinner);
 
-        List<String> spin = getCategories();
+        List<String> spin = CategoryPopulator.getCategories(true);
         ArrayAdapter<String> cAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, spin);
         cAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

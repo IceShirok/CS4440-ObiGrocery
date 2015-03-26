@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.DatePicker;
 
 import com.example.obigrocery.activities.R;
+import com.example.obigrocery.activities.global.ReportFragmentGen;
 
 public class ReportDateFragment extends ReportFragmentGen {
 

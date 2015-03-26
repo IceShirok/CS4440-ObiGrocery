@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
+
 import com.example.obigrocery.activities.R;
 
 public class ItemListAdapterCheck extends ItemListAdapterGen {
@@ -29,11 +30,14 @@ public class ItemListAdapterCheck extends ItemListAdapterGen {
                 .findViewById(R.id.list_item_string);
         listItemText.setText(display.get(position).toString());
 
-        CheckBox purchasedCheckbox = (CheckBox) view.findViewById(R.id.check);
+        final CheckBox purchasedCheckbox = (CheckBox) view.findViewById(R.id.check);
+        purchasedCheckbox.setChecked(getItem(position).isPurchased());
+
         purchasedCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO need to figure out how to select which item is selected
+                checkItem(getItem(position), purchasedCheckbox.isChecked());
+                // TODO save this information to database?
             }
         });
 

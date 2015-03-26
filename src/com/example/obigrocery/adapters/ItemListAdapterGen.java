@@ -1,6 +1,7 @@
 package com.example.obigrocery.adapters;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import android.annotation.SuppressLint;
@@ -44,6 +45,12 @@ public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
         // not needed
         return 0;
     }
+    
+    public void checkItem(ItemPOJO object, boolean check) {
+        list.remove(object);
+        object.setPurchased(check);
+        list.add(object);
+    }
 
     public List<ItemPOJO> getList() {
         return list;
@@ -72,6 +79,8 @@ public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
     public void displayCategory(String category) {
         display.clear();
         this.notifyDataSetChanged();
+        
+        Collections.sort(list);
         
         ArrayList<ItemPOJO> temp = new ArrayList<>();
         if(category.equalsIgnoreCase("all")) {

@@ -7,7 +7,7 @@ import android.content.DialogInterface;
 import android.view.View;
 
 import com.example.obigrocery.POJO.ItemPOJO;
-import com.example.obigrocery.activities.EditGroceryListGen;
+import com.example.obigrocery.activities.global.EditGroceryListGen;
 
 public class NewGroceryList extends EditGroceryListGen {
 

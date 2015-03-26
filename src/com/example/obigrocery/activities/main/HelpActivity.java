@@ -10,12 +10,18 @@ import com.example.obigrocery.activities.R;
 
 public class HelpActivity extends ActionBarActivity {
 
+    /******************************************************************
+     * Instantiation of stuff into the app
+     ******************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_help_screen);
     }
 
+    /******************************************************************
+     * options
+     ******************************************************************/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -35,6 +41,9 @@ public class HelpActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /******************************************************************
+     * navigation back
+     ******************************************************************/
     public void returnToMenu(View view) {
         finish();
     }

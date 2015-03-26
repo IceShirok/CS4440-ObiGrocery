@@ -25,6 +25,9 @@ public class ObiGroceryMainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
         
+        Button reportButton = (Button) findViewById(R.id.genReportButton);
+        reportButton.setEnabled(false);
+        
         Button helpButton = (Button) findViewById(R.id.helpButton);
         helpButton.setEnabled(false);
     }

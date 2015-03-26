@@ -1,4 +1,4 @@
-package com.example.obigrocery.activities.lists;
+package com.example.obigrocery.activities.global;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,6 +16,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.obigrocery.activities.R;
+import com.example.obigrocery.activities.lists.ListShoppingOne;
 
 public class ListShoppingGen extends ActionBarActivity {
     

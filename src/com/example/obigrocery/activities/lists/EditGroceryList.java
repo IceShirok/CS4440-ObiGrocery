@@ -7,8 +7,8 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.example.obigrocery.POJO.ItemPOJO;
-import com.example.obigrocery.activities.EditGroceryListGen;
 import com.example.obigrocery.activities.R;
+import com.example.obigrocery.activities.global.EditGroceryListGen;
 
 public class EditGroceryList extends EditGroceryListGen {
     

@@ -9,7 +9,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.obigrocery.activities.R;
-import com.example.obigrocery.activities.lists.ListShoppingGen;
+import com.example.obigrocery.activities.global.ListShoppingGen;
 
 public class NewGroceryAll extends ListShoppingGen {
     

@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import android.widget.Spinner;
 
 import com.example.obigrocery.activities.R;
+import com.example.obigrocery.activities.global.ReportFragmentGen;
 
 public class ReportCategoryFragment extends ReportFragmentGen {
 

@@ -2,13 +2,13 @@ package com.example.obigrocery.POJO;
 
 import java.math.BigDecimal;
 
-public class ItemPOJO {
+public class ItemPOJO implements Comparable<ItemPOJO>{
     
     private String name;
     private BigDecimal price;
     private int quantity;
     private String category;
-    private boolean checked;
+    private boolean purchased;
 
     public ItemPOJO(String name, BigDecimal price, int quantity, String category) {
         // price should use BigDecimal for money stuff, not double
@@ -17,6 +17,7 @@ public class ItemPOJO {
         this.price = price;
         this.quantity = quantity;
         this.category = category;
+        this.purchased = false;
     }
 
     public String getName() {
@@ -43,11 +44,11 @@ public class ItemPOJO {
     public void setCategory(String category) {
         this.category = category;
     }
-    public boolean isChecked() {
-        return checked;
+    public boolean isPurchased() {
+        return purchased;
     }
-    public void setChecked(boolean checked) {
-        this.checked = checked;
+    public void setPurchased(boolean purchased) {
+        this.purchased = purchased;
     }
     
     /*
@@ -71,9 +72,24 @@ public class ItemPOJO {
         }
         ItemPOJO that = (ItemPOJO)other;
         return this.getName().equals(that.getName())
+                /*
                 && this.getQuantity() == that.getQuantity()
                 && this.getPrice().equals(that.getPrice())
+                */
                 && this.getCategory().equals(that.getCategory());
+    }
+    
+    @Override
+    public int hashCode() {
+        return this.getName().hashCode() + this.getCategory().hashCode();
+    }
+
+    @Override
+    public int compareTo(ItemPOJO another) {
+        if(this.getCategory().compareTo(another.getCategory()) != 0) {
+            return this.getCategory().compareTo(another.getCategory());
+        }
+        return this.getName().compareTo(another.getName());
     }
 
 }
