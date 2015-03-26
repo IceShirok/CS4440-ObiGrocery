@@ -105,10 +105,10 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/updateButton"
+            android:id="@+id/cancelButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Update" />
+            android:text="Cancel" />
 
         <Button
             android:id="@+id/deleteButton"
@@ -117,10 +117,10 @@
             android:text="Delete" />
 
         <Button
-            android:id="@+id/cancelButton"
+            android:id="@+id/updateButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Cancel" />
+            android:text="Update" />
 
     </LinearLayout>
 

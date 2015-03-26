@@ -30,6 +30,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="44dp"
         android:onClick="returnToMenu"
-        android:text="Return to Menu" />
+        android:text="Menu" />
 
 </LinearLayout>

@@ -29,20 +29,21 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/finishCheckButton"
-            style="android:buttonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="finishGroceryList"
-            android:text="Finish List" />
-
-        <Button
             android:id="@+id/menuButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="38dp"
             android:onClick="returnToMenu"
             android:text="Menu" />
+
+        <Button
+            android:id="@+id/finishCheckButton"
+            style="android:buttonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="finishGroceryList"
+            android:text="Next" />
+
     </LinearLayout>
 
 </LinearLayout>

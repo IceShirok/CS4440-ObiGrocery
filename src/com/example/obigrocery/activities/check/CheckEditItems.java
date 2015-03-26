@@ -1,31 +1,40 @@
-package com.example.obigrocery.activities.lists;
+package com.example.obigrocery.activities.check;
 
 import java.math.BigDecimal;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.ListView;
 
 import com.example.obigrocery.POJO.ItemPOJO;
 import com.example.obigrocery.activities.R;
 import com.example.obigrocery.activities.global.EditGroceryListGen;
 
-public class EditGroceryList extends EditGroceryListGen {
+public class CheckEditItems extends EditGroceryListGen {
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
+        listTextbox.setVisibility(View.GONE);
+        itemNameTextbox.setVisibility(View.GONE);
+        quantityTextbox.setVisibility(View.GONE);
+        priceTextbox.setVisibility(View.GONE);
+        addGroceryButton.setVisibility(View.GONE);
+        duplicateGroceryButton.setVisibility(View.GONE);
+        itemsView.setMinimumHeight(280);
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             shoppingListId = extras.getInt("SHOPPING_LIST_ID");
 
             // display stuff starts
-            adapter.add(new ItemPOJO("Bread1", new BigDecimal(1), 1, "Baked Goods"));
-            adapter.add(new ItemPOJO("Bread2", new BigDecimal(0), 0, "Baked Goods"));
-            adapter.add(new ItemPOJO("Bread3", new BigDecimal(1), 1, "Baked Goods"));
-            adapter.add(new ItemPOJO("Meat1", new BigDecimal(0), 0, "Meats"));
-            adapter.add(new ItemPOJO("Meat2", new BigDecimal(0), 0, "Meats"));
+            adapter.add(new ItemPOJO("Bread", new BigDecimal(1), shoppingListId, "Baked Goods"));
+            adapter.add(new ItemPOJO("Bread", new BigDecimal(1), shoppingListId, "Baked Goods"));
+            adapter.add(new ItemPOJO("Bread", new BigDecimal(1), 1, "Baked Goods"));
+            adapter.add(new ItemPOJO("Meat", new BigDecimal(1), 1, "Meats"));
+            adapter.add(new ItemPOJO("Meats", new BigDecimal(1), 1, "BMeats"));
             adapter.add(new ItemPOJO("Dairy", new BigDecimal(1), 1, "Dairy"));
             // display stuff ends
 

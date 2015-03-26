@@ -60,6 +60,8 @@ public class ItemPOJO implements Comparable<ItemPOJO>{
         String aString = name + ": " + category;
         if(purchased) {
             aString += "\n\t" + quantity + " x $" + price;
+        } else {
+            aString += "\n\t Not purchased";
         }
         System.out.println(aString);
         return aString;

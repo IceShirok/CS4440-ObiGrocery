@@ -55,20 +55,21 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/editListButton"
-            style="android:buttonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="editList"
-            android:text="Edit List" />
-
-        <Button
             android:id="@+id/listButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="38dp"
             android:onClick="returnToLists"
             android:text="Back to Lists" />
+
+        <Button
+            android1:id="@+id/editListButton"
+            style="android:buttonStyle"
+            android1:layout_width="wrap_content"
+            android1:layout_height="wrap_content"
+            android1:onClick="editList"
+            android1:text="Edit List" />
+
     </LinearLayout>
 
 </LinearLayout>

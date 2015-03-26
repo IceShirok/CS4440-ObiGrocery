@@ -28,6 +28,7 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.obigrocery.POJO.ItemPOJO;
 import com.example.obigrocery.activities.R;
@@ -62,11 +63,11 @@ public class EditGroceryListGen extends ActionBarActivity {
         addGroceryButton = (Button) findViewById(R.id.addGroceryButton);
         addGroceryButton.setEnabled(false);
 
-        finishGroceryButton = (Button) findViewById(R.id.finishGroceryButton);
-        finishGroceryButton.setEnabled(false);
-
         duplicateGroceryButton = (Button) findViewById(R.id.duplicateGroceryButton);
         duplicateGroceryButton.setEnabled(false);
+
+        finishGroceryButton = (Button) findViewById(R.id.finishGroceryButton);
+        finishGroceryButton.setEnabled(false);
 
         listTextbox = (EditText) findViewById(R.id.listTextbox);
         listTextbox.addTextChangedListener(new TextWatcher() {
@@ -296,6 +297,10 @@ public class EditGroceryListGen extends ActionBarActivity {
      * UPDATING
      ******************************************************************/
     protected void editItemAlert(final ItemPOJO item) {
+        getEditItemDialog(item, false).show();
+    }
+    
+    protected AlertDialog getEditItemDialog(final ItemPOJO item, final boolean editPurchased) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setTitle("Editing " + item.getName())
                 .setMessage("Edit to your heart's desire.");
@@ -305,28 +310,44 @@ public class EditGroceryListGen extends ActionBarActivity {
         final AlertDialog alertDialog = builder.create();
         LayoutInflater inflater = alertDialog.getLayoutInflater();
         View dialoglayout = inflater.inflate(R.layout.alert_edit_grocery_one, frameView);
-
+        
         final CheckBox purchasedBox = (CheckBox) dialoglayout.findViewById(R.id.purchasedBox);
-        purchasedBox.setChecked(item.isPurchased());
-
         final EditText nText = (EditText) dialoglayout.findViewById(R.id.itemNameTextbox);
         nText.setText(item.getName());
         final EditText qText = (EditText) dialoglayout.findViewById(R.id.quantityTextbox);
         qText.setText(item.getQuantity()+"");
         final EditText pText = (EditText) dialoglayout.findViewById(R.id.priceTextbox);
         pText.setText(item.getPrice().toString());
-        final Spinner cText = (Spinner) dialoglayout.findViewById(R.id.categorySpinner);
+        if(!editPurchased) {
+            purchasedBox.setVisibility(View.GONE);
+            qText.setVisibility(View.GONE);
+            pText.setVisibility(View.GONE);
 
+            TextView markup = (TextView) findViewById(R.id.quantityText);
+            markup.setVisibility(View.GONE);
+        } else {
+            purchasedBox.setChecked(item.isPurchased());
+            purchasedBox.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // TODO save this info to database?
+                    qText.setEnabled(purchasedBox.isChecked());
+                    pText.setEnabled(purchasedBox.isChecked());
+                }
+            });
+        }
+        final Spinner cText = (Spinner) dialoglayout.findViewById(R.id.categorySpinner);
+        
         List<String> spin = CategoryPopulator.getCategories(false);
         ArrayAdapter<String> cAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, spin);
         cAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cText.setAdapter(cAdapter);
-
+        
         final Button updateButton = (Button) dialoglayout.findViewById(R.id.updateButton);
         final Button deleteButton = (Button) dialoglayout.findViewById(R.id.deleteButton);
         final Button cancelButton = (Button) dialoglayout.findViewById(R.id.cancelButton);
-
+        
         updateButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -338,13 +359,15 @@ public class EditGroceryListGen extends ActionBarActivity {
                 ItemPOJO itemNew = null;
                 
                 nameText = nText.getText().toString();
-                priceText = pText.getText().toString();
-                System.out.println("price is " + priceText);
-                quantityText = qText.getText().toString();
                 categoryText = cText.getSelectedItem().toString();
-                itemNew = isValidItem(nameText, priceText, quantityText, categoryText);
-                System.out.println(itemNew + " is here");
-
+                if(editPurchased && purchasedBox.isChecked()) {
+                    priceText = pText.getText().toString();
+                    quantityText = qText.getText().toString();
+                    itemNew = isValidItem(nameText, priceText, quantityText, categoryText);
+                } else {
+                    itemNew = isValidItem(nameText, categoryText);
+                }
+        
                 if(itemNew != null) {
                     categoryShift(categoryText);
                     adapter.add(itemNew);
@@ -355,14 +378,14 @@ public class EditGroceryListGen extends ActionBarActivity {
                 alertDialog.cancel();
             }
         });
-
+        
         cancelButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
                 alertDialog.cancel();
             }
         });
-
+        
         deleteButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -372,8 +395,7 @@ public class EditGroceryListGen extends ActionBarActivity {
                 alertDialog.cancel();
             }
         });
-
-        alertDialog.show();
+        return alertDialog;
     }
 
     
