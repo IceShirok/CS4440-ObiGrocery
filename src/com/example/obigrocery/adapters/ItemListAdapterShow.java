@@ -19,8 +19,8 @@ public class ItemListAdapterShow extends ItemListAdapterGen {
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = super.getView(position, convertView, parent);
 
-        Button deleteBtn = (Button) view.findViewById(R.id.delete_btn);
-        deleteBtn.setVisibility(View.GONE);
+        /*Button deleteBtn = (Button) view.findViewById(R.id.delete_btn);
+        deleteBtn.setVisibility(View.GONE);*/
 
         return view;
     }

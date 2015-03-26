@@ -37,6 +37,8 @@ public class ReportDateFragment extends ReportFragmentGen {
         calendar.set(endDate.getYear(), endDate.getDayOfMonth(), endDate.getMonth() + 1);
         Date eDate = calendar.getTime();
         
+        // TODO pass start and end dates to next page
+        
         return sDate.compareTo(eDate) < 0;
     }
 

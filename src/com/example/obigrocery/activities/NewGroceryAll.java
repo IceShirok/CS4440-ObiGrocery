@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.AdapterView.OnItemClickListener;
 
 public class NewGroceryAll extends ListShoppingGen {
@@ -19,7 +20,11 @@ public class NewGroceryAll extends ListShoppingGen {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        System.out.println("new grocery list created");
         setContentView(R.layout.activity_shopping_lists);
+        
+        TextView instructionText = (TextView) findViewById(R.id.instructionText);
+        instructionText.setText("Instructions: select a list to import all items.");
         
         shoppingListView = (ListView) findViewById(R.id.shoppingListView);
         shoppingListView.setOnItemClickListener(new OnItemClickListener() {
@@ -27,8 +32,12 @@ public class NewGroceryAll extends ListShoppingGen {
             public void onItemClick(AdapterView<?> parent, View view, int position, long arg3) {
                 adapter.getItem(position);
                 Intent i = new Intent(getApplicationContext(), NewGroceryOne.class);
+                i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
                 i.putExtra("SHOPPING_LIST_ID", position);
                 startActivity(i);
+                setResult(RESULT_OK, getIntent());
+                System.out.println("actual intent");
+                finish();
             }
         });
         

@@ -20,7 +20,7 @@ public class ItemListAdapterEdit extends ItemListAdapterGen {
     public View getView(final int position, View convertView, ViewGroup parent) {
         View view = super.getView(position, convertView, parent);
 
-        Button deleteBtn = (Button) view.findViewById(R.id.delete_btn);
+        /*Button deleteBtn = (Button) view.findViewById(R.id.delete_btn);
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -30,7 +30,7 @@ public class ItemListAdapterEdit extends ItemListAdapterGen {
                 removeFromDatabase(item); // TODO may not need to override
                 notifyDataSetChanged();
             }
-        });
+        });*/
 
         return view;
     }

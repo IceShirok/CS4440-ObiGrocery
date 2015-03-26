@@ -9,8 +9,6 @@ import android.widget.ListView;
 import com.example.obigrocery.POJO.ItemPOJO;
 
 public class EditGroceryList extends EditGroceryListGen {
-
-    private int shoppingListId;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {

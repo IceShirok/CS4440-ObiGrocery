@@ -7,12 +7,18 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
+import android.widget.Spinner;
 
 public class ReportInputActivity extends ActionBarActivity {
     
     private int position;
-    private final static int NUM_FRAGMENTS = 2;
+    private final static int NUM_FRAGMENTS = 3;
 
+
+    /******************************************************************
+     * Setup for fragments
+     ******************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,27 +48,45 @@ public class ReportInputActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     
+
+
+    /******************************************************************
+     * Fragment transition stuff
+     ******************************************************************/
+    
     /*
      * Fragment factory
      */
     public ReportFragmentGen getFragment(int position) {
         String title = null;
         ReportFragmentGen frag = null;
+        Button disabledButton = null;
         switch(position){
         case 0:
             title = "Obi Grocery - Pick a Date";
             this.setTitle(title);
             frag = new ReportDateFragment();
+            disabledButton = (Button) frag.getView().findViewById(R.id.prevButton);
+            disabledButton.setEnabled(false);
             break;
         case 1:
             title = "Obi Grocery - Pick a Category";
             this.setTitle(title);
             frag = new ReportCategoryFragment();
             break;
+        case 2:
+            title = "Obi Grocery - Pick Item Groupings";
+            this.setTitle(title);
+            frag = new ReportCategoryFragment();
+//            disabledButton = (Button) frag.getView().findViewById(R.id.nextButton);
+//            disabledButton.setEnabled(false);
+            break;
         default:
             title = "Obi Grocery - Pick a Date";
             this.setTitle(title);
             frag = new ReportDateFragment();
+            disabledButton = (Button) frag.getView().findViewById(R.id.prevButton);
+            disabledButton.setEnabled(false);
             break;
         }
         return frag;
@@ -84,10 +108,6 @@ public class ReportInputActivity extends ActionBarActivity {
         } else {
             this.generateReport();
         }
-    }
-    
-    protected void generateReport() {
-        // TODO get info
     }
     
     protected void transition(int position) {
@@ -113,6 +133,10 @@ public class ReportInputActivity extends ActionBarActivity {
             .setNeutralButton("OK", null)
             .show();
         }
+    }
+    
+    protected void generateReport() {
+        // TODO get info
     }
     
     public void onBackPressed() {

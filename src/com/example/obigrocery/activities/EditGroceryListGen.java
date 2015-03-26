@@ -2,6 +2,7 @@ package com.example.obigrocery.activities;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import android.app.AlertDialog;
@@ -12,9 +13,11 @@ import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -22,6 +25,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -29,6 +33,8 @@ import com.example.obigrocery.POJO.ItemPOJO;
 import com.example.obigrocery.adapters.ItemListAdapterEdit;
 
 public class EditGroceryListGen extends ActionBarActivity {
+
+    protected int shoppingListId;
 
     protected EditText listTextbox;
     protected EditText itemNameTextbox;
@@ -58,7 +64,7 @@ public class EditGroceryListGen extends ActionBarActivity {
         finishGroceryButton.setEnabled(false);
 
         duplicateGroceryButton = (Button) findViewById(R.id.duplicateGroceryButton);
-        duplicateGroceryButton.setEnabled(true);
+        duplicateGroceryButton.setEnabled(false);
 
         listTextbox = (EditText) findViewById(R.id.listTextbox);
         listTextbox.addTextChangedListener(new TextWatcher() {
@@ -96,21 +102,144 @@ public class EditGroceryListGen extends ActionBarActivity {
                 // TODO can edit item when clicked
                 // Fix this so it works
                 System.out.println("blah " + position);
-                editItemAlert(adapter.getItem(position).toString());
+                editItemAlert(adapter.getItem(position));
             }
         });
 
         populateCategories();
     }
-    
 
     /******************************************************************
-     * Helper methods for instantiations and listeners
+     * Options menu (don't worry about this)
      ******************************************************************/
     
-    /*
-     * Only allow items to be added if input is not blank and in specific category
-     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.new_grocery_list, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    
+    /******************************************************************
+     * Selecting between categories
+     ******************************************************************/
+    protected void categoryShift(String category) {
+        adapter.displayCategory(category);
+        itemsView.invalidateViews();
+        itemsView.setAdapter(adapter);
+        addGroceryButton.setEnabled(enableAdd());
+    }
+    
+    protected List<String> getCategories() {
+        List<String> spinnerArray = new ArrayList<String>();
+        // TODO program to add categories from database
+        spinnerArray.add("Baked Goods");
+        spinnerArray.add("Dairy");
+        spinnerArray.add("Meats");
+        spinnerArray.add("Vegetables");
+        return spinnerArray;
+    }
+
+    protected void populateCategories() {
+        List<String> spinnerArray = getCategories();
+        // note that "All" must be included
+        spinnerArray.add("All");
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, spinnerArray);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        categorySpinner = (Spinner) findViewById(R.id.categorySpinner);
+        categorySpinner.setAdapter(adapter);
+        this.categoryShift("All");
+        // TODO may want to make this a constant, since db won't have this option available
+        
+        categorySpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                categoryShift(categorySpinner.getSelectedItem().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {}
+        });
+    }
+
+    
+    /******************************************************************
+     * Adding stuff to the list
+     ******************************************************************/
+    
+    public boolean addGroceryItem(View view) {
+        // hides keyboard
+        InputMethodManager imm = (InputMethodManager) getBaseContext()
+                .getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(itemNameTextbox.getWindowToken(), 0);
+
+        ItemPOJO formedItem = isValidItem(itemNameTextbox.getText().toString(),
+                priceTextbox.getText().toString(),
+                quantityTextbox.getText().toString(),
+                categorySpinner.getSelectedItem().toString());
+        if (formedItem != null) {
+            addItemsToDisplay(formedItem);
+            addItemsToDatabase(formedItem);
+            quantityTextbox.setText("");
+            priceTextbox.setText("");
+            itemNameTextbox.setText("");
+            return true;
+        } else {
+            String errorMessage = "Incorrect number format!";
+
+            new AlertDialog.Builder(this)
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setTitle("Error")
+            .setMessage(errorMessage)
+            .setNeutralButton("OK", null)
+            .show();
+            return false;
+        }
+    }
+    
+    protected ItemPOJO isValidItem(String name, String price, String quantity, String category) {
+        String n = null;
+        int q = 0;
+        BigDecimal p = null;
+        String c = null;
+        try {
+            n = name;
+            p = new BigDecimal(Double.parseDouble(price));
+            q = Integer.parseInt(quantity);
+            c = category;
+            return new ItemPOJO(n, p, q, c);
+        } catch (NumberFormatException e) {
+            System.out.println(" problem: " + e);
+            return null;
+        }
+    }
+
+    protected void addItemsToDisplay(ItemPOJO item) {
+        adapter.add(item);
+        itemsView.invalidateViews();
+        itemsView.setAdapter(adapter);
+    }
+
+    protected void addItemsToDatabase(ItemPOJO item) {
+        // TODO implement so item can be added to database
+    }
+
     protected boolean enableAdd() {
         return itemNameTextbox.getText().length() > 0
                 && quantityTextbox.getText().length() > 0
@@ -132,140 +261,139 @@ public class EditGroceryListGen extends ActionBarActivity {
             addGroceryButton.setEnabled(enableAdd());
         }
     };
-
-    protected void populateCategories() {
-        List<String> spinnerArray = new ArrayList<String>();
-        // TODO program to add categories from database
-        spinnerArray.add("All");
-        spinnerArray.add("Baked Goods");
-        spinnerArray.add("Dairy");
-        spinnerArray.add("Meats");
-        spinnerArray.add("Vegetables");
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, spinnerArray);
-
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        categorySpinner = (Spinner) findViewById(R.id.categorySpinner);
-        categorySpinner.setAdapter(adapter);
-        this.categoryShift("All");
-        // TODO may want to make this a constant, since db won't have this option available
-        
-        categorySpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-                categoryShift(categorySpinner.getSelectedItem().toString());
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
-
-        });
-    }
-
+    
+    
     /******************************************************************
-     * Options menu (don't worry about this)
+     * DUPLICATE and get stuff from an existing list
      ******************************************************************/
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.new_grocery_list, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    /******************************************************************
-     * Selecting between categories
-     ******************************************************************/
-    protected void categoryShift(String category) {
-        adapter.displayCategory(category);
-        itemsView.invalidateViews();
-        itemsView.setAdapter(adapter);
-        addGroceryButton.setEnabled(enableAdd());
-    }
-
-    /******************************************************************
-     * Adding stuff to the list
-     ******************************************************************/
-    public boolean addGroceryItem(View view) {
-        // hides keyboard
-        InputMethodManager imm = (InputMethodManager) getBaseContext()
-                .getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.hideSoftInputFromWindow(itemNameTextbox.getWindowToken(), 0);
-
-        // adds to list
-        String itemName = null;
-        int quantity = 0;
-        BigDecimal price = null;
-        String category = null;
-        try {
-            quantity = Integer.parseInt(quantityTextbox.getText().toString());
-            price = new BigDecimal(priceTextbox.getText().toString());
-            itemName = itemNameTextbox.getText().toString();
-            category = categorySpinner.getSelectedItem().toString();
-        } catch (NumberFormatException e) {
-            String errorMessage = "Incorrect number format!";
-
-            new AlertDialog.Builder(this)
-            .setIcon(android.R.drawable.ic_dialog_alert)
-            .setTitle("Error")
-            .setMessage(errorMessage)
-            .setNeutralButton("OK", null)
-            .show();
-        }
-        if (itemName != null) {
-            addItemsToDisplay(itemName, quantity, price, category);
-            addItemsToDatabase(itemName, quantity, price, category);
-            quantityTextbox.setText("");
-            priceTextbox.setText("");
-            itemNameTextbox.setText("");
-            return true;
-        }
-        return false;
-    }
-
-    protected void addItemsToDisplay(String itemName, int quantity, BigDecimal price, String category) {
-        ItemPOJO item = new ItemPOJO(itemName, price, quantity, category);
-        adapter.add(item);
-        itemsView.invalidateViews();
-        itemsView.setAdapter(adapter);
-    }
-
-    protected void addItemsToDatabase(String itemName, int quantity, BigDecimal price, String category) {
-        // TODO implement so item can be added to database
-    }
+    
+    public final static int GET_ITEM_LIST = 1;
     
     public void duplicateList(View view) {
-        // TODO implement the following below
         Intent i = new Intent(getApplicationContext(), NewGroceryAll.class);
+        startActivityForResult(i, GET_ITEM_LIST);
+        i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+        i.putExtra("SHOPPING_LIST_ID", -1);
         startActivity(i);
-        /*
-        get the list id from the previous activity
-        for (some data structure) {
-            addItemsToDisplay(itemName, quantity, price, category);
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        System.out.println("Activity Results in EditGrocery");
+        if (requestCode == GET_ITEM_LIST) {
+            System.out.println(resultCode == RESULT_OK);
+            if (resultCode == RESULT_OK) {
+                Bundle extras = data.getExtras();
+                if(extras != null) {
+                    int shoppingListId = extras.getInt("SHOPPING_LIST_ID");
+                    System.out.println("List selected ID: " + shoppingListId);
+                    // TODO use db to get items in list, add stuff to list
+                    /*
+                    get the list id from the previous activity
+                    for (some data structure) {
+                        addItemsToDisplay(itemName, quantity, price, category);
+                    }
+                     */
+                    categoryShift("All");
+                } else {
+                    System.out.println("error occurred when importing list...");
+                }
+            }
         }
-        categoryShift("All");
-         */
+    }
+    
+    /******************************************************************
+     * UPDATING
+     ******************************************************************/
+    protected void editItemAlert(final ItemPOJO item) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this)
+                .setTitle("Editing " + item.getName())
+                .setMessage("Edit to your heart's desire.");
+        final FrameLayout frameView = new FrameLayout(this);
+        builder.setView(frameView);
+        
+        final AlertDialog alertDialog = builder.create();
+        LayoutInflater inflater = alertDialog.getLayoutInflater();
+        View dialoglayout = inflater.inflate(R.layout.alert_edit_grocery_one, frameView);
+
+        final EditText nText = (EditText) dialoglayout.findViewById(R.id.itemNameTextbox);
+        nText.setText(item.getName());
+        final EditText qText = (EditText) dialoglayout.findViewById(R.id.quantityTextbox);
+        qText.setText(item.getQuantity()+"");
+        final EditText pText = (EditText) dialoglayout.findViewById(R.id.priceTextbox);
+        pText.setText(item.getPrice().toString());
+        final Spinner cText = (Spinner) dialoglayout.findViewById(R.id.categorySpinner);
+
+        List<String> spin = getCategories();
+        ArrayAdapter<String> cAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, spin);
+        cAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        cText.setAdapter(cAdapter);
+
+        final Button updateButton = (Button) dialoglayout.findViewById(R.id.updateButton);
+        final Button deleteButton = (Button) dialoglayout.findViewById(R.id.deleteButton);
+        final Button cancelButton = (Button) dialoglayout.findViewById(R.id.cancelButton);
+
+        updateButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO update display, update db
+                String nameText = null;
+                String priceText = null;
+                String quantityText = null;
+                String categoryText = null;
+                ItemPOJO itemNew = null;
+                
+                nameText = nText.getText().toString();
+                priceText = pText.getText().toString();
+                System.out.println("price is " + priceText);
+                quantityText = qText.getText().toString();
+                categoryText = cText.getSelectedItem().toString();
+                itemNew = isValidItem(nameText, priceText, quantityText, categoryText);
+                System.out.println(itemNew + " is here");
+
+                if(itemNew != null) {
+                    categoryShift(categoryText);
+                    adapter.add(itemNew);
+                    adapter.remove(item);
+                    itemsView.invalidateViews();
+                    itemsView.setAdapter(adapter);
+                }
+                alertDialog.cancel();
+            }
+        });
+
+        cancelButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                alertDialog.cancel();
+            }
+        });
+
+        deleteButton.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO make adapter able to remove stuff
+                adapter.remove(item);
+                itemsView.invalidateViews();
+                itemsView.setAdapter(adapter);
+                alertDialog.cancel();
+            }
+        });
+
+        alertDialog.show();
     }
 
     
     /******************************************************************
-     * Done, save anything else in db, go to confirmation page
+     * FINISH, save anything else in db, go to confirmation page
      ******************************************************************/
+    
     public void finishGroceryList(View view) {
+        // TODO also include a timestamp for the list
+        Date date = new Date();
+        System.out.println("List saved at " + date.toString());
+
         String listName = listTextbox.getText().toString();
 
         if (listName != null && listName.length() > 0) {
@@ -304,6 +432,7 @@ public class EditGroceryListGen extends ActionBarActivity {
         }
     }
     
+
     /******************************************************************
      * Returning to menu
      ******************************************************************/
@@ -335,31 +464,5 @@ public class EditGroceryListGen extends ActionBarActivity {
         } else {
             finish();
         }
-    }
-    
-    protected void editItemAlert(String info) {
-        // TODO finish this implementation
-        AlertDialog.Builder alert = new AlertDialog.Builder(this);
-
-        alert.setTitle("Title");
-        alert.setMessage("Message");
-
-        // Set an EditText view to get user input 
-        final EditText input = new EditText(this);
-        alert.setView(input);
-
-        alert.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                // Do something with value!
-            }
-        });
-
-        alert.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            public void onClick(DialogInterface dialog, int whichButton) {
-                // Canceled.
-            }
-        });
-
-        alert.show();
     }
 }

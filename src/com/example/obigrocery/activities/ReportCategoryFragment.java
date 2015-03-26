@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Spinner;
 
 public class ReportCategoryFragment extends ReportFragmentGen {
 
@@ -19,7 +20,10 @@ public class ReportCategoryFragment extends ReportFragmentGen {
 
     @Override
     public boolean allowTransition() {
-        // TODO Auto-generated method stub
+        Spinner categorySpinner = (Spinner) getView().findViewById(R.id.categorySpinner);
+        String category = categorySpinner.getSelectedItem().toString();
+        System.out.println(category);
+        // TODO pass category to next page
         return true;
     }
 

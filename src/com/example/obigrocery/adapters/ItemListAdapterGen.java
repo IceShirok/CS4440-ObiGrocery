@@ -54,6 +54,12 @@ public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
         this.notifyDataSetChanged();
     }
     
+    public void remove(ItemPOJO object) {
+        list.remove(object);
+        display.remove(object);
+        this.notifyDataSetChanged();
+    }
+    
 
     /******************************************************************
      * Display stuff
@@ -99,7 +105,7 @@ public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
                 .findViewById(R.id.list_item_string);
         listItemText.setText(display.get(position).toString());
 
-        Button deleteBtn = (Button) view.findViewById(R.id.delete_btn);
+        /*Button deleteBtn = (Button) view.findViewById(R.id.delete_btn);
 
         deleteBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +116,7 @@ public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
                 removeFromDatabase(item);
                 notifyDataSetChanged();
             }
-        });
+        });*/
 
         return view;
     }

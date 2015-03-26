@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
@@ -46,6 +47,9 @@ public class NewGroceryOne extends ActionBarActivity {
 
             String title = "Obi Grocery - Show List " + shoppingListId;
             this.setTitle(title);
+            
+            Button finishButton = (Button) findViewById(R.id.editListButton);
+            finishButton.setText("Finish");
 
             itemsView = (ListView) findViewById(R.id.itemView);
             itemsView.setAdapter(adapter);
@@ -88,9 +92,7 @@ public class NewGroceryOne extends ActionBarActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
+            public void onNothingSelected(AdapterView<?> parentView) {}
 
         });
     }
@@ -125,6 +127,9 @@ public class NewGroceryOne extends ActionBarActivity {
     
     public void editList(View view) {
         // TODO pass id info so list is duplicated to new grocery list
+        getIntent().putExtra("SHOPPING_LIST_ID", shoppingListId);
+        setResult(RESULT_OK, getIntent());
+        finish();
     }
 
     /******************************************************************
