@@ -23,6 +23,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListView;
@@ -198,6 +199,10 @@ public class EditGroceryListGen extends ActionBarActivity {
         }
     }
     
+    protected ItemPOJO isValidItem(String name, String category) {
+        return this.isValidItem(name, "0", "0", category);
+    }
+    
     protected ItemPOJO isValidItem(String name, String price, String quantity, String category) {
         String n = null;
         int q = 0;
@@ -232,7 +237,7 @@ public class EditGroceryListGen extends ActionBarActivity {
                 && !categorySpinner.getSelectedItem().toString().equalsIgnoreCase("All");
     }
 
-    protected class AddGroceryWatcher implements TextWatcher {
+    public class AddGroceryWatcher implements TextWatcher {
         @Override
         public void onTextChanged(CharSequence s, int start, int before, int count) {
             addGroceryButton.setEnabled(enableAdd());
@@ -301,6 +306,9 @@ public class EditGroceryListGen extends ActionBarActivity {
         LayoutInflater inflater = alertDialog.getLayoutInflater();
         View dialoglayout = inflater.inflate(R.layout.alert_edit_grocery_one, frameView);
 
+        final CheckBox purchasedBox = (CheckBox) dialoglayout.findViewById(R.id.purchasedBox);
+        purchasedBox.setChecked(item.isPurchased());
+
         final EditText nText = (EditText) dialoglayout.findViewById(R.id.itemNameTextbox);
         nText.setText(item.getName());
         final EditText qText = (EditText) dialoglayout.findViewById(R.id.quantityTextbox);
@@ -309,7 +317,7 @@ public class EditGroceryListGen extends ActionBarActivity {
         pText.setText(item.getPrice().toString());
         final Spinner cText = (Spinner) dialoglayout.findViewById(R.id.categorySpinner);
 
-        List<String> spin = CategoryPopulator.getCategories(true);
+        List<String> spin = CategoryPopulator.getCategories(false);
         ArrayAdapter<String> cAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, spin);
         cAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -358,7 +366,6 @@ public class EditGroceryListGen extends ActionBarActivity {
         deleteButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO make adapter able to remove stuff
                 adapter.remove(item);
                 itemsView.invalidateViews();
                 itemsView.setAdapter(adapter);

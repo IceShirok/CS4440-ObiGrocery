@@ -31,19 +31,19 @@
             android:text="New Shopping List" />
 
         <Button
+            android:id="@+id/inputPurchasedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="gotoPurchased"
+            android:text="Input Purchased Items" />
+
+        <Button
             android:id="@+id/loadGroceryButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
             android:onClick="gotoLoad"
             android:text="Shopping Lists" />
-
-        <Button
-            android:id="@+id/inputPurchasedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="gotoPurchased"
-            android:text="Input Purchased Items" />
 
         <Button
             android:id="@+id/genReportButton"

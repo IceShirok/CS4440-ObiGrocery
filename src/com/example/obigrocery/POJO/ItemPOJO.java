@@ -17,7 +17,11 @@ public class ItemPOJO implements Comparable<ItemPOJO>{
         this.price = price;
         this.quantity = quantity;
         this.category = category;
-        this.purchased = false;
+        this.purchased = (!price.equals(BigDecimal.ZERO) && quantity != 0);
+    }
+    
+    public ItemPOJO(String name, String category) {
+        this(name, new BigDecimal(0), 0, category);
     }
 
     public String getName() {
@@ -51,12 +55,14 @@ public class ItemPOJO implements Comparable<ItemPOJO>{
         this.purchased = purchased;
     }
     
-    /*
-     * Used for display in app
-     */
     @Override
     public String toString() {
-        return name + ": " + category + "\n\t" + quantity + " x $" + price;
+        String aString = name + ": " + category;
+        if(purchased) {
+            aString += "\n\t" + quantity + " x $" + price;
+        }
+        System.out.println(aString);
+        return aString;
     }
     
     @Override
@@ -72,10 +78,6 @@ public class ItemPOJO implements Comparable<ItemPOJO>{
         }
         ItemPOJO that = (ItemPOJO)other;
         return this.getName().equals(that.getName())
-                /*
-                && this.getQuantity() == that.getQuantity()
-                && this.getPrice().equals(that.getPrice())
-                */
                 && this.getCategory().equals(that.getCategory());
     }
     

@@ -19,9 +19,6 @@ import android.widget.TextView;
 
 import com.example.obigrocery.POJO.ItemPOJO;
 import com.example.obigrocery.activities.R;
-import com.example.obigrocery.activities.R.id;
-import com.example.obigrocery.activities.R.layout;
-import com.example.obigrocery.activities.R.menu;
 import com.example.obigrocery.activities.lists.EditGroceryList;
 import com.example.obigrocery.adapters.ItemListAdapterGen;
 

@@ -15,6 +15,11 @@ import com.example.obigrocery.activities.newgrocery.NewGroceryList;
 import com.example.obigrocery.activities.report.ReportInputActivity;
 
 public class ObiGroceryMainActivity extends ActionBarActivity {
+    
+    /*
+    TODO do the following
+    - purchased items: prompt another screen with list of items, click and edit quantity and price
+     */
 
     /******************************************************************
      * Main menu for the app - woohoo!
