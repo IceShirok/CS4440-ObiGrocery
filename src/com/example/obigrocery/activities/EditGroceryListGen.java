@@ -31,7 +31,7 @@ import android.widget.Spinner;
 
 import com.example.obigrocery.POJO.ItemPOJO;
 import com.example.obigrocery.activities.newgrocery.NewGroceryAll;
-import com.example.obigrocery.adapters.ItemListAdapterEdit;
+import com.example.obigrocery.adapters.ItemListAdapterGen;
 
 public class EditGroceryListGen extends ActionBarActivity {
 
@@ -48,7 +48,7 @@ public class EditGroceryListGen extends ActionBarActivity {
     protected Button finishGroceryButton;
     protected Button duplicateGroceryButton;
 
-    protected ItemListAdapterEdit adapter;
+    protected ItemListAdapterGen adapter;
 
     /******************************************************************
      * Instantiation of stuff into the app
@@ -93,16 +93,12 @@ public class EditGroceryListGen extends ActionBarActivity {
 
         itemsView = (ListView) findViewById(R.id.itemView);
 
-        adapter = new ItemListAdapterEdit(this);
+        adapter = new ItemListAdapterGen(this);
         itemsView.setAdapter(adapter);
         itemsView.setClickable(true);
         itemsView.setOnItemClickListener(new OnItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view,
-                    int position, long id) {
-                // TODO can edit item when clicked
-                // Fix this so it works
-                System.out.println("blah " + position);
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 editItemAlert(adapter.getItem(position));
             }
         });

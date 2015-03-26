@@ -19,11 +19,11 @@ import android.widget.Spinner;
 
 import com.example.obigrocery.POJO.ItemPOJO;
 import com.example.obigrocery.activities.R;
-import com.example.obigrocery.adapters.ItemListAdapterShow;
+import com.example.obigrocery.adapters.ItemListAdapterGen;
 
 public class ListShoppingOne extends ActionBarActivity {
     
-    private ItemListAdapterShow adapter;
+    private ItemListAdapterGen adapter;
     protected ListView itemsView;
     protected Spinner categorySpinner;
     private int shoppingListId;
@@ -38,7 +38,7 @@ public class ListShoppingOne extends ActionBarActivity {
             // TODO use shoppingListId to populate listview with db stuff
             // note that this stuff is for display only!
             shoppingListId = extras.getInt("SHOPPING_LIST_ID");
-            adapter = new ItemListAdapterShow(this);
+            adapter = new ItemListAdapterGen(this);
             adapter.add(new ItemPOJO("Bread", new BigDecimal(1), shoppingListId, "Baked Goods"));
             adapter.add(new ItemPOJO("Bread", new BigDecimal(1), shoppingListId, "Baked Goods"));
             adapter.add(new ItemPOJO("Bread", new BigDecimal(1), 1, "Baked Goods"));

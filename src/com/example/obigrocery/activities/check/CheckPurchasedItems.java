@@ -7,17 +7,19 @@ import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.obigrocery.POJO.ItemPOJO;
 import com.example.obigrocery.activities.R;
-import com.example.obigrocery.adapters.ItemListAdapterShow;
+import com.example.obigrocery.adapters.ItemListAdapterCheck;
 
 public class CheckPurchasedItems extends ActionBarActivity {
     
     private Button finishCheckButton;
-    private ItemListAdapterShow adapter;
+    private ItemListAdapterCheck adapter;
     private ListView itemsView;
 
     @Override
@@ -30,7 +32,7 @@ public class CheckPurchasedItems extends ActionBarActivity {
         
         itemsView = (ListView) findViewById(R.id.itemView);
 
-        adapter = new ItemListAdapterShow(this);
+        adapter = new ItemListAdapterCheck(this);
         adapter.add(new ItemPOJO("Bread", new BigDecimal(1), 1, "Baked Goods"));
         adapter.add(new ItemPOJO("Bread", new BigDecimal(1), 1, "Baked Goods"));
         adapter.add(new ItemPOJO("Bread", new BigDecimal(1), 1, "Baked Goods"));
@@ -40,6 +42,12 @@ public class CheckPurchasedItems extends ActionBarActivity {
 
         itemsView.setAdapter(adapter);
         itemsView.setClickable(true);
+        itemsView.setOnItemClickListener(new OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                checkItem(adapter.getItem(position));
+            }
+        });
     }
 
     @Override
@@ -59,6 +67,10 @@ public class CheckPurchasedItems extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    
+    protected void checkItem(ItemPOJO item) {
+        // TODO implement
     }
     
     public void finishGroceryList(View view) {

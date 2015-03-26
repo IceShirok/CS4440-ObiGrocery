@@ -106,27 +106,6 @@ public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
                 .findViewById(R.id.list_item_string);
         listItemText.setText(display.get(position).toString());
 
-        /*Button deleteBtn = (Button) view.findViewById(R.id.delete_btn);
-
-        deleteBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // do something
-                ItemPOJO item = display.remove(position);
-                list.remove(item);
-                removeFromDatabase(item);
-                notifyDataSetChanged();
-            }
-        });*/
-
         return view;
-    }
-    
-
-    /******************************************************************
-     * Remove item from database
-     ******************************************************************/
-    public void removeFromDatabase(ItemPOJO item) {
-        // TODO implement to remove item from database
     }
 }
