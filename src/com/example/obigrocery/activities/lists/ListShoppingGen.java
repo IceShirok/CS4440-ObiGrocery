@@ -1,4 +1,4 @@
-package com.example.obigrocery.activities;
+package com.example.obigrocery.activities.lists;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +15,12 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.obigrocery.activities.R;
+
 public class ListShoppingGen extends ActionBarActivity {
     
-    private ListView shoppingListView;
-    private ArrayAdapter<String> adapter;
+    protected ListView shoppingListView;
+    protected ArrayAdapter<String> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +41,6 @@ public class ListShoppingGen extends ActionBarActivity {
         shoppingListView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long arg3) {
-                // TODO transfer information to next screen
                 adapter.getItem(position);
                 Intent i = new Intent(getApplicationContext(), ListShoppingOne.class);
                 i.putExtra("SHOPPING_LIST_ID", position);
@@ -49,6 +50,7 @@ public class ListShoppingGen extends ActionBarActivity {
     }
     
     protected void populateList() {
+        System.out.println("populating list");
         List<String> list = new ArrayList<>();
         // TODO use db to populate list
         list.add("Shopping List 1\n\tNumber of items: 10");

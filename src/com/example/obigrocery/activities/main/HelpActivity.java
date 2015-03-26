@@ -1,4 +1,9 @@
-package com.example.obigrocery.activities;
+package com.example.obigrocery.activities.main;
+
+import com.example.obigrocery.activities.R;
+import com.example.obigrocery.activities.R.id;
+import com.example.obigrocery.activities.R.layout;
+import com.example.obigrocery.activities.R.menu;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -6,23 +11,18 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.github.mikephil.charting.charts.LineChart;
-
-public class ReportSummaryActivity extends ActionBarActivity {
+public class HelpActivity extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_report_summary);
-
-        LineChart chart = (LineChart) findViewById(R.id.chart);
-        System.out.println(chart);
+        setContentView(R.layout.activity_help_screen);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.report_summary, menu);
+        getMenuInflater().inflate(R.menu.help_screen, menu);
         return true;
     }
 

@@ -1,4 +1,13 @@
-package com.example.obigrocery.activities;
+package com.example.obigrocery.activities.main;
+
+import com.example.obigrocery.activities.R;
+import com.example.obigrocery.activities.R.id;
+import com.example.obigrocery.activities.R.layout;
+import com.example.obigrocery.activities.R.menu;
+import com.example.obigrocery.activities.check.CheckShoppingAll;
+import com.example.obigrocery.activities.lists.ListShoppingAll;
+import com.example.obigrocery.activities.newgrocery.NewGroceryList;
+import com.example.obigrocery.activities.report.ReportInputActivity;
 
 import android.content.Intent;
 import android.os.Bundle;

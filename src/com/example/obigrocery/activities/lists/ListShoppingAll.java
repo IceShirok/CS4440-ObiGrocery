@@ -1,4 +1,4 @@
-package com.example.obigrocery.activities;
+package com.example.obigrocery.activities.lists;
 
 public class ListShoppingAll extends ListShoppingGen {
 

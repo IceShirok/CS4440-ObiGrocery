@@ -1,4 +1,7 @@
-package com.example.obigrocery.activities;
+package com.example.obigrocery.activities.report;
+
+import com.example.obigrocery.activities.R;
+import com.example.obigrocery.activities.R.layout;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

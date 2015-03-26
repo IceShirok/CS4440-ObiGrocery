@@ -1,4 +1,4 @@
-package com.example.obigrocery.activities;
+package com.example.obigrocery.activities.lists;
 
 import java.math.BigDecimal;
 
@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.widget.ListView;
 
 import com.example.obigrocery.POJO.ItemPOJO;
+import com.example.obigrocery.activities.EditGroceryListGen;
+import com.example.obigrocery.activities.R;
+import com.example.obigrocery.activities.R.id;
 
 public class EditGroceryList extends EditGroceryListGen {
     

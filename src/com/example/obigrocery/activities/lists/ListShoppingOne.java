@@ -1,4 +1,4 @@
-package com.example.obigrocery.activities;
+package com.example.obigrocery.activities.lists;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -18,6 +18,10 @@ import android.widget.ListView;
 import android.widget.Spinner;
 
 import com.example.obigrocery.POJO.ItemPOJO;
+import com.example.obigrocery.activities.R;
+import com.example.obigrocery.activities.R.id;
+import com.example.obigrocery.activities.R.layout;
+import com.example.obigrocery.activities.R.menu;
 import com.example.obigrocery.adapters.ItemListAdapterShow;
 
 public class ListShoppingOne extends ActionBarActivity {

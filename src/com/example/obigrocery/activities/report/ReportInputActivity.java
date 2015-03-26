@@ -1,4 +1,9 @@
-package com.example.obigrocery.activities;
+package com.example.obigrocery.activities.report;
+
+import com.example.obigrocery.activities.R;
+import com.example.obigrocery.activities.R.id;
+import com.example.obigrocery.activities.R.layout;
+import com.example.obigrocery.activities.R.menu;
 
 import android.app.AlertDialog;
 import android.os.Bundle;

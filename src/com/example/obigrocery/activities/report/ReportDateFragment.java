@@ -1,4 +1,4 @@
-package com.example.obigrocery.activities;
+package com.example.obigrocery.activities.report;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -9,6 +9,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.DatePicker;
+
+import com.example.obigrocery.activities.R;
 
 public class ReportDateFragment extends ReportFragmentGen {
 

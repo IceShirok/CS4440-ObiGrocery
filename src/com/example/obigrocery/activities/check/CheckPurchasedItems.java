@@ -1,4 +1,4 @@
-package com.example.obigrocery.activities;
+package com.example.obigrocery.activities.check;
 
 import java.math.BigDecimal;
 
@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.obigrocery.POJO.ItemPOJO;
+import com.example.obigrocery.activities.R;
 import com.example.obigrocery.adapters.ItemListAdapterShow;
 
 public class CheckPurchasedItems extends ActionBarActivity {
