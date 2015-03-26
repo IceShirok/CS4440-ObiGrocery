@@ -1,12 +1,11 @@
 package com.example.obigrocery.activities.report;
 
-import com.example.obigrocery.activities.R;
-import com.example.obigrocery.activities.R.layout;
-
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.example.obigrocery.activities.R;
 
 public class ReportOptionFragment extends ReportFragmentGen {
 

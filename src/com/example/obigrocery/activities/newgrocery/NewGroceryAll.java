@@ -1,9 +1,5 @@
 package com.example.obigrocery.activities.newgrocery;
 
-import com.example.obigrocery.activities.R;
-import com.example.obigrocery.activities.R.id;
-import com.example.obigrocery.activities.lists.ListShoppingGen;
-
 import android.content.Intent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -11,6 +7,9 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+
+import com.example.obigrocery.activities.R;
+import com.example.obigrocery.activities.lists.ListShoppingGen;
 
 public class NewGroceryAll extends ListShoppingGen {
     

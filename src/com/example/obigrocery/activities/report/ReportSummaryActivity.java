@@ -7,9 +7,6 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.obigrocery.activities.R;
-import com.example.obigrocery.activities.R.id;
-import com.example.obigrocery.activities.R.layout;
-import com.example.obigrocery.activities.R.menu;
 import com.github.mikephil.charting.charts.LineChart;
 
 public class ReportSummaryActivity extends ActionBarActivity {

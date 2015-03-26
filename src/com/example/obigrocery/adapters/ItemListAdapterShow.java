@@ -4,9 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-
-import com.example.obigrocery.activities.R;
 
 public class ItemListAdapterShow extends ItemListAdapterGen {
 

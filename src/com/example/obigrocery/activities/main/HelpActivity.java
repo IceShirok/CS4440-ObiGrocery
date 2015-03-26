@@ -1,15 +1,12 @@
 package com.example.obigrocery.activities.main;
 
-import com.example.obigrocery.activities.R;
-import com.example.obigrocery.activities.R.id;
-import com.example.obigrocery.activities.R.layout;
-import com.example.obigrocery.activities.R.menu;
-
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.example.obigrocery.activities.R;
 
 public class HelpActivity extends ActionBarActivity {
 

@@ -1,10 +1,5 @@
 package com.example.obigrocery.activities.report;
 
-import com.example.obigrocery.activities.R;
-import com.example.obigrocery.activities.R.id;
-import com.example.obigrocery.activities.R.layout;
-import com.example.obigrocery.activities.R.menu;
-
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -13,7 +8,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Spinner;
+
+import com.example.obigrocery.activities.R;
 
 public class ReportInputActivity extends ActionBarActivity {
     
