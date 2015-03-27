@@ -11,19 +11,10 @@ import android.widget.Button;
 import com.example.obigrocery.activities.R;
 
 public class ObiGroceryMainActivity extends ActionBarActivity {
-    
-    /*
-    TODO edit the following:
-    - change price and quantity to amount and units
-    - purpose of app: when going to grocery store, select what you purchased
-    - report - discuss after professor
-    - units: dropdown, amount: dropdown or input
-     */
 
     /******************************************************************
      * Main menu for the app - woohoo!
      ******************************************************************/
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +28,6 @@ public class ObiGroceryMainActivity extends ActionBarActivity {
     /******************************************************************
      * options stuff
      ******************************************************************/
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -61,7 +51,6 @@ public class ObiGroceryMainActivity extends ActionBarActivity {
     /******************************************************************
      * Navigation to other activities
      ******************************************************************/
-    
     public void gotoNew(View view) {
         Intent i = new Intent(getApplicationContext(), EditGroceryListGen.class);
         startActivity(i);

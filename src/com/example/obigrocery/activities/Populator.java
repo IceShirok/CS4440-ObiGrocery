@@ -6,23 +6,31 @@ import java.util.List;
 
 public class Populator {
     
+    public final static String ALL_CATEGORY = "All";
+    
     public static List<String> getCategories(boolean needAll) {
         List<String> categoryArray = new ArrayList<String>();
-        // TODO program to add categories from database
         if(needAll) {
-            categoryArray.add("All");
+            categoryArray.add(ALL_CATEGORY);
         }
+        /*
+         * TODO Program to add categories from database.
+         */
         categoryArray.add("Baked Goods");
         categoryArray.add("Dairy");
         categoryArray.add("Meats");
         categoryArray.add("Vegetables");
+
         Collections.sort(categoryArray);
         return categoryArray;
     }
     
     public static List<String> getUnits() {
         List<String> unitArray = new ArrayList<String>();
-        // TODO program to add categories from database
+        /*
+         * TODO Program to add units from database.
+         */
+        
         unitArray.add("unit");
         unitArray.add("oz");
         unitArray.add("lbs");
@@ -30,6 +38,7 @@ public class Populator {
         unitArray.add("pint");
         unitArray.add("quart");
         unitArray.add("gallon");
+        
         Collections.sort(unitArray);
         return unitArray;
     }

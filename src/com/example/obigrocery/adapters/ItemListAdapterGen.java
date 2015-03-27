@@ -14,6 +14,7 @@ import android.widget.ListAdapter;
 import android.widget.TextView;
 
 import com.example.obigrocery.POJO.ItemPOJO;
+import com.example.obigrocery.activities.Populator;
 import com.example.obigrocery.activities.R;
 
 public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
@@ -72,10 +73,7 @@ public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
     /******************************************************************
      * Display stuff
      ******************************************************************/
-    
-    /*
-     * Used to change display based on item category
-     */
+
     public void displayCategory(String category) {
         display.clear();
         this.notifyDataSetChanged();
@@ -83,7 +81,7 @@ public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
         Collections.sort(list);
         
         ArrayList<ItemPOJO> temp = new ArrayList<>();
-        if(category.equalsIgnoreCase("all")) {
+        if(category.equalsIgnoreCase(Populator.ALL_CATEGORY)) {
             for(ItemPOJO item : list) {
                 temp.add(item);
             }

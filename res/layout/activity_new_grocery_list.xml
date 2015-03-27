@@ -49,9 +49,9 @@
                 android:id="@+id/quantityTextbox"
                 android:layout_width="74dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_weight="0.05"
                 android:layout_gravity="left"
+                android:layout_marginTop="16dp"
+                android:layout_weight="0.02"
                 android:background="#ffffff"
                 android:ems="10"
                 android:hint="Quantity" />
@@ -61,7 +61,7 @@
                 android:layout_width="39dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.04"
-                android:text=" x         $"
+                android:text=" units of"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <Spinner
