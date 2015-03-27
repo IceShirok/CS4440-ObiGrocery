@@ -15,13 +15,17 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.obigrocery.POJO.ListPOJO;
 import com.example.obigrocery.activities.R;
 
 public class ListShoppingGen extends ActionBarActivity {
     
     protected ListView shoppingListView;
-    protected ArrayAdapter<String> adapter;
+    protected ArrayAdapter<ListPOJO> adapter;
 
+    /******************************************************************
+     * Creating the list of shopping lists
+     ******************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,31 +39,38 @@ public class ListShoppingGen extends ActionBarActivity {
         TextView instructionText = (TextView) findViewById(R.id.instructionText);
         instructionText.setText("Instructions: select a list to view.");
     }
-    
     protected void setupListView() {
         shoppingListView = (ListView) findViewById(R.id.shoppingListView);
         shoppingListView.setOnItemClickListener(new OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long arg3) {
-                adapter.getItem(position);
                 Intent i = new Intent(getApplicationContext(), ListOneListGen.class);
-                i.putExtra("SHOPPING_LIST_ID", position);
+                i.putExtra("SHOPPING_LIST_ID", adapter.getItem(position).getId());
                 startActivity(i);
             }
         });
     }
-    
+
+    /******************************************************************
+     * Populating the list - a database story
+     ******************************************************************/
     protected void populateList() {
-        System.out.println("populating list");
-        List<String> list = new ArrayList<>();
-        // TODO use db to populate list
-        list.add("Shopping List 1\n\tNumber of items: 10");
-        list.add("Shopping list 2\n\tNumber of items: 10");
-        list.add("Shopping list 3\n\tNumber of items: 10");
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
+        /*
+         * TODO use database to populate the list of shopping lists
+         * The ListPOJO takes in a String name of list, and the int ID number of list
+         */
+
+        List<ListPOJO> display = new ArrayList<>();
+        display.add(new ListPOJO("Shopping List 5", 5));
+        display.add(new ListPOJO("Shopping List 6", 6));
+        display.add(new ListPOJO("Shopping List 7", 7));
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, display);
         shoppingListView.setAdapter(adapter);
     }
 
+    /******************************************************************
+     * Options
+     ******************************************************************/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -79,9 +90,10 @@ public class ListShoppingGen extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /*
-     * Return to menu
-     */
+
+    /******************************************************************
+     * Navigation
+     ******************************************************************/
     public void returnToMenu(View view) {
         finish();
     }

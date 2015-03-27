@@ -104,6 +104,7 @@ public class EditGroceryListGen extends ActionBarActivity {
 
         populateCategories();
         populateUnits();
+        setTitle();
     }
 
     /******************************************************************
@@ -275,7 +276,6 @@ public class EditGroceryListGen extends ActionBarActivity {
 //                if(extras != null) {
 //                    int shoppingListId = extras.getInt("SHOPPING_LIST_ID");
 //                    System.out.println("List selected ID: " + shoppingListId);
-//                    // TODO use db to get items in list, add stuff to list
 //                    /*
 //                    get the list id from the previous activity
 //                    for (some data structure) {
@@ -357,7 +357,6 @@ public class EditGroceryListGen extends ActionBarActivity {
         updateButton.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO update display, update db
                 String nameText = null;
                 String unitText = null;
                 String quantityText = null;
@@ -393,6 +392,7 @@ public class EditGroceryListGen extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 adapter.remove(item);
+                deleteFromDatabase(item);
                 itemsView.invalidateViews();
                 itemsView.setAdapter(adapter);
                 alertDialog.cancel();
@@ -414,6 +414,8 @@ public class EditGroceryListGen extends ActionBarActivity {
          * Note that listId is an instance variable set upon creation,
          *  so you can use the id value whenever
          */
+        Date date = new Date();
+        System.out.println("List saved at " + date.toString());
         return 0;
     }
 
@@ -421,7 +423,11 @@ public class EditGroceryListGen extends ActionBarActivity {
         /*
          * TODO implement so item is added to database
          * should be an insert
+         * ItemPOJO consists of name, unit, quantity, and category
          */
+        System.out.println("***** Adding an item to the database. *****");
+        System.out.println(item);
+        System.out.println("***** Finished adding an item to the database. *****");
     }
 
     protected void updateItemToDatabase(ItemPOJO oldItem, ItemPOJO newItem) {
@@ -430,12 +436,37 @@ public class EditGroceryListGen extends ActionBarActivity {
          * oldItem is the original item in the database
          * newItem is the new information to replace the original item
          */
+        System.out.println("***** Updating an item to the database. *****");
+        System.out.println(oldItem);
+        System.out.println(newItem);
+        System.out.println("***** Finished updating an item to the database. *****");
     }
 
     protected void updateListToDatabase(String name) {
         /*
          * TODO implement so list is named
          */
+        System.out.println("***** Updating list name to the database. *****");
+        System.out.println(name);
+        System.out.println("***** Finished updating list name to the database. *****");
+    }
+
+    protected void deleteFromDatabase(ItemPOJO item) {
+        /*
+         * TODO implement so item is deleted from the database
+         */
+        System.out.println("***** Deleting an item to the database. *****");
+        System.out.println(item);
+        System.out.println("***** Finished deleting an item to the database. *****");
+    }
+
+    protected void setTitle() {
+        /*
+         * TODO use database to get the name of the shopping list using shoppingListId
+         */
+        String title = "Obi Grocery - Create New List ";
+        this.setTitle(title);
+        listTextbox.setText("Obi Grocery List " + shoppingListId);
     }
 
     
@@ -444,9 +475,6 @@ public class EditGroceryListGen extends ActionBarActivity {
      ******************************************************************/
     
     public void finishGroceryList(View view) {
-        Date date = new Date();
-        System.out.println("List saved at " + date.toString());
-
         String listName = listTextbox.getText().toString();
 
         if (listName != null && listName.length() > 0) {

@@ -27,24 +27,22 @@ public class ListOneListGen extends ActionBarActivity {
     protected Spinner categorySpinner;
     protected int shoppingListId;
 
+    /******************************************************************
+     * Creating the display of a list, read-only
+     ******************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_shopping_lists);
-
-        String title = "Obi Grocery - Show List " + shoppingListId;
-        this.setTitle(title);
         
         setInstructions();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            // TODO use shoppingListId to populate listview with db stuff
-            // note that this stuff is for display only!
             shoppingListId = extras.getInt("SHOPPING_LIST_ID");
             populateList();
             populateCategories();
-            
+            setTitle();
         } else {
             String errorMessage = "List missing from database. Exiting...";
 
@@ -63,15 +61,30 @@ public class ListOneListGen extends ActionBarActivity {
         instructionText.setText("View of list, read-only");
     }
     
+    protected void setTitle() {
+        /*
+         * TODO use database to get the name of the shopping list using shoppingListId
+         */
+        String title = "Obi Grocery - Show List " + shoppingListId;
+        this.setTitle(title);
+    }
+
+    /******************************************************************
+     * Populating the list
+     ******************************************************************/
     protected void populateList() {
         adapter = new ItemListAdapterGen(this);
-        // TODO use db to populate, use shoppingListId
-        adapter.add(new ItemPOJO("Bread", "oz", shoppingListId, "Baked Goods"));
-        adapter.add(new ItemPOJO("Bread", "oz", shoppingListId, "Baked Goods"));
-        adapter.add(new ItemPOJO("Bread", "oz", 1, "Baked Goods"));
+        /*
+         * TODO use database to populate
+         * Use shoppingListId to retrieve
+         */
+        adapter.add(new ItemPOJO("Bread1", "oz", shoppingListId, "Baked Goods"));
+        adapter.add(new ItemPOJO("Bread2", "oz", shoppingListId, "Baked Goods"));
+        adapter.add(new ItemPOJO("Bread3", "oz", 1, "Baked Goods"));
         adapter.add(new ItemPOJO("Meat", "oz", 1, "Meats"));
-        adapter.add(new ItemPOJO("Meats", "oz", 1, "BMeats"));
+        adapter.add(new ItemPOJO("Meats", "oz", 1, "Meats"));
         adapter.add(new ItemPOJO("Dairy", "oz", 1, "Dairy"));
+
         itemsView = (ListView) findViewById(R.id.itemView);
         itemsView.setAdapter(adapter);
     }
@@ -88,7 +101,7 @@ public class ListOneListGen extends ActionBarActivity {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         categorySpinner = (Spinner) findViewById(R.id.categorySpinner);
         categorySpinner.setAdapter(adapter);
-        this.categoryShift("All");
+        this.categoryShift(Populator.ALL_CATEGORY);
         
         categorySpinner.setOnItemSelectedListener(new OnItemSelectedListener() {
             @Override
@@ -97,10 +110,56 @@ public class ListOneListGen extends ActionBarActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
+            public void onNothingSelected(AdapterView<?> parentView) {}
         });
+    }
+
+    /******************************************************************
+     * Selecting between categories
+     ******************************************************************/
+    protected void categoryShift(String category) {
+        adapter.displayCategory(category);
+        itemsView.invalidateViews();
+        itemsView.setAdapter(adapter);
+    }
+
+
+    /******************************************************************
+     * Editing a list
+     ******************************************************************/
+    public void editList(View view) {
+        Intent i = new Intent(getApplicationContext(), EditGroceryList.class);
+        i.putExtra("SHOPPING_LIST_ID", shoppingListId);
+        startActivityForResult(i, EDIT_ITEM_LIST);
+    }
+    
+    public final static int EDIT_ITEM_LIST = 1;
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        System.out.println("Activity Results in listing one list");
+        if (requestCode == EDIT_ITEM_LIST) {
+            if (resultCode == RESULT_OK) {
+                Bundle extras = data.getExtras();
+                if(extras != null) {
+                    int shoppingListId = extras.getInt("SHOPPING_LIST_ID");
+                    System.out.println("List selected ID: " + shoppingListId);
+                    categoryShift(Populator.ALL_CATEGORY);
+                    populateList();
+                } else {
+                    System.out.println("error occurred when importing list...");
+                }
+            }
+        }
+    }
+
+    /******************************************************************
+     * Let's go shopping!
+     ******************************************************************/
+    public void letsGoShopping(View view) {
+        Intent i = new Intent(getApplicationContext(), CheckPurchasedItems.class);
+        i.putExtra("SHOPPING_LIST_ID", shoppingListId);
+        startActivity(i);
     }
 
     /******************************************************************
@@ -123,31 +182,6 @@ public class ListOneListGen extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
-    }
-
-    /******************************************************************
-     * Selecting between categories
-     ******************************************************************/
-    protected void categoryShift(String category) {
-        adapter.displayCategory(category);
-        itemsView.invalidateViews();
-        itemsView.setAdapter(adapter);
-    }
-
-
-    /******************************************************************
-     * next action
-     ******************************************************************/
-    public void editList(View view) {
-        Intent i = new Intent(getApplicationContext(), EditGroceryList.class);
-        i.putExtra("SHOPPING_LIST_ID", shoppingListId);
-        startActivity(i);
-    }
-    
-    public void letsGoShopping(View view) {
-        Intent i = new Intent(getApplicationContext(), CheckPurchasedItems.class);
-        i.putExtra("SHOPPING_LIST_ID", shoppingListId);
-        startActivity(i);
     }
 
     /******************************************************************
