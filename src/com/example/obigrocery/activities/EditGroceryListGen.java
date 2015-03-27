@@ -48,8 +48,6 @@ public class EditGroceryListGen extends ActionBarActivity {
     protected Button chooseButton;
 
     protected ItemListAdapterGen adapter;
-    
-    protected int listId;
 
     /******************************************************************
      * Instantiation of stuff into the app
@@ -59,7 +57,7 @@ public class EditGroceryListGen extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_grocery_list);
         
-        this.listId = generateListId();
+        this.shoppingListId = generateListId();
         
         addGroceryButton = (Button) findViewById(R.id.addGroceryButton);
         addGroceryButton.setEnabled(false);
@@ -269,26 +267,20 @@ public class EditGroceryListGen extends ActionBarActivity {
          * TODO allow the app to generate items for the user
          * Can go to screen to show suggested options
          */
+        Intent i = new Intent(getApplicationContext(), SuggestItemsList.class);
+        i.putExtra("SHOPPING_LIST_ID", shoppingListId);
+        startActivityForResult(i, SUGGEST_ITEM);
     }
-
-//    public final static int GET_ITEM_LIST = 1;
-    
-//    public void duplicateList(View view) {
-//        Intent i = new Intent(getApplicationContext(), NewGroceryAll.class);
-//        startActivityForResult(i, GET_ITEM_LIST);
-//        i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-//        i.putExtra("SHOPPING_LIST_ID", -1);
-//        startActivity(i);
-//    }
     
     public final static int CHOOSE_ITEM = 0;
+    public final static int SUGGEST_ITEM = 1;
     
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         System.out.println("Activity Results in EditGrocery");
-        if (requestCode == CHOOSE_ITEM) {
-            System.out.println(resultCode == RESULT_OK);
+        if (requestCode == CHOOSE_ITEM || requestCode == SUGGEST_ITEM) {
             if (resultCode == RESULT_OK) {
+                System.out.println("Chose some items from a list");
                 Bundle extras = data.getExtras();
                 if(extras != null) {
                     int shoppingListId = extras.getInt("SHOPPING_LIST_ID");
@@ -426,15 +418,15 @@ public class EditGroceryListGen extends ActionBarActivity {
 
     protected int generateListId() {
         /*
-         * TODO implement so can get the list ID
-         * This method should create whatever you need to set up the list
+         * TODO implement so can return the list id to the app
+         * This method should also create whatever you need to set up the list
+         * and store it into the database
          * i.e. name, date, id, etc.
-         * Note that listId is an instance variable set upon creation,
-         *  so you can use the id value whenever
          */
         Date date = new Date();
         System.out.println("List saved at " + date.toString());
-        return 0;
+        int myId = 1;
+        return myId;
     }
 
     protected void addItemsToDatabase(ItemPOJO item) {

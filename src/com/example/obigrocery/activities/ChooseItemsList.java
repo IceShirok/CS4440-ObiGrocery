@@ -68,10 +68,8 @@ public class ChooseItemsList extends CheckPurchasedItems {
         Intent returnIntent = new Intent();
         ArrayList<String> list = new ArrayList<>();
         List<ItemPOJO> temp = ((ItemListAdapterSelect) adapter).getCheckedList();
-        if(temp != null) {
-            for(ItemPOJO item : temp) {
-                list.add(item.getName()+","+item.getUnit()+","+item.getQuantity()+","+item.getCategory());
-            }
+        for(ItemPOJO item : temp) {
+            list.add(item.getName()+","+item.getUnit()+","+item.getQuantity()+","+item.getCategory());
         }
         returnIntent.putStringArrayListExtra("result", list);
         setResult(RESULT_OK, returnIntent);

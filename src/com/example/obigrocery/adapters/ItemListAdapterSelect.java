@@ -69,10 +69,12 @@ public class ItemListAdapterSelect extends ItemListAdapterGen {
     
     public List<ItemPOJO> getCheckedList() {
         List<ItemPOJO> temp = new ArrayList<>();
-        for(int i=0; i<list.size(); i++) {
-            if(checkedList.get(i).booleanValue()) {
-                temp.add(list.get(i));
-                System.out.println(list.get(i));
+            if(checkedList != null) {
+            for(int i=0; i<list.size(); i++) {
+                if(checkedList.get(i).booleanValue()) {
+                    temp.add(list.get(i));
+                    System.out.println(list.get(i));
+                }
             }
         }
         return temp;
