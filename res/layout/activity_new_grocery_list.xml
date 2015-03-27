@@ -111,11 +111,19 @@
             android:text="Add Item" />
 
         <Button
-            android:id="@+id/duplicateGroceryButton"
+            android:id="@+id/chooseButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="duplicateList"
-            android:text="Duplicate a List" />
+            android:onClick="chooseList"
+            android:text="Choose" />
+
+        <Button
+            android:id="@+id/suggestButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="suggestList"
+            android:text="Suggest" />
+
     </LinearLayout>
 
     <ListView

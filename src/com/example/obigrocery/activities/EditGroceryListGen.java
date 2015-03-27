@@ -43,7 +43,7 @@ public class EditGroceryListGen extends ActionBarActivity {
 
     protected Button addGroceryButton;
     protected Button finishGroceryButton;
-    protected Button duplicateGroceryButton;
+    protected Button chooseButton;
 
     protected ItemListAdapterGen adapter;
     
@@ -61,9 +61,6 @@ public class EditGroceryListGen extends ActionBarActivity {
         
         addGroceryButton = (Button) findViewById(R.id.addGroceryButton);
         addGroceryButton.setEnabled(false);
-
-        duplicateGroceryButton = (Button) findViewById(R.id.duplicateGroceryButton);
-        duplicateGroceryButton.setEnabled(false);
 
         finishGroceryButton = (Button) findViewById(R.id.finishGroceryButton);
         finishGroceryButton.setEnabled(false);
@@ -253,9 +250,20 @@ public class EditGroceryListGen extends ActionBarActivity {
     
     
     /******************************************************************
-     * DUPLICATE and get stuff from an existing list
+     * Retrieve from previous data
      ******************************************************************/
     
+    public void chooseList(View view) {
+        /*
+         * TODO go to a screen filled with foods from history, user can add
+         */
+    }
+
+    public void suggestList(View view) {
+        /*
+         * TODO allow the app to generate items for the user
+         */
+    }
 //    public final static int GET_ITEM_LIST = 1;
     
 //    public void duplicateList(View view) {
