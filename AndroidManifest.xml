@@ -50,6 +50,10 @@
             android:name=".EditGroceryList"
             android:label="@string/title_activity_new_grocery_list" >
         </activity>
+        <activity
+            android:name=".ChooseItemsList"
+            android:label="@string/title_activity_show_shopping_lists" >
+        </activity>
     </application>
 
 </manifest>

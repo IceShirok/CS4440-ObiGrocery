@@ -10,9 +10,9 @@ import android.widget.TextView;
 
 import com.example.obigrocery.activities.R;
 
-public class ItemListAdapterCheck extends ItemListAdapterGen {
+public class ItemListAdapterPurchase extends ItemListAdapterGen {
 
-    public ItemListAdapterCheck(Context context, int shoppingListId) {
+    public ItemListAdapterPurchase(Context context, int shoppingListId) {
         super(context, shoppingListId);
     }
 

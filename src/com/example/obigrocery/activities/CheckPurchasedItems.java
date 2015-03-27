@@ -1,14 +1,10 @@
 package com.example.obigrocery.activities;
 
-import android.app.AlertDialog;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.obigrocery.POJO.ItemPOJO;
-import com.example.obigrocery.adapters.ItemListAdapterCheck;
+import com.example.obigrocery.adapters.ItemListAdapterPurchase;
 
 public class CheckPurchasedItems extends ListOneListGen {
 
@@ -18,38 +14,6 @@ public class CheckPurchasedItems extends ListOneListGen {
     /******************************************************************
      * Instantiation of stuff into the app
      ******************************************************************/
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-        Button editListButton = (Button) findViewById(R.id.editListButton);
-        editListButton.setVisibility(View.GONE);
-
-        Button shopButton = (Button) findViewById(R.id.shopButton);
-        shopButton.setVisibility(View.GONE);
-        
-        itemsView = (ListView) findViewById(R.id.itemView);
-        itemsView.setAdapter(adapter);
-
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            shoppingListId = extras.getInt("SHOPPING_LIST_ID");
-
-            populateList();
-            populateCategories();
-            setTitle();
-        } else {
-            String errorMessage = "List missing from database. Exiting...";
-
-            new AlertDialog.Builder(this)
-            .setIcon(android.R.drawable.ic_dialog_alert)
-            .setTitle("Error")
-            .setMessage(errorMessage)
-            .setNeutralButton("OK", null)
-            .show();
-            finish();
-        }
-    }
     
     protected void setTitle() {
         /*
@@ -68,7 +32,7 @@ public class CheckPurchasedItems extends ListOneListGen {
      * Populating stuff to the app
      ******************************************************************/
     protected void populateList() {
-        adapter = new ItemListAdapterCheck(this, shoppingListId);
+        adapter = new ItemListAdapterPurchase(this, shoppingListId);
         /*
          * TODO use database to populate the list using shoppingListId
          */

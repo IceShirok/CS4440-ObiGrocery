@@ -1,11 +1,13 @@
 package com.example.obigrocery.activities;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -257,6 +259,9 @@ public class EditGroceryListGen extends ActionBarActivity {
         /*
          * TODO go to a screen filled with foods from history, user can add
          */
+        Intent i = new Intent(getApplicationContext(), ChooseItemsList.class);
+        i.putExtra("SHOPPING_LIST_ID", shoppingListId);
+        startActivityForResult(i, CHOOSE_ITEM);
     }
 
     public void suggestList(View view) {
@@ -276,29 +281,32 @@ public class EditGroceryListGen extends ActionBarActivity {
 //        startActivity(i);
 //    }
     
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        System.out.println("Activity Results in EditGrocery");
-//        if (requestCode == GET_ITEM_LIST) {
-//            System.out.println(resultCode == RESULT_OK);
-//            if (resultCode == RESULT_OK) {
-//                Bundle extras = data.getExtras();
-//                if(extras != null) {
-//                    int shoppingListId = extras.getInt("SHOPPING_LIST_ID");
-//                    System.out.println("List selected ID: " + shoppingListId);
-//                    /*
-//                    get the list id from the previous activity
-//                    for (some data structure) {
-//                        addItemsToDisplay(itemName, quantity, price, category);
-//                    }
-//                     */
-//                    categoryShift(Populator.ALL_CATEGORY);
-//                } else {
-//                    System.out.println("error occurred when importing list...");
-//                }
-//            }
-//        }
-//    }
+    public final static int CHOOSE_ITEM = 0;
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        System.out.println("Activity Results in EditGrocery");
+        if (requestCode == CHOOSE_ITEM) {
+            System.out.println(resultCode == RESULT_OK);
+            if (resultCode == RESULT_OK) {
+                Bundle extras = data.getExtras();
+                if(extras != null) {
+                    int shoppingListId = extras.getInt("SHOPPING_LIST_ID");
+                    System.out.println("List selected ID: " + shoppingListId);
+                    ArrayList<String> newItems = data.getStringArrayListExtra("result");
+                    for(String s : newItems) {
+                        String[] split = s.split(",");
+                        ItemPOJO item = isValidItem(split[0], split[1], split[2],split[3]);
+                        addItemsToDisplay(item);
+                        addItemsToDatabase(item);
+                    }
+                    categoryShift(Populator.ALL_CATEGORY);
+                } else {
+                    System.out.println("error occurred when importing list...");
+                }
+            }
+        }
+    }
     
     /******************************************************************
      * UPDATING
