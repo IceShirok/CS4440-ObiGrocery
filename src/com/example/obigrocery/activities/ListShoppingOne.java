@@ -1,9 +1,7 @@
-package com.example.obigrocery.activities.lists;
+package com.example.obigrocery.activities;
 
 import android.content.Intent;
 import android.view.View;
-
-import com.example.obigrocery.activities.global.ListOneListGen;
 
 public class ListShoppingOne extends ListOneListGen {
     

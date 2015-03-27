@@ -1,6 +1,4 @@
-package com.example.obigrocery.activities.lists;
-
-import java.math.BigDecimal;
+package com.example.obigrocery.activities;
 
 import android.app.AlertDialog;
 import android.os.Bundle;
@@ -8,7 +6,6 @@ import android.widget.ListView;
 
 import com.example.obigrocery.POJO.ItemPOJO;
 import com.example.obigrocery.activities.R;
-import com.example.obigrocery.activities.global.EditGroceryListGen;
 
 public class EditGroceryList extends EditGroceryListGen {
     
@@ -21,12 +18,12 @@ public class EditGroceryList extends EditGroceryListGen {
             shoppingListId = extras.getInt("SHOPPING_LIST_ID");
 
             // display stuff starts
-            adapter.add(new ItemPOJO("Bread1", new BigDecimal(1), 1, "Baked Goods"));
-            adapter.add(new ItemPOJO("Bread2", new BigDecimal(0), 0, "Baked Goods"));
-            adapter.add(new ItemPOJO("Bread3", new BigDecimal(1), 1, "Baked Goods"));
-            adapter.add(new ItemPOJO("Meat1", new BigDecimal(0), 0, "Meats"));
-            adapter.add(new ItemPOJO("Meat2", new BigDecimal(0), 0, "Meats"));
-            adapter.add(new ItemPOJO("Dairy", new BigDecimal(1), 1, "Dairy"));
+            adapter.add(new ItemPOJO("Bread1", "oz", 1, "Baked Goods"));
+            adapter.add(new ItemPOJO("Bread2", "oz", 0, "Baked Goods"));
+            adapter.add(new ItemPOJO("Bread3", "oz", 1, "Baked Goods"));
+            adapter.add(new ItemPOJO("Meat1", "oz", 0, "Meats"));
+            adapter.add(new ItemPOJO("Meat2", "oz", 0, "Meats"));
+            adapter.add(new ItemPOJO("Dairy", "oz", 1, "Dairy"));
             // display stuff ends
 
             // TODO use shoppingListId to populate listview with db stuff
@@ -51,9 +48,5 @@ public class EditGroceryList extends EditGroceryListGen {
             .show();
             finish();
         }
-    }
-
-    protected void editItemAlert(final ItemPOJO item) {
-        getEditItemDialog(item, true).show();
     }
 }

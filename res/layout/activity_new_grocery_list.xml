@@ -64,16 +64,10 @@
                 android:text=" x         $"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
-            <EditText
-                android:id="@+id/priceTextbox"
-                android:layout_width="82dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginTop="17dp"
-                android:layout_weight="0.03"
-                android:background="#ffffff"
-                android:ems="10"
-                android:hint="Unit price" />
+            <Spinner
+                android:id="@+id/unitSpinner"
+                android:layout_width="96dp"
+                android:layout_height="25dp" />
 
         </LinearLayout>
 

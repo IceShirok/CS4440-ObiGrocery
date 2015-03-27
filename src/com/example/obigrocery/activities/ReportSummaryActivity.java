@@ -1,4 +1,4 @@
-package com.example.obigrocery.activities.main;
+package com.example.obigrocery.activities;
 
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -7,25 +7,34 @@ import android.view.MenuItem;
 import android.view.View;
 
 import com.example.obigrocery.activities.R;
+import com.github.mikephil.charting.charts.LineChart;
 
-public class HelpActivity extends ActionBarActivity {
+public class ReportSummaryActivity extends ActionBarActivity {
+    
+    /*
+    TODO put all the things
+    
+    more of a dashboard-type thing
+    - summary of last week/month/some amt of time
+    - spending in total
+    - spending by category
+    - impulse purchases
+    - most regular purchases
+     */
 
-    /******************************************************************
-     * Instantiation of stuff into the app
-     ******************************************************************/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_help_screen);
+        setContentView(R.layout.activity_report_summary);
+
+        LineChart chart = (LineChart) findViewById(R.id.chart);
+        System.out.println(chart);
     }
 
-    /******************************************************************
-     * options
-     ******************************************************************/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.help_screen, menu);
+        getMenuInflater().inflate(R.menu.report_summary, menu);
         return true;
     }
 
@@ -41,9 +50,6 @@ public class HelpActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /******************************************************************
-     * navigation back
-     ******************************************************************/
     public void returnToMenu(View view) {
         finish();
     }

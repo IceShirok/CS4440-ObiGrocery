@@ -1,6 +1,5 @@
-package com.example.obigrocery.activities.global;
+package com.example.obigrocery.activities;
 
-import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
 
@@ -28,11 +27,8 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
-import android.widget.TextView;
 
 import com.example.obigrocery.POJO.ItemPOJO;
-import com.example.obigrocery.activities.R;
-import com.example.obigrocery.activities.newgrocery.NewGroceryAll;
 import com.example.obigrocery.adapters.ItemListAdapterGen;
 
 public class EditGroceryListGen extends ActionBarActivity {
@@ -42,7 +38,7 @@ public class EditGroceryListGen extends ActionBarActivity {
     protected EditText listTextbox;
     protected EditText itemNameTextbox;
     protected EditText quantityTextbox;
-    protected EditText priceTextbox;
+    protected Spinner unitSpinner;
     protected ListView itemsView;
     protected Spinner categorySpinner;
 
@@ -90,8 +86,8 @@ public class EditGroceryListGen extends ActionBarActivity {
         quantityTextbox = (EditText) findViewById(R.id.quantityTextbox);
         quantityTextbox.addTextChangedListener(new AddGroceryWatcher());
         
-        priceTextbox = (EditText) findViewById(R.id.priceTextbox);
-        priceTextbox.addTextChangedListener(new AddGroceryWatcher());
+        unitSpinner = (Spinner) findViewById(R.id.unitSpinner);
+        //unitSpinner.addTextChangedListener(new AddGroceryWatcher());
 
         itemsView = (ListView) findViewById(R.id.itemView);
 
@@ -106,6 +102,7 @@ public class EditGroceryListGen extends ActionBarActivity {
         });
 
         populateCategories();
+        populateUnits();
     }
 
     /******************************************************************
@@ -143,7 +140,7 @@ public class EditGroceryListGen extends ActionBarActivity {
     }
 
     protected void populateCategories() {
-        List<String> spinnerArray = CategoryPopulator.getCategories(true);
+        List<String> spinnerArray = Populator.getCategories(true);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, spinnerArray);
@@ -165,6 +162,17 @@ public class EditGroceryListGen extends ActionBarActivity {
         });
     }
 
+    protected void populateUnits() {
+        List<String> spinnerArray = Populator.getUnits();
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, spinnerArray);
+
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        unitSpinner = (Spinner) findViewById(R.id.unitSpinner);
+        unitSpinner.setAdapter(adapter);
+    }
+
     
     /******************************************************************
      * Adding stuff to the list
@@ -177,14 +185,13 @@ public class EditGroceryListGen extends ActionBarActivity {
         imm.hideSoftInputFromWindow(itemNameTextbox.getWindowToken(), 0);
 
         ItemPOJO formedItem = isValidItem(itemNameTextbox.getText().toString(),
-                priceTextbox.getText().toString(),
+                unitSpinner.getSelectedItem().toString(),
                 quantityTextbox.getText().toString(),
                 categorySpinner.getSelectedItem().toString());
         if (formedItem != null) {
             addItemsToDisplay(formedItem);
             addItemsToDatabase(formedItem);
             quantityTextbox.setText("");
-            priceTextbox.setText("");
             itemNameTextbox.setText("");
             return true;
         } else {
@@ -200,21 +207,17 @@ public class EditGroceryListGen extends ActionBarActivity {
         }
     }
     
-    protected ItemPOJO isValidItem(String name, String category) {
-        return this.isValidItem(name, "0", "0", category);
-    }
-    
-    protected ItemPOJO isValidItem(String name, String price, String quantity, String category) {
+    protected ItemPOJO isValidItem(String name, String unit, String quantity, String category) {
         String n = null;
         int q = 0;
-        BigDecimal p = null;
+        String u = null;
         String c = null;
         try {
             n = name;
-            p = new BigDecimal(Double.parseDouble(price));
+            u = unit;
             q = Integer.parseInt(quantity);
             c = category;
-            return new ItemPOJO(n, p, q, c);
+            return new ItemPOJO(n, u, q, c);
         } catch (NumberFormatException e) {
             System.out.println(" problem: " + e);
             return null;
@@ -234,7 +237,6 @@ public class EditGroceryListGen extends ActionBarActivity {
     protected boolean enableAdd() {
         return itemNameTextbox.getText().length() > 0
                 && quantityTextbox.getText().length() > 0
-                && priceTextbox.getText().length() > 0
                 && !categorySpinner.getSelectedItem().toString().equalsIgnoreCase("All");
     }
 
@@ -260,13 +262,13 @@ public class EditGroceryListGen extends ActionBarActivity {
     
     public final static int GET_ITEM_LIST = 1;
     
-    public void duplicateList(View view) {
-        Intent i = new Intent(getApplicationContext(), NewGroceryAll.class);
-        startActivityForResult(i, GET_ITEM_LIST);
-        i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
-        i.putExtra("SHOPPING_LIST_ID", -1);
-        startActivity(i);
-    }
+//    public void duplicateList(View view) {
+//        Intent i = new Intent(getApplicationContext(), NewGroceryAll.class);
+//        startActivityForResult(i, GET_ITEM_LIST);
+//        i.setFlags(Intent.FLAG_ACTIVITY_FORWARD_RESULT);
+//        i.putExtra("SHOPPING_LIST_ID", -1);
+//        startActivity(i);
+//    }
     
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -297,13 +299,13 @@ public class EditGroceryListGen extends ActionBarActivity {
      * UPDATING
      ******************************************************************/
     protected void editItemAlert(final ItemPOJO item) {
-        getEditItemDialog(item, false).show();
+        getEditItemDialog(item).show();
     }
     
-    protected AlertDialog getEditItemDialog(final ItemPOJO item, final boolean editPurchased) {
+    protected AlertDialog getEditItemDialog(final ItemPOJO item) {
         AlertDialog.Builder builder = new AlertDialog.Builder(this)
                 .setTitle("Editing " + item.getName())
-                .setMessage("Edit to your heart's desire.");
+                .setMessage("Edit the item.");
         final FrameLayout frameView = new FrameLayout(this);
         builder.setView(frameView);
         
@@ -312,33 +314,24 @@ public class EditGroceryListGen extends ActionBarActivity {
         View dialoglayout = inflater.inflate(R.layout.alert_edit_grocery_one, frameView);
         
         final CheckBox purchasedBox = (CheckBox) dialoglayout.findViewById(R.id.purchasedBox);
+        purchasedBox.setChecked(item.isPurchased());
+
         final EditText nText = (EditText) dialoglayout.findViewById(R.id.itemNameTextbox);
         nText.setText(item.getName());
         final EditText qText = (EditText) dialoglayout.findViewById(R.id.quantityTextbox);
         qText.setText(item.getQuantity()+"");
-        final EditText pText = (EditText) dialoglayout.findViewById(R.id.priceTextbox);
-        pText.setText(item.getPrice().toString());
-        if(!editPurchased) {
-            purchasedBox.setVisibility(View.GONE);
-            qText.setVisibility(View.GONE);
-            pText.setVisibility(View.GONE);
+        final Spinner uText = (Spinner) dialoglayout.findViewById(R.id.unitSpinner);
+        // TODO set to whatever the item is
+        
+        List<String> units = Populator.getUnits();
+        ArrayAdapter<String> uAdapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_spinner_item, units);
+        uAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        uText.setAdapter(uAdapter);
 
-            TextView markup = (TextView) findViewById(R.id.quantityText);
-            markup.setVisibility(View.GONE);
-        } else {
-            purchasedBox.setChecked(item.isPurchased());
-            purchasedBox.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    // TODO save this info to database?
-                    qText.setEnabled(purchasedBox.isChecked());
-                    pText.setEnabled(purchasedBox.isChecked());
-                }
-            });
-        }
         final Spinner cText = (Spinner) dialoglayout.findViewById(R.id.categorySpinner);
         
-        List<String> spin = CategoryPopulator.getCategories(false);
+        List<String> spin = Populator.getCategories(false);
         ArrayAdapter<String> cAdapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, spin);
         cAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -353,20 +346,16 @@ public class EditGroceryListGen extends ActionBarActivity {
             public void onClick(View v) {
                 // TODO update display, update db
                 String nameText = null;
-                String priceText = null;
+                String unitText = null;
                 String quantityText = null;
                 String categoryText = null;
                 ItemPOJO itemNew = null;
                 
                 nameText = nText.getText().toString();
                 categoryText = cText.getSelectedItem().toString();
-                if(editPurchased && purchasedBox.isChecked()) {
-                    priceText = pText.getText().toString();
-                    quantityText = qText.getText().toString();
-                    itemNew = isValidItem(nameText, priceText, quantityText, categoryText);
-                } else {
-                    itemNew = isValidItem(nameText, categoryText);
-                }
+                unitText = uText.getSelectedItem().toString();
+                quantityText = qText.getText().toString();
+                itemNew = isValidItem(nameText, unitText, quantityText, categoryText);
         
                 if(itemNew != null) {
                     categoryShift(categoryText);
@@ -425,7 +414,7 @@ public class EditGroceryListGen extends ActionBarActivity {
             new AlertDialog.Builder(this)
             .setIcon(android.R.drawable.ic_dialog_info)
             .setTitle("Confirmation")
-            .setMessage("List "+listName+" saved to database.")
+            .setMessage("List name "+listName+" saved to database.")
             .setNeutralButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -434,8 +423,7 @@ public class EditGroceryListGen extends ActionBarActivity {
             })
             .show();
         } else {
-            // TODO make this better
-            String errorMessage = "Not a valid list name.";
+            String errorMessage = "Enter a valid grocery list name.";
 
             new AlertDialog.Builder(this)
             .setIcon(android.R.drawable.ic_dialog_alert)
@@ -461,6 +449,7 @@ public class EditGroceryListGen extends ActionBarActivity {
     
     protected void cancelListConfirm() {
         // TODO change this, since list is saved for every add, delete, update
+        /*
         if (adapter.getList().size() > 0) {
             new AlertDialog.Builder(this)
                 .setIcon(android.R.drawable.ic_dialog_alert)
@@ -478,5 +467,7 @@ public class EditGroceryListGen extends ActionBarActivity {
         } else {
             finish();
         }
+        */
+        finish();
     }
 }

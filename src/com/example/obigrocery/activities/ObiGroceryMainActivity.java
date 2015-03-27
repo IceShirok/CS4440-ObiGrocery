@@ -1,4 +1,4 @@
-package com.example.obigrocery.activities.main;
+package com.example.obigrocery.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,16 +9,15 @@ import android.view.View;
 import android.widget.Button;
 
 import com.example.obigrocery.activities.R;
-import com.example.obigrocery.activities.check.CheckShoppingAll;
-import com.example.obigrocery.activities.lists.ListShoppingAll;
-import com.example.obigrocery.activities.newgrocery.NewGroceryList;
-import com.example.obigrocery.activities.report.ReportInputActivity;
 
 public class ObiGroceryMainActivity extends ActionBarActivity {
     
     /*
-    TODO do the following
-    - purchased items: prompt another screen with list of items, click and edit quantity and price
+    TODO edit the following:
+    - change price and quantity to amount and units
+    - purpose of app: when going to grocery store, select what you purchased
+    - report - discuss after professor
+    - units: dropdown, amount: dropdown or input
      */
 
     /******************************************************************
@@ -32,9 +31,6 @@ public class ObiGroceryMainActivity extends ActionBarActivity {
         
         Button reportButton = (Button) findViewById(R.id.genReportButton);
         reportButton.setEnabled(false);
-        
-        Button helpButton = (Button) findViewById(R.id.helpButton);
-        helpButton.setEnabled(false);
     }
 
 
@@ -67,28 +63,18 @@ public class ObiGroceryMainActivity extends ActionBarActivity {
      ******************************************************************/
     
     public void gotoNew(View view) {
-        Intent i = new Intent(getApplicationContext(), NewGroceryList.class);
-        startActivity(i);
-    }
-    
-    public void gotoLoad(View view) {
-        Intent i = new Intent(getApplicationContext(), ListShoppingAll.class);
+        Intent i = new Intent(getApplicationContext(), EditGroceryListGen.class);
         startActivity(i);
     }
     
     public void gotoPurchased(View view) {
-        Intent i = new Intent(getApplicationContext(), CheckShoppingAll.class);
+        Intent i = new Intent(getApplicationContext(), ListShoppingGen.class);
         startActivity(i);
     }
     
     public void gotoReports(View view) {
-        Intent i = new Intent(getApplicationContext(), ReportInputActivity.class);
-        startActivity(i);
-    }
-    
-    public void gotoHelp(View view) {
-        Intent i = new Intent(getApplicationContext(), HelpActivity.class);
-        startActivity(i);
+        //Intent i = new Intent(getApplicationContext(), ReportInputActivity.class);
+        //startActivity(i);
     }
 
     public void exitApp(View view) {

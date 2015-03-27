@@ -22,6 +22,12 @@
             android:text="Obi Grocery App"
             android:textSize="25sp" />
 
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome to Obi Grocery! Be able to create grocery lists!" />
+
         <Button
             android:id="@+id/newGroceryButton"
             android:layout_width="wrap_content"
@@ -34,15 +40,8 @@
             android:id="@+id/inputPurchasedButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:onClick="gotoPurchased"
-            android:text="Input Purchased Items" />
-
-        <Button
-            android:id="@+id/loadGroceryButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_marginTop="18dp"
-            android:onClick="gotoLoad"
+            android:onClick="gotoPurchased"
             android:text="Shopping Lists" />
 
         <Button
@@ -52,14 +51,6 @@
             android:layout_marginTop="24dp"
             android:onClick="gotoReports"
             android:text="Generate Report" />
-
-        <Button
-            android:id="@+id/helpButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="19dp"
-            android:onClick="gotoHelp"
-            android:text="Help" />
 
         <Button
             android:id="@+id/exitButton"

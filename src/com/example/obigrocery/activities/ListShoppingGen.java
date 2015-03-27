@@ -1,4 +1,4 @@
-package com.example.obigrocery.activities.global;
+package com.example.obigrocery.activities;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +16,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.obigrocery.activities.R;
-import com.example.obigrocery.activities.lists.ListShoppingOne;
 
 public class ListShoppingGen extends ActionBarActivity {
     
@@ -43,7 +42,7 @@ public class ListShoppingGen extends ActionBarActivity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long arg3) {
                 adapter.getItem(position);
-                Intent i = new Intent(getApplicationContext(), ListShoppingOne.class);
+                Intent i = new Intent(getApplicationContext(), ListOneListGen.class);
                 i.putExtra("SHOPPING_LIST_ID", position);
                 startActivity(i);
             }

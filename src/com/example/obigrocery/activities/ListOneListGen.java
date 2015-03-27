@@ -1,9 +1,9 @@
-package com.example.obigrocery.activities.newgrocery;
+package com.example.obigrocery.activities;
 
-import java.math.BigDecimal;
 import java.util.List;
 
 import android.app.AlertDialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -12,48 +12,37 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.example.obigrocery.POJO.ItemPOJO;
 import com.example.obigrocery.activities.R;
-import com.example.obigrocery.activities.global.CategoryPopulator;
 import com.example.obigrocery.adapters.ItemListAdapterGen;
 
-public class NewGroceryOne extends ActionBarActivity {
+public class ListOneListGen extends ActionBarActivity {
     
-    private ItemListAdapterGen adapter;
+    protected ItemListAdapterGen adapter;
     protected ListView itemsView;
     protected Spinner categorySpinner;
-    private int shoppingListId;
+    protected int shoppingListId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_shopping_lists);
 
+        String title = "Obi Grocery - Show List " + shoppingListId;
+        this.setTitle(title);
+        
+        setInstructions();
+
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
             // TODO use shoppingListId to populate listview with db stuff
             // note that this stuff is for display only!
             shoppingListId = extras.getInt("SHOPPING_LIST_ID");
-            adapter = new ItemListAdapterGen(this);
-            adapter.add(new ItemPOJO("Bread", new BigDecimal(1), shoppingListId, "Baked Goods"));
-            adapter.add(new ItemPOJO("Bread", new BigDecimal(1), shoppingListId, "Baked Goods"));
-            adapter.add(new ItemPOJO("Bread", new BigDecimal(1), 1, "Baked Goods"));
-            adapter.add(new ItemPOJO("Meat", new BigDecimal(1), 1, "Meats"));
-            adapter.add(new ItemPOJO("Meats", new BigDecimal(1), 1, "BMeats"));
-            adapter.add(new ItemPOJO("Dairy", new BigDecimal(1), 1, "Dairy"));
-
-            String title = "Obi Grocery - Show List " + shoppingListId;
-            this.setTitle(title);
-            
-            Button finishButton = (Button) findViewById(R.id.editListButton);
-            finishButton.setText("Finish");
-
-            itemsView = (ListView) findViewById(R.id.itemView);
-            itemsView.setAdapter(adapter);
+            populateList();
             populateCategories();
             
         } else {
@@ -68,9 +57,30 @@ public class NewGroceryOne extends ActionBarActivity {
             finish();
         }
     }
+    
+    protected void setInstructions() {
+        TextView instructionText = (TextView) findViewById(R.id.instructionText);
+        instructionText.setText("View of list, read-only");
+    }
+    
+    protected void populateList() {
+        adapter = new ItemListAdapterGen(this);
+        // TODO use db to populate, use shoppingListId
+        adapter.add(new ItemPOJO("Bread", "oz", shoppingListId, "Baked Goods"));
+        adapter.add(new ItemPOJO("Bread", "oz", shoppingListId, "Baked Goods"));
+        adapter.add(new ItemPOJO("Bread", "oz", 1, "Baked Goods"));
+        adapter.add(new ItemPOJO("Meat", "oz", 1, "Meats"));
+        adapter.add(new ItemPOJO("Meats", "oz", 1, "BMeats"));
+        adapter.add(new ItemPOJO("Dairy", "oz", 1, "Dairy"));
+        itemsView = (ListView) findViewById(R.id.itemView);
+        itemsView.setAdapter(adapter);
+    }
 
+    /******************************************************************
+     * Selecting between categories
+     ******************************************************************/
     protected void populateCategories() {
-        List<String> spinnerArray = CategoryPopulator.getCategories(true);
+        List<String> spinnerArray = Populator.getCategories(true);
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_spinner_item, spinnerArray);
@@ -87,20 +97,15 @@ public class NewGroceryOne extends ActionBarActivity {
             }
 
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {}
-
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
         });
     }
 
     /******************************************************************
-     * Selecting between categories
+     * options
      ******************************************************************/
-    protected void categoryShift(String category) {
-        adapter.displayCategory(category);
-        itemsView.invalidateViews();
-        itemsView.setAdapter(adapter);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -119,12 +124,30 @@ public class NewGroceryOne extends ActionBarActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-    
+
+    /******************************************************************
+     * Selecting between categories
+     ******************************************************************/
+    protected void categoryShift(String category) {
+        adapter.displayCategory(category);
+        itemsView.invalidateViews();
+        itemsView.setAdapter(adapter);
+    }
+
+
+    /******************************************************************
+     * next action
+     ******************************************************************/
     public void editList(View view) {
-        // TODO pass id info so list is duplicated to new grocery list
-        getIntent().putExtra("SHOPPING_LIST_ID", shoppingListId);
-        setResult(RESULT_OK, getIntent());
-        finish();
+        Intent i = new Intent(getApplicationContext(), EditGroceryList.class);
+        i.putExtra("SHOPPING_LIST_ID", shoppingListId);
+        startActivity(i);
+    }
+    
+    public void letsGoShopping(View view) {
+        Intent i = new Intent(getApplicationContext(), CheckPurchasedItems.class);
+        i.putExtra("SHOPPING_LIST_ID", shoppingListId);
+        startActivity(i);
     }
 
     /******************************************************************

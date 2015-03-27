@@ -7,14 +7,14 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.obigrocery.activities.check.CheckPurchasedItems" >
+    tools:context="com.example.obigrocery.activities.CheckPurchasedItems" >
 
     <TextView
         android:id="@+id/instructionText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.14"
-        android:text="First, check off the items that have been purchased." />
+        android:text="Check off the items you&apos;ve purchased." />
 
     <ListView
         android:id="@+id/itemView"
@@ -35,14 +35,6 @@
             android:layout_marginBottom="38dp"
             android:onClick="returnToMenu"
             android:text="Menu" />
-
-        <Button
-            android:id="@+id/finishCheckButton"
-            style="android:buttonStyle"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:onClick="finishGroceryList"
-            android:text="Next" />
 
     </LinearLayout>
 

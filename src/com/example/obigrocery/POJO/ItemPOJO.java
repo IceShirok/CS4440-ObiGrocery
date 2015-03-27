@@ -1,34 +1,31 @@
 package com.example.obigrocery.POJO;
 
-import java.math.BigDecimal;
 
 public class ItemPOJO implements Comparable<ItemPOJO>{
     
     private String name;
-    private BigDecimal price;
+    private String unit;
     private int quantity;
     private String category;
     private boolean purchased;
 
-    public ItemPOJO(String name, BigDecimal price, int quantity, String category) {
-        // price should use BigDecimal for money stuff, not double
-        // this is due to floating point number's bad precision
+    public ItemPOJO(String name, String unit, int quantity, String category) {
         this.name = name;
-        this.price = price;
+        this.unit = unit;
         this.quantity = quantity;
         this.category = category;
-        this.purchased = (!price.equals(BigDecimal.ZERO) && quantity != 0);
+        this.purchased = false;
     }
     
-    public ItemPOJO(String name, String category) {
-        this(name, new BigDecimal(0), 0, category);
+    public ItemPOJO(String name, String unit, String category) {
+        this(name, unit, 0, category);
     }
 
     public String getName() {
         return name;
     }
-    public BigDecimal getPrice() {
-        return price;
+    public String getUnit() {
+        return unit;
     }
     public int getQuantity() {
         return quantity;
@@ -39,8 +36,8 @@ public class ItemPOJO implements Comparable<ItemPOJO>{
     public void setName(String name) {
         this.name = name;
     }
-    public void setPrice(BigDecimal price) {
-        this.price = price;
+    public void setUnit(String unit) {
+        this.unit = unit;
     }
     public void setQuantity(int quantity) {
         this.quantity = quantity;
@@ -57,14 +54,7 @@ public class ItemPOJO implements Comparable<ItemPOJO>{
     
     @Override
     public String toString() {
-        String aString = name + ": " + category;
-        if(purchased) {
-            aString += "\n\t" + quantity + " x $" + price;
-        } else {
-            aString += "\n\t Not purchased";
-        }
-        System.out.println(aString);
-        return aString;
+        return name + ": " + category + "\n\t" + quantity + " units of label " + unit;
     }
     
     @Override
