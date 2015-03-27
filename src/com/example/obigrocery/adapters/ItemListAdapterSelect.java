@@ -16,9 +16,6 @@ import com.example.obigrocery.activities.R;
 
 public class ItemListAdapterSelect extends ItemListAdapterGen {
     
-    /*
-     * TODO fix because the superclass sorts
-     */
     private ArrayList<Boolean> checkedList;
     private boolean isPopulated;
 
@@ -45,9 +42,6 @@ public class ItemListAdapterSelect extends ItemListAdapterGen {
         selectCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*
-                 * TODO may not want to save until finishing
-                 */
                 if(!isPopulated) {
                     checkedList = new ArrayList<>();
                     for(int i=0; i<list.size(); i++) {
@@ -60,6 +54,17 @@ public class ItemListAdapterSelect extends ItemListAdapterGen {
         });
 
         return view;
+    }
+    
+    /*
+     * note: act like a set - only distinct stuff on display
+     */
+    public void add(ItemPOJO object) {
+        if(!list.contains(object)) {
+            list.add(object);
+            display.add(object);
+            this.notifyDataSetChanged();
+        }
     }
     
     public List<ItemPOJO> getCheckedList() {

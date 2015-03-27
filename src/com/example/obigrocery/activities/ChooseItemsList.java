@@ -50,6 +50,7 @@ public class ChooseItemsList extends CheckPurchasedItems {
         /*
          * TODO use database to populate
          * Use shoppingListId to retrieve
+         * Want to have unique/distinct items here from all history, or part of it
          */
         adapter.add(new ItemPOJO("Bread1", "oz", shoppingListId, "Baked Goods"));
         adapter.add(new ItemPOJO("Bread2", "oz", shoppingListId, "Baked Goods"));
@@ -67,8 +68,10 @@ public class ChooseItemsList extends CheckPurchasedItems {
         Intent returnIntent = new Intent();
         ArrayList<String> list = new ArrayList<>();
         List<ItemPOJO> temp = ((ItemListAdapterSelect) adapter).getCheckedList();
-        for(ItemPOJO item : temp) {
-            list.add(item.getName()+","+item.getUnit()+","+item.getQuantity()+","+item.getCategory());
+        if(temp != null) {
+            for(ItemPOJO item : temp) {
+                list.add(item.getName()+","+item.getUnit()+","+item.getQuantity()+","+item.getCategory());
+            }
         }
         returnIntent.putStringArrayListExtra("result", list);
         setResult(RESULT_OK, returnIntent);
