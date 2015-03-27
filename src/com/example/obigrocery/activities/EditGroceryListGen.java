@@ -89,7 +89,7 @@ public class EditGroceryListGen extends ActionBarActivity {
         unitSpinner = (Spinner) findViewById(R.id.unitSpinner);
 
         itemsView = (ListView) findViewById(R.id.itemView);
-        adapter = new ItemListAdapterGen(this);
+        adapter = new ItemListAdapterGen(this, shoppingListId);
         itemsView.setAdapter(adapter);
         itemsView.setClickable(true);
         itemsView.setOnItemClickListener(new OnItemClickListener() {
@@ -262,8 +262,10 @@ public class EditGroceryListGen extends ActionBarActivity {
     public void suggestList(View view) {
         /*
          * TODO allow the app to generate items for the user
+         * Can go to screen to show suggested options
          */
     }
+
 //    public final static int GET_ITEM_LIST = 1;
     
 //    public void duplicateList(View view) {

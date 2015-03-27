@@ -12,8 +12,8 @@ import com.example.obigrocery.activities.R;
 
 public class ItemListAdapterCheck extends ItemListAdapterGen {
 
-    public ItemListAdapterCheck(Context context) {
-        super(context);
+    public ItemListAdapterCheck(Context context, int shoppingListId) {
+        super(context, shoppingListId);
     }
 
     @SuppressLint("InflateParams")
@@ -37,7 +37,10 @@ public class ItemListAdapterCheck extends ItemListAdapterGen {
             @Override
             public void onClick(View v) {
                 checkItem(getItem(position), purchasedCheckbox.isChecked());
-                // TODO save this information to database?
+                /*
+                 * TODO save this information to the database
+                 * you can use shoppingListId
+                 */
             }
         });
 

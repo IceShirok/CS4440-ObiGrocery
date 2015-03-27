@@ -73,7 +73,7 @@ public class ListOneListGen extends ActionBarActivity {
      * Populating the list
      ******************************************************************/
     protected void populateList() {
-        adapter = new ItemListAdapterGen(this);
+        adapter = new ItemListAdapterGen(this, shoppingListId);
         /*
          * TODO use database to populate
          * Use shoppingListId to retrieve

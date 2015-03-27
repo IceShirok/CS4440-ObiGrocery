@@ -68,7 +68,7 @@ public class CheckPurchasedItems extends ListOneListGen {
      * Populating stuff to the app
      ******************************************************************/
     protected void populateList() {
-        adapter = new ItemListAdapterCheck(this);
+        adapter = new ItemListAdapterCheck(this, shoppingListId);
         /*
          * TODO use database to populate the list using shoppingListId
          */

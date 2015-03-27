@@ -21,14 +21,16 @@ public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
     protected List<ItemPOJO> list = new ArrayList<>();
     protected List<ItemPOJO> display = new ArrayList<>();
     protected Context context;
+    protected int shoppingListId;
 
     /******************************************************************
      * Model logic
      * list - list of all items in the view
      * display - list of current items displayed
      ******************************************************************/
-    public ItemListAdapterGen(Context context) {
+    public ItemListAdapterGen(Context context, int shoppingListId) {
         this.context = context;
+        this.shoppingListId = shoppingListId;
     }
 
     @Override
