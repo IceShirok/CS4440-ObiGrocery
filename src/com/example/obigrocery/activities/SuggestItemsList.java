@@ -47,6 +47,13 @@ public class SuggestItemsList extends ChooseItemsList {
     }
     
     private class PopulateListTask extends AsyncTask<Void, Void, List<ItemPOJO>> {
+        private int databaseId;
+
+        @Override
+        protected void onPreExecute() {
+            databaseId = shoppingListId;
+        }
+
         @Override
         protected List<ItemPOJO> doInBackground(Void... params) {
             Connection connection;
@@ -61,7 +68,7 @@ public class SuggestItemsList extends ChooseItemsList {
                 stmt.executeUpdate("INSERT INTO food_table VALUES (3)");
                 ResultSet rs = stmt.executeQuery("SELECT food FROM food_table");
                 while (rs.next()) {
-                    System.out.println("Read from DB: " + rs.getInt("food"));
+                    System.out.println("Read from DB: " + rs.getInt("food") + databaseId);
                     items.add(new ItemPOJO("Bread " + rs.getInt("food"), "oz", 1, "Baked Goods"));
                     items.add(new ItemPOJO("Meat " + rs.getInt("food"), "oz", 1, "Meats"));
                     items.add(new ItemPOJO("Dairy " + rs.getInt("food"), "oz", 1, "Dairy"));
@@ -85,9 +92,6 @@ public class SuggestItemsList extends ChooseItemsList {
             }
             itemsView.setAdapter(adapter);
         }
-
-        @Override
-        protected void onPreExecute() {}
 
         @Override
         protected void onProgressUpdate(Void... values) {}
