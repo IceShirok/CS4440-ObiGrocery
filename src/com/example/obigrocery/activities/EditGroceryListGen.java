@@ -2,6 +2,7 @@ package com.example.obigrocery.activities;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import android.app.AlertDialog;
@@ -31,6 +32,7 @@ import android.widget.Spinner;
 
 import com.example.obigrocery.POJO.ItemPOJO;
 import com.example.obigrocery.adapters.ItemListAdapterGen;
+import com.example.obigrocery.activities.DBTools;
 
 public class EditGroceryListGen extends ActionBarActivity {
 
@@ -48,6 +50,8 @@ public class EditGroceryListGen extends ActionBarActivity {
     protected Button chooseButton;
 
     protected ItemListAdapterGen adapter;
+    
+    DBTools dbTools = new DBTools(this);
 
     /******************************************************************
      * Instantiation of stuff into the app
@@ -435,6 +439,21 @@ public class EditGroceryListGen extends ActionBarActivity {
          * should be an insert
          * ItemPOJO consists of name, unit, quantity, and category
          */
+    	
+    	// Will hold the HashMap of values 		
+    	HashMap<String, String> queryValuesMap =  new  HashMap<String, String>();
+
+    	// Get the values from the EditText boxes  	
+    	
+    	queryValuesMap.put("categoryName", categorySpinner.getSelectedItem().toString());
+    	queryValuesMap.put("productName", itemNameTextbox.getText().toString());
+    	queryValuesMap.put("amount", quantityTextbox.getText().toString());
+    	queryValuesMap.put("units", unitSpinner.getSelectedItem().toString());
+
+    	// Call for the HashMap to be added to the database
+    	dbTools.insertItem(queryValuesMap);
+    	
+    	
         System.out.println("***** Adding an item to the database. *****");
         System.out.println(item);
         System.out.println("***** Finished adding an item to the database. *****");
