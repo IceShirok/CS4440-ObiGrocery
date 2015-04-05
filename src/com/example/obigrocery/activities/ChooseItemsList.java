@@ -12,8 +12,12 @@ import android.widget.TextView;
 
 import com.example.obigrocery.POJO.ItemPOJO;
 import com.example.obigrocery.adapters.ItemListAdapterSelect;
+import com.example.obigrocery.activities.DBTools;
 
 public class ChooseItemsList extends CheckPurchasedItems {
+	
+	// The object that allows to manipulate the database
+	DBTools dbTools = new DBTools(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -13,13 +13,13 @@ public class Populator {
         if(needAll) {
             categoryArray.add(ALL_CATEGORY);
         }
-        /*
-         * TODO Program to add categories from database.
-         */
+
+        categoryArray.add("Protein");
+        categoryArray.add("Fruit & Vegetable");
+        categoryArray.add("Drinks");
+        categoryArray.add("Frozen Food");
+        categoryArray.add("Houseware");
         categoryArray.add("Baked Goods");
-        categoryArray.add("Dairy");
-        categoryArray.add("Meats");
-        categoryArray.add("Vegetables");
 
         Collections.sort(categoryArray);
         return categoryArray;
@@ -27,9 +27,6 @@ public class Populator {
     
     public static List<String> getUnits() {
         List<String> unitArray = new ArrayList<String>();
-        /*
-         * TODO Program to add units from database.
-         */
         
         unitArray.add("unit");
         unitArray.add("oz");
