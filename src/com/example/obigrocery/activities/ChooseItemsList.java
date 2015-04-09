@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.obigrocery.POJO.ItemPOJO;
 import com.example.obigrocery.adapters.ItemListAdapterSelect;
-import com.example.obigrocery.activities.DBTools;
+import com.example.obigrocery.db.DBTools;
 
 public class ChooseItemsList extends CheckPurchasedItems {
 	
