@@ -17,11 +17,14 @@ import android.widget.TextView;
 
 import com.example.obigrocery.POJO.ListPOJO;
 import com.example.obigrocery.activities.R;
+import com.example.obigrocery.db.*;
+import com.example.obigrocery.sqlmodel.*;
 
 public class ListShoppingGen extends ActionBarActivity {
     
     protected ListView shoppingListView;
     protected ArrayAdapter<ListPOJO> adapter;
+    private ShoppingListDAO shoppingListDAO;
 
     /******************************************************************
      * Creating the list of shopping lists
@@ -30,6 +33,10 @@ public class ListShoppingGen extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_lists);
+        
+        shoppingListDAO = new ShoppingListDAO(this);
+        shoppingListDAO.open();
+        
         setInstructions();
         setupListView();
         populateList();
@@ -59,13 +66,22 @@ public class ListShoppingGen extends ActionBarActivity {
          * TODO use database to populate the list of shopping lists
          * The ListPOJO takes in a String name of list, and the int ID number of list
          */
-
+    	/*
+    	List<ShoppingList> values = new ArrayList<>();
+    	values = shoppingListDAO.getAllShoppingLists();
+    	
+        ArrayAdapter<ShoppingList> adapter = new ArrayAdapter<ShoppingList>(this,
+        		android.R.layout.simple_list_item_1, values);
+        shoppingListView.setAdapter(adapter);
+    	 */
+        
         List<ListPOJO> display = new ArrayList<>();
         display.add(new ListPOJO("Shopping List 5", 5));
         display.add(new ListPOJO("Shopping List 6", 6));
         display.add(new ListPOJO("Shopping List 7", 7));
         adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, display);
         shoppingListView.setAdapter(adapter);
+        
     }
 
     /******************************************************************

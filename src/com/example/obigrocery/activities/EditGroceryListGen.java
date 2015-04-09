@@ -32,7 +32,7 @@ import android.widget.Spinner;
 
 import com.example.obigrocery.POJO.ItemPOJO;
 import com.example.obigrocery.adapters.ItemListAdapterGen;
-import com.example.obigrocery.activities.DBTools;
+import com.example.obigrocery.db.DBTools;
 
 public class EditGroceryListGen extends ActionBarActivity {
 
@@ -451,7 +451,7 @@ public class EditGroceryListGen extends ActionBarActivity {
     	queryValuesMap.put("units", unitSpinner.getSelectedItem().toString());
 
     	// Call for the HashMap to be added to the database
-    	dbTools.insertItem(queryValuesMap);
+    	//dbTools.insertItem(queryValuesMap);
     	
     	
         System.out.println("***** Adding an item to the database. *****");
