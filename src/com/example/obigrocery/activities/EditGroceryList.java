@@ -1,5 +1,10 @@
 package com.example.obigrocery.activities;
 
+import java.util.List;
+
+import com.example.obigrocery.sqlmodel.ListGrocery;
+import com.example.obigrocery.sqlmodel.ShoppingList;
+
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
@@ -21,7 +26,7 @@ public class EditGroceryList extends EditGroceryListGen {
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            shoppingListId = extras.getInt("SHOPPING_LIST_ID");
+            shoppingListId = extras.getLong("SHOPPING_LIST_ID");
 
             populateList();
             setTitle();
@@ -44,31 +49,23 @@ public class EditGroceryList extends EditGroceryListGen {
      * Populate stuff to the app
      ******************************************************************/
     protected void setTitle() {
-        /*
-         * TODO use database to get the name of the shopping list using shoppingListId
-         */
         String title = "Obi Grocery - Edit List " + shoppingListId;
         this.setTitle(title);
         listTextbox.setText(title);
     }
 
     protected void populateList() {
-        /*
-         * TODO use database to populate list items from list
-         * use shoppingListId to retrieve from database
-         * nothing else is needed because it's taken care of by its parent class
-         */
-        /*
-        adapter.add(new ItemPOJO("Bread1", "oz", 1, "Baked Goods"));
-        adapter.add(new ItemPOJO("Bread2", "oz", 0, "Baked Goods"));
-        adapter.add(new ItemPOJO("Bread3", "oz", 1, "Baked Goods"));
-        adapter.add(new ItemPOJO("Meat1", "oz", 0, "Meats"));
-        adapter.add(new ItemPOJO("Meat2", "oz", 0, "Meats"));
-        adapter.add(new ItemPOJO("Dairy", "oz", 1, "Dairy"));
-        */
+        List<ListGrocery> items = listGroceryDb.getListGeocerybyListId(shoppingListId);
+        for(ListGrocery item : items) {
+            adapter.add(item);
+        }
 
         itemsView = (ListView) findViewById(R.id.itemView);
         itemsView.setAdapter(adapter);
+    }
+
+    protected long generateListId() {
+        return shoppingListId;
     }
 
     /******************************************************************

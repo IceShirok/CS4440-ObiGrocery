@@ -75,7 +75,6 @@ public class EditGroceryListGen extends ActionBarActivity {
         addGroceryButton.setEnabled(false);
 
         finishGroceryButton = (Button) findViewById(R.id.finishGroceryButton);
-        finishGroceryButton.setEnabled(false);
         
         chooseButton = (Button) findViewById(R.id.chooseButton);
         chooseButton.setEnabled(false);
@@ -84,19 +83,7 @@ public class EditGroceryListGen extends ActionBarActivity {
         suggestButton.setEnabled(false);
 
         listTextbox = (EditText) findViewById(R.id.listTextbox);
-        listTextbox.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before,
-                    int count) {
-                finishGroceryButton.setEnabled(listTextbox.getText().length() > 0);
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {}
-        });
+        listTextbox.setVisibility(View.GONE);
         
         itemNameTextbox = (EditText) findViewById(R.id.itemNameTextbox);
         itemNameTextbox.addTextChangedListener(new AddGroceryWatcher());
@@ -465,14 +452,13 @@ public class EditGroceryListGen extends ActionBarActivity {
 //        System.out.println("***** Finished updating list name to the database. *****");
 //    }
 
-//    protected void setTitle() {
-//        /*
-//         * TODO use database to get the name of the shopping list using shoppingListId
-//         */
-//        String title = "Obi Grocery - Create New List ";
-//        this.setTitle(title);
-//        listTextbox.setText("Obi Grocery List " + shoppingListId);
-//    }
+    protected void setTitle() {
+        /*
+         * TODO use database to get the name of the shopping list using shoppingListId
+         */
+        String title = "Obi Grocery - Create New List " + shoppingListId;
+        this.setTitle(title);
+    }
 
     
     /******************************************************************
