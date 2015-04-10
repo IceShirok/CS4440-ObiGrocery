@@ -1,18 +1,5 @@
 package com.example.obigrocery.activities;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ListView;
-import android.widget.TextView;
-
-import com.example.obigrocery.POJO.ItemPOJO;
-import com.example.obigrocery.adapters.ItemListAdapterSelect;
-import com.example.obigrocery.db.DBTools;
 
 public class ChooseItemsList extends CheckPurchasedItems {
 	
