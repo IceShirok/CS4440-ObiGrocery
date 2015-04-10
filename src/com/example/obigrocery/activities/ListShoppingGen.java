@@ -50,9 +50,17 @@ public class ListShoppingGen extends ActionBarActivity {
                 Intent i = new Intent(getApplicationContext(), ListOneListGen.class);
                 i.putExtra("SHOPPING_LIST_ID", adapter.getItem(position).getId());
                 System.out.println("the id should be : " + adapter.getItem(position).getId());
-                startActivity(i);
+                startActivityForResult(i, 0);
             }
         });
+    }
+    
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        System.out.println("Activity Results in EditGrocery");
+        if (resultCode == RESULT_OK) {
+            populateList();
+        }
     }
 
     /******************************************************************

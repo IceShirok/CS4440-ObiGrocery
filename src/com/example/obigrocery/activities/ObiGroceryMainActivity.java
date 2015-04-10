@@ -22,7 +22,7 @@ public class ObiGroceryMainActivity extends ActionBarActivity {
         
         Button reportButton = (Button) findViewById(R.id.genReportButton);
         reportButton.setEnabled(false);
-        reportButton.setVisibility(View.GONE);
+        //reportButton.setVisibility(View.GONE);
     }
 
 

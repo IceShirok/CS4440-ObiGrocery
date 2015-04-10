@@ -13,6 +13,7 @@
 
     <TextView
         android:id="@+id/instructionText"
+        style="@style/ObiInstructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.14"
@@ -44,11 +45,11 @@
 
     <ListView
         android:id="@+id/itemView"
+        style="@style/ObiItemsView"
         android:layout_width="wrap_content"
         android:layout_height="140dp"
         android1:layout_weight="0.86"
         android:fadeScrollbars="false" >
-
     </ListView>
 
     <LinearLayout
@@ -56,16 +57,17 @@
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/listButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="38dp"
-            android:onClick="returnToLists"
-            android:text="Back" />
+            android1:id="@+id/listButton"
+            style="@style/ObiButton"
+            android1:layout_width="wrap_content"
+            android1:layout_height="wrap_content"
+            android1:layout_marginBottom="38dp"
+            android1:onClick="returnToLists"
+            android1:text="Back" />
 
         <Button
             android1:id="@+id/editListButton"
-            style="android:buttonStyle"
+            style="@style/ObiButton"
             android1:layout_width="wrap_content"
             android1:layout_height="wrap_content"
             android1:onClick="editList"
@@ -73,10 +75,26 @@
 
         <Button
             android1:id="@+id/shopButton"
+	        style="@style/ObiButton"
             android1:layout_width="wrap_content"
             android1:layout_height="wrap_content"
             android1:onClick="letsGoShopping"
             android1:text="Shop" />
+
+        <Button
+            android1:id="@+id/Button01"
+            style="@style/ObiButton"
+            android1:layout_width="wrap_content"
+            android1:layout_height="wrap_content"
+            android1:onClick="deleteList"
+            android1:text="Delete" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android1:layout_width="match_parent"
+        android1:layout_height="wrap_content"
+        android1:layout_weight="0.14" >
 
     </LinearLayout>
 

@@ -3,6 +3,7 @@ package com.example.obigrocery.activities;
 import java.util.List;
 
 import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -18,6 +19,7 @@ import android.widget.TextView;
 
 import com.example.obigrocery.adapters.ItemListAdapterGen;
 import com.example.obigrocery.db.ListGroceryDAO;
+import com.example.obigrocery.db.ShoppingListDAO;
 import com.example.obigrocery.sqlmodel.ListGrocery;
 
 public class ListOneListGen extends ActionBarActivity {
@@ -153,7 +155,25 @@ public class ListOneListGen extends ActionBarActivity {
     public void letsGoShopping(View view) {
         Intent i = new Intent(getApplicationContext(), CheckPurchasedItems.class);
         i.putExtra("SHOPPING_LIST_ID", shoppingListId);
-        startActivity(i);
+        startActivityForResult(i, 0);
+    }
+    
+    public void deleteList(final View view) {
+        new AlertDialog.Builder(this)
+        .setIcon(android.R.drawable.ic_dialog_alert)
+        .setTitle("Delete List Confirmation")
+        .setMessage("Are you sure you want to delete? This cannot be undone!")
+        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ShoppingListDAO shoppingListDb = new ShoppingListDAO(view.getContext());
+                shoppingListDb.deleteShoppingList(shoppingListDb.getShoppingListById(shoppingListId));
+                setResult(RESULT_OK, getIntent());
+                finish();
+            }
+        })
+        .setNegativeButton("No", null)
+        .show();
     }
 
     /******************************************************************

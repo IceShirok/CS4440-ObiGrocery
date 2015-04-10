@@ -1,23 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Obi Grocery</string>
+    <string name="app_name">Smart Grocery App</string>
     <string name="main_menu_welcome">Welcome!</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_help_screen">Obi Grocery - Help</string>
+    <string name="title_activity_help_screen">Smart Grocery - Help</string>
     <string name="hello_world">Hello world!</string>
-    <string name="title_activity_new_grocery_list">Obi Grocery - New List</string>
-    <string name="title_activity_shopping_lists">Obi Grocery - Shopping Lists</string>
-    <string name="title_activity_report_summary">Obi Grocery - Report Summary</string>
-    <string name="title_activity_show_shopping_lists">Obi Grocery - Show Shopping List</string>
+    <string name="title_activity_new_grocery_list">Smart Grocery - New List</string>
+    <string name="title_activity_shopping_lists">Smart Grocery - Shopping Lists</string>
+    <string name="title_activity_report_summary">Smart Grocery - Report Summary</string>
+    <string name="title_activity_show_shopping_lists">Smart Grocery - Show Shopping List</string>
     <string name="title_activity_shopping_category">Shopping Category</string>
-    <string name="title_activity_edit_grocery_list">Obi Grocery - Edit Shopping List</string>
-    <string name="title_activity_check_purchased_items">Obi Grocery - Check Purchased Items</string>
-    <string name="title_activity_blah">BlahActivity</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
+    <string name="title_activity_edit_grocery_list">Smart Grocery - Edit Shopping List</string>
+    <string name="title_activity_check_purchased_items">Smart Grocery - Check Purchased Items</string>
     <string name="title_activity_report_summaries">Obi Grocery - Report Summary</string>
 
 </resources>

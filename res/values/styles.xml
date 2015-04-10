@@ -1,4 +1,4 @@
-<resources>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!--
         Base application theme, dependent on API level. This theme is replaced
@@ -21,8 +21,8 @@
 		<item name="android:layout_width">fill_parent</item>
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:capitalize">characters</item>
-		<item name="android:typeface">monospace</item>
-		<item name="android:textSize">25sp</item>
+		<item name="android:typeface">sans</item>
+		<item name="android:textSize">30sp</item>
 		<item name="android:textColor">#000000</item>/> 
 	</style>
 
@@ -30,18 +30,43 @@
 		<item name="android:layout_width">fill_parent</item>
 		<item name="android:layout_height">wrap_content</item>
 		<item name="android:capitalize">characters</item>
-		<item name="android:typeface">monospace</item>
-		<item name="android:textSize">15sp</item>
+		<item name="android:typeface">sans</item>
+		<item name="android:textSize">25sp</item>
+		<item name="android:textColor">#000000</item>/> 
+	</style>
+
+	<style name="ObiInstructions" parent="@android:style/TextAppearance">
+		<item name="android:layout_width">fill_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+		<item name="android:capitalize">characters</item>
+		<item name="android:typeface">sans</item>
+		<item name="android:textSize">20sp</item>
 		<item name="android:textColor">#000000</item>/> 
 	</style>
 	
 	<style name="ObiButton">
 	    <item name="android:textColor">#ffffff</item>
 	    <item name="android:padding">0dp</item>
+	    <item name="android:layout_margin">3dp</item>
+		<item name="android:capitalize">characters</item>
+		<item name="android:typeface">sans</item>
+		<item name="android:textSize">15sp</item>
+		<item name="android:background">@drawable/selector_button_main_menu</item>
+	</style>
+	
+	<style name="ObiMainButton" parent="ObiButton">
+	    <item name="android:padding">0dp</item>
 	    <item name="android:minWidth">88dp</item>
 	    <item name="android:minHeight">36dp</item>
 	    <item name="android:layout_margin">3dp</item>
-	    <item name="android:background">#58c318</item>
+		<item name="android:textSize">15sp</item>
+	</style>
+	
+	<style name="ObiItemsView" parent="ObiButton">
+		<item name="android:textSize">15sp</item>
+		<item name="android:padding">5dp</item>
+		<item name="android:background">@drawable/paper_bg</item>
+		<item name="android:tileMode">repeat</item>
 	</style>
 
 </resources>

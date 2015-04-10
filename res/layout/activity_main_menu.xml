@@ -21,14 +21,14 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="23dp"
-            android:text="Obi Grocery App" />
+            android:text="Smart Grocery App" />
 
         <TextView
             android:id="@+id/textView2"
    			style="@style/ObiFlavor"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Welcome to Obi Grocery!\nBe able to create grocery lists!" />
+            android:text="Create grocery lists!" />
 
         <TableLayout
             android:layout_width="match_parent"
@@ -45,10 +45,9 @@
 
                     <Button
                         android:id="@+id/newGroceryButton"
-                        style="@style/ObiButton"
-                        android:background="@drawable/button_main_menu"
-                        android:layout_width="125dp"
-                        android:layout_height="125dp"
+                        style="@style/ObiMainButton"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:onClick="gotoNew"
                         android:text="New Shopping List" />
 
@@ -60,10 +59,9 @@
 
                     <Button
                         android:id="@+id/inputPurchasedButton"
-                        style="@style/ObiButton"
-                        android:background="@drawable/button_main_menu"
-                        android:layout_width="125dp"
-                        android:layout_height="125dp"
+                        style="@style/ObiMainButton"
+                        android:layout_width="100dp"
+                        android:layout_height="100dp"
                         android:onClick="gotoPurchased"
                         android:text="Shopping Lists" />
 
@@ -78,10 +76,9 @@
 
                 <Button
                     android:id="@+id/genReportButton"
-                    style="@style/ObiButton"
-                    android:background="@drawable/button_main_menu"
-                    android:layout_width="125dp"
-                    android:layout_height="125dp"
+                    style="@style/ObiMainButton"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:onClick="gotoReports"
                     android:text="Generate Report" />
 
@@ -94,10 +91,9 @@
 
                 <Button
                     android:id="@+id/exitButton"
-                    style="@style/ObiButton"
-                    android:background="@drawable/button_main_menu"
-                    android:layout_width="125dp"
-                    android:layout_height="125dp"
+                    style="@style/ObiMainButton"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
                     android:onClick="exitApp"
                     android:text="Exit" />
 
