@@ -16,16 +16,17 @@ import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import com.example.obigrocery.POJO.ItemPOJO;
-import com.example.obigrocery.activities.R;
 import com.example.obigrocery.adapters.ItemListAdapterGen;
+import com.example.obigrocery.db.ListGroceryDAO;
+import com.example.obigrocery.sqlmodel.ListGrocery;
 
 public class ListOneListGen extends ActionBarActivity {
     
     protected ItemListAdapterGen adapter;
     protected ListView itemsView;
     protected Spinner categorySpinner;
-    protected int shoppingListId;
+    protected long shoppingListId;
+    protected ListGroceryDAO listGroceryDb;
 
     /******************************************************************
      * Creating the display of a list, read-only
@@ -35,11 +36,13 @@ public class ListOneListGen extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_shopping_lists);
         
+        listGroceryDb = new ListGroceryDAO(this);
+        
         setInstructions();
 
         Bundle extras = getIntent().getExtras();
         if (extras != null) {
-            shoppingListId = extras.getInt("SHOPPING_LIST_ID");
+            shoppingListId = extras.getLong("SHOPPING_LIST_ID");
             populateList();
             populateCategories();
             setTitle();
@@ -62,9 +65,6 @@ public class ListOneListGen extends ActionBarActivity {
     }
     
     protected void setTitle() {
-        /*
-         * TODO use database to get the name of the shopping list using shoppingListId
-         */
         String title = "Obi Grocery - Show List " + shoppingListId;
         this.setTitle(title);
     }
@@ -74,16 +74,10 @@ public class ListOneListGen extends ActionBarActivity {
      ******************************************************************/
     protected void populateList() {
         adapter = new ItemListAdapterGen(this, shoppingListId);
-        /*
-         * TODO use database to populate
-         * Use shoppingListId to retrieve
-         */
-        adapter.add(new ItemPOJO("Bread1", "oz", shoppingListId, "Baked Goods"));
-        adapter.add(new ItemPOJO("Bread2", "oz", shoppingListId, "Baked Goods"));
-        adapter.add(new ItemPOJO("Bread3", "oz", 1, "Baked Goods"));
-        adapter.add(new ItemPOJO("Meat", "oz", 1, "Meats"));
-        adapter.add(new ItemPOJO("Meats", "oz", 1, "Meats"));
-        adapter.add(new ItemPOJO("Dairy", "oz", 1, "Dairy"));
+        List<ListGrocery> groceryItems = listGroceryDb.getListGeocerybyListId(shoppingListId);
+        for(ListGrocery item : groceryItems) {
+            adapter.add(item);
+        }
 
         itemsView = (ListView) findViewById(R.id.itemView);
         itemsView.setAdapter(adapter);

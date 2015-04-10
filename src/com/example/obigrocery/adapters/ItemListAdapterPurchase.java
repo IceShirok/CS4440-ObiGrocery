@@ -9,11 +9,16 @@ import android.widget.CheckBox;
 import android.widget.TextView;
 
 import com.example.obigrocery.activities.R;
+import com.example.obigrocery.db.ListGroceryDAO;
+import com.example.obigrocery.sqlmodel.ListGrocery;
 
 public class ItemListAdapterPurchase extends ItemListAdapterGen {
+    
+    private ListGroceryDAO listGroceryDb;
 
-    public ItemListAdapterPurchase(Context context, int shoppingListId) {
+    public ItemListAdapterPurchase(Context context, long shoppingListId) {
         super(context, shoppingListId);
+        listGroceryDb = new ListGroceryDAO(context);
     }
 
     @SuppressLint("InflateParams")
@@ -31,16 +36,16 @@ public class ItemListAdapterPurchase extends ItemListAdapterGen {
         listItemText.setText(display.get(position).toString());
 
         final CheckBox purchasedCheckbox = (CheckBox) view.findViewById(R.id.check);
-        purchasedCheckbox.setChecked(getItem(position).isPurchased());
+        purchasedCheckbox.setChecked(getItem(position).getIsPurchased() == 1 ? true : false);
 
         purchasedCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkItem(getItem(position), purchasedCheckbox.isChecked());
-                /*
-                 * TODO save this information to the database
-                 * you can use shoppingListId
-                 */
+                ListGrocery item = getItem(position);
+                boolean isChecked = purchasedCheckbox.isChecked();
+                checkItem(item, purchasedCheckbox.isChecked());
+                listGroceryDb.updateListGrocery(item.getId(), item.getListId(), item.getProductID(),
+                        item.getUnits(), item.getAmount(), isChecked ? 1 : 0);
             }
         });
 

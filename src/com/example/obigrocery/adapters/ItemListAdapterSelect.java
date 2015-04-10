@@ -11,15 +11,15 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.TextView;
 
-import com.example.obigrocery.POJO.ItemPOJO;
 import com.example.obigrocery.activities.R;
+import com.example.obigrocery.sqlmodel.ListGrocery;
 
 public class ItemListAdapterSelect extends ItemListAdapterGen {
     
     private ArrayList<Boolean> checkedList;
     private boolean isPopulated;
 
-    public ItemListAdapterSelect(Context context, int shoppingListId) {
+    public ItemListAdapterSelect(Context context, long shoppingListId) {
         super(context, shoppingListId);
     }
 
@@ -59,7 +59,7 @@ public class ItemListAdapterSelect extends ItemListAdapterGen {
     /*
      * note: act like a set - only distinct stuff on display
      */
-    public void add(ItemPOJO object) {
+    public void add(ListGrocery object) {
         if(!list.contains(object)) {
             list.add(object);
             display.add(object);
@@ -67,8 +67,8 @@ public class ItemListAdapterSelect extends ItemListAdapterGen {
         }
     }
     
-    public List<ItemPOJO> getCheckedList() {
-        List<ItemPOJO> temp = new ArrayList<>();
+    public List<ListGrocery> getCheckedList() {
+        List<ListGrocery> temp = new ArrayList<>();
             if(checkedList != null) {
             for(int i=0; i<list.size(); i++) {
                 if(checkedList.get(i).booleanValue()) {

@@ -6,8 +6,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.obigrocery.POJO.ItemPOJO;
-
 public class EditGroceryList extends EditGroceryListGen {
 
     /******************************************************************

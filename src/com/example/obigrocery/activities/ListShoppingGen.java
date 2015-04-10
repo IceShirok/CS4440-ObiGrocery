@@ -1,6 +1,5 @@
 package com.example.obigrocery.activities;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
@@ -15,15 +14,13 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import com.example.obigrocery.POJO.ListPOJO;
-import com.example.obigrocery.activities.R;
-import com.example.obigrocery.db.*;
-import com.example.obigrocery.sqlmodel.*;
+import com.example.obigrocery.db.ShoppingListDAO;
+import com.example.obigrocery.sqlmodel.ShoppingList;
 
 public class ListShoppingGen extends ActionBarActivity {
     
     protected ListView shoppingListView;
-    protected ArrayAdapter<ListPOJO> adapter;
+    protected ArrayAdapter<ShoppingList> adapter;
     private ShoppingListDAO shoppingListDAO;
 
     /******************************************************************
@@ -35,7 +32,6 @@ public class ListShoppingGen extends ActionBarActivity {
         setContentView(R.layout.activity_shopping_lists);
         
         shoppingListDAO = new ShoppingListDAO(this);
-        //shoppingListDAO.open();
         
         setInstructions();
         setupListView();
@@ -53,6 +49,7 @@ public class ListShoppingGen extends ActionBarActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long arg3) {
                 Intent i = new Intent(getApplicationContext(), ListOneListGen.class);
                 i.putExtra("SHOPPING_LIST_ID", adapter.getItem(position).getId());
+                System.out.println("the id should be : " + adapter.getItem(position).getId());
                 startActivity(i);
             }
         });
@@ -62,30 +59,10 @@ public class ListShoppingGen extends ActionBarActivity {
      * Populating the list - a database story
      ******************************************************************/
     protected void populateList() {
-        /*
-         * TODO use database to populate the list of shopping lists
-         * The ListPOJO takes in a String name of list, and the int ID number of list
-         */
-    	List<ShoppingList> values = new ArrayList<>();
-    	values = shoppingListDAO.getAllShoppingLists();
-    	System.out.println("size of list: " + values.size());
-    	for(ShoppingList list : values) {
-    	    System.out.println(list);
-    	}
-    	
-        ArrayAdapter<ShoppingList> adapter = new ArrayAdapter<ShoppingList>(this,
+    	List<ShoppingList> values = shoppingListDAO.getAllShoppingLists();
+        adapter = new ArrayAdapter<ShoppingList>(this,
         		android.R.layout.simple_list_item_1, values);
         shoppingListView.setAdapter(adapter);
-
-        /*
-        List<ListPOJO> display = new ArrayList<>();
-        display.add(new ListPOJO("Shopping List 5", 5));
-        display.add(new ListPOJO("Shopping List 6", 6));
-        display.add(new ListPOJO("Shopping List 7", 7));
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, display);
-        shoppingListView.setAdapter(adapter);
-         */
-        
     }
 
     /******************************************************************

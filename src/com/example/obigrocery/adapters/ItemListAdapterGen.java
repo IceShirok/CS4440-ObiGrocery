@@ -13,13 +13,13 @@ import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
-import com.example.obigrocery.POJO.ItemPOJO;
 import com.example.obigrocery.activities.Populator;
 import com.example.obigrocery.activities.R;
+import com.example.obigrocery.sqlmodel.ListGrocery;
 
 public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
-    protected List<ItemPOJO> list = new ArrayList<>();
-    protected List<ItemPOJO> display = new ArrayList<>();
+    protected List<ListGrocery> list = new ArrayList<>();
+    protected List<ListGrocery> display = new ArrayList<>();
     protected Context context;
     protected long shoppingListId;
 
@@ -39,7 +39,7 @@ public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
     }
 
     @Override
-    public ItemPOJO getItem(int pos) {
+    public ListGrocery getItem(int pos) {
         return display.get(pos);
     }
 
@@ -49,23 +49,23 @@ public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
         return 0;
     }
     
-    public void checkItem(ItemPOJO object, boolean check) {
+    public void checkItem(ListGrocery object, boolean check) {
         list.remove(object);
-        object.setPurchased(check);
+        object.setIsPurchased(check ? 1 : 0);
         list.add(object);
     }
 
-    public List<ItemPOJO> getList() {
+    public List<ListGrocery> getList() {
         return list;
     }
     
-    public void add(ItemPOJO object) {
+    public void add(ListGrocery object) {
         list.add(object);
         display.add(object);
         this.notifyDataSetChanged();
     }
     
-    public void remove(ItemPOJO object) {
+    public void remove(ListGrocery object) {
         list.remove(object);
         display.remove(object);
         this.notifyDataSetChanged();
@@ -82,14 +82,15 @@ public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
         
         Collections.sort(list);
         
-        ArrayList<ItemPOJO> temp = new ArrayList<>();
+        ArrayList<ListGrocery> temp = new ArrayList<>();
         if(category.equalsIgnoreCase(Populator.ALL_CATEGORY)) {
-            for(ItemPOJO item : list) {
+            for(ListGrocery item : list) {
                 temp.add(item);
             }
         } else {
-            for(ItemPOJO item : list) {
-                if(item.getCategory().equals(category)) {
+            List<String> categories = Populator.getCategories(false);
+            for(ListGrocery item : list) {
+                if(categories.get((int)item.getProducts().getCategoryId()).equals(category)) {
                     temp.add(item);
                 }
             }

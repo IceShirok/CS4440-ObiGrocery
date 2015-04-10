@@ -1,10 +1,6 @@
 package com.example.obigrocery.activities;
 
-import android.widget.ListView;
 import android.widget.TextView;
-
-import com.example.obigrocery.POJO.ItemPOJO;
-import com.example.obigrocery.adapters.ItemListAdapterPurchase;
 
 public class CheckPurchasedItems extends ListOneListGen {
 
@@ -32,18 +28,18 @@ public class CheckPurchasedItems extends ListOneListGen {
      * Populating stuff to the app
      ******************************************************************/
     protected void populateList() {
-        adapter = new ItemListAdapterPurchase(this, shoppingListId);
-        /*
-         * TODO use database to populate the list using shoppingListId
-         */
-        adapter.add(new ItemPOJO("Bread1", "oz", 1, "Baked Goods"));
-        adapter.add(new ItemPOJO("Bread2", "oz", 0, "Baked Goods"));
-        adapter.add(new ItemPOJO("Bread3", "oz", 1, "Baked Goods"));
-        adapter.add(new ItemPOJO("Meat1", "oz", 0, "Meats"));
-        adapter.add(new ItemPOJO("Meat2", "oz", 0, "Meats"));
-        adapter.add(new ItemPOJO("Dairy", "oz", 1, "Dairy"));
-
-        itemsView = (ListView) findViewById(R.id.itemView);
-        itemsView.setAdapter(adapter);
+//        adapter = new ItemListAdapterPurchase(this, shoppingListId);
+//        /*
+//         * TODO use database to populate the list using shoppingListId
+//         */
+//        adapter.add(new ItemPOJO("Bread1", "oz", 1, "Baked Goods"));
+//        adapter.add(new ItemPOJO("Bread2", "oz", 0, "Baked Goods"));
+//        adapter.add(new ItemPOJO("Bread3", "oz", 1, "Baked Goods"));
+//        adapter.add(new ItemPOJO("Meat1", "oz", 0, "Meats"));
+//        adapter.add(new ItemPOJO("Meat2", "oz", 0, "Meats"));
+//        adapter.add(new ItemPOJO("Dairy", "oz", 1, "Dairy"));
+//
+//        itemsView = (ListView) findViewById(R.id.itemView);
+//        itemsView.setAdapter(adapter);
     }
 }

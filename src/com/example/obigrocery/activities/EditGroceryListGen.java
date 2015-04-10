@@ -27,7 +27,7 @@ import android.widget.FrameLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 
-import com.example.obigrocery.adapters.ListItemAdapter;
+import com.example.obigrocery.adapters.ItemListAdapterGen;
 import com.example.obigrocery.db.ListGroceryDAO;
 import com.example.obigrocery.db.ProductsDAO;
 import com.example.obigrocery.db.ShoppingListDAO;
@@ -51,7 +51,7 @@ public class EditGroceryListGen extends ActionBarActivity {
     protected Button chooseButton;
     protected Button suggestButton;
 
-    protected ListItemAdapter adapter;
+    protected ItemListAdapterGen adapter;
     
     protected ShoppingListDAO shoppingListDb;
     protected ProductsDAO productDb;
@@ -107,7 +107,7 @@ public class EditGroceryListGen extends ActionBarActivity {
         unitSpinner = (Spinner) findViewById(R.id.unitSpinner);
 
         itemsView = (ListView) findViewById(R.id.itemView);
-        adapter = new ListItemAdapter(this, shoppingListId);
+        adapter = new ItemListAdapterGen(this, shoppingListId);
         itemsView.setAdapter(adapter);
         itemsView.setClickable(true);
         itemsView.setOnItemClickListener(new OnItemClickListener() {
