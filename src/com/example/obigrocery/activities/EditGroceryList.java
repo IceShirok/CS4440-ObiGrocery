@@ -60,12 +60,14 @@ public class EditGroceryList extends EditGroceryListGen {
          * use shoppingListId to retrieve from database
          * nothing else is needed because it's taken care of by its parent class
          */
+        /*
         adapter.add(new ItemPOJO("Bread1", "oz", 1, "Baked Goods"));
         adapter.add(new ItemPOJO("Bread2", "oz", 0, "Baked Goods"));
         adapter.add(new ItemPOJO("Bread3", "oz", 1, "Baked Goods"));
         adapter.add(new ItemPOJO("Meat1", "oz", 0, "Meats"));
         adapter.add(new ItemPOJO("Meat2", "oz", 0, "Meats"));
         adapter.add(new ItemPOJO("Dairy", "oz", 1, "Dairy"));
+        */
 
         itemsView = (ListView) findViewById(R.id.itemView);
         itemsView.setAdapter(adapter);

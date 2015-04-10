@@ -2,7 +2,7 @@ package com.example.obigrocery.sqlmodel;
 
 import java.io.Serializable;
 
-public class ListGrocery implements Serializable{
+public class ListGrocery implements Serializable, Comparable<ListGrocery>{
 	public static final String TAG = "ListGrocery";
 	private static final long serialVersionUID = -7406082437623008161L;
 	
@@ -90,5 +90,35 @@ public class ListGrocery implements Serializable{
 	public void setShoppingList(ShoppingList shoppingList){
 		this.shoppingList = shoppingList;
 	}
+    
+    @Override
+    public String toString() {
+        return products.toString();
+    }
+    
+    @Override
+    public boolean equals(Object other) {
+        if(other == this) {
+            return true;
+        }
+        if(other == null) {
+            return false;
+        }
+        if(!(other instanceof ListGrocery)) {
+            return false;
+        }
+        ListGrocery that = (ListGrocery)other;
+        return this.getId() == that.getId();
+    }
+    
+    @Override
+    public int hashCode() {
+        return (int) (this.getId());
+    }
+
+    @Override
+    public int compareTo(ListGrocery another) {
+        return (int) (this.getId() - another.getId());
+    }
 
 }
