@@ -12,15 +12,6 @@ import com.example.obigrocery.activities.R;
 
 public class ObiGroceryMainActivity extends ActionBarActivity {
     
-    /*
-     * TODO my checklist
-     * - if shopping list is empty, delete list from database
-     * - implement suggestions
-     * - maybe implement report summary
-     * - needed: transfer of info to remote server
-     * - fix the GUI so it looks nicer
-     */
-
     /******************************************************************
      * Main menu for the app - woohoo!
      ******************************************************************/
@@ -31,6 +22,7 @@ public class ObiGroceryMainActivity extends ActionBarActivity {
         
         Button reportButton = (Button) findViewById(R.id.genReportButton);
         reportButton.setEnabled(false);
+        reportButton.setVisibility(View.GONE);
     }
 
 

@@ -6,6 +6,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:background="#C2FAC0"
     tools:context="com.example.obigrocery.screen.MainMenu" >
 
     <LinearLayout
@@ -44,6 +45,8 @@
 
                     <Button
                         android:id="@+id/newGroceryButton"
+                        style="@style/ObiButton"
+                        android:background="@drawable/button_main_menu"
                         android:layout_width="125dp"
                         android:layout_height="125dp"
                         android:onClick="gotoNew"
@@ -57,6 +60,8 @@
 
                     <Button
                         android:id="@+id/inputPurchasedButton"
+                        style="@style/ObiButton"
+                        android:background="@drawable/button_main_menu"
                         android:layout_width="125dp"
                         android:layout_height="125dp"
                         android:onClick="gotoPurchased"
@@ -73,6 +78,8 @@
 
                 <Button
                     android:id="@+id/genReportButton"
+                    style="@style/ObiButton"
+                    android:background="@drawable/button_main_menu"
                     android:layout_width="125dp"
                     android:layout_height="125dp"
                     android:onClick="gotoReports"
@@ -87,6 +94,8 @@
 
                 <Button
                     android:id="@+id/exitButton"
+                    style="@style/ObiButton"
+                    android:background="@drawable/button_main_menu"
                     android:layout_width="125dp"
                     android:layout_height="125dp"
                     android:onClick="exitApp"
