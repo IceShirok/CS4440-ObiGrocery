@@ -29,37 +29,76 @@
             android:layout_height="wrap_content"
             android:text="Welcome to Obi Grocery!\nBe able to create grocery lists!" />
 
-        <Button
-            android:id="@+id/newGroceryButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:onClick="gotoNew"
-            android:text="New Shopping List" />
+        <TableLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
 
-        <Button
-            android:id="@+id/inputPurchasedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="18dp"
-            android:onClick="gotoPurchased"
-            android:text="Shopping Lists" />
+            <TableRow
+                android:id="@+id/tableRow1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
-        <Button
-            android:id="@+id/genReportButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:onClick="gotoReports"
-            android:text="Generate Report" />
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
 
-        <Button
-            android:id="@+id/exitButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="14dp"
-            android:onClick="exitApp"
-            android:text="Exit" />
+                    <Button
+                        android:id="@+id/newGroceryButton"
+                        android:layout_width="125dp"
+                        android:layout_height="125dp"
+                        android:onClick="gotoNew"
+                        android:text="New Shopping List" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" >
+
+                    <Button
+                        android:id="@+id/inputPurchasedButton"
+                        android:layout_width="125dp"
+                        android:layout_height="125dp"
+                        android:onClick="gotoPurchased"
+                        android:text="Shopping Lists" />
+
+                </LinearLayout>
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <Button
+                    android:id="@+id/genReportButton"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:onClick="gotoReports"
+                    android:text="Generate Report" />
+
+            </TableRow>
+
+            <TableRow
+                android:id="@+id/tableRow4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
+
+                <Button
+                    android:id="@+id/exitButton"
+                    android:layout_width="125dp"
+                    android:layout_height="125dp"
+                    android:onClick="exitApp"
+                    android:text="Exit" />
+
+            </TableRow>
+        </TableLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" >
+        </LinearLayout>
 
     </LinearLayout>
 

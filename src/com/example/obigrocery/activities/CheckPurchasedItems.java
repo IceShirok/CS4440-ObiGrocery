@@ -3,8 +3,11 @@ package com.example.obigrocery.activities;
 import java.util.List;
 
 import com.example.obigrocery.adapters.ItemListAdapterPurchase;
+import com.example.obigrocery.db.ListGroceryDAO;
 import com.example.obigrocery.sqlmodel.ListGrocery;
 
+import android.app.AlertDialog;
+import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -16,18 +19,42 @@ public class CheckPurchasedItems extends ListOneListGen {
     /******************************************************************
      * Instantiation of stuff into the app
      ******************************************************************/
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_check_purchased_items);
+        
+        listGroceryDb = new ListGroceryDAO(this);
+        
+        setInstructions();
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            shoppingListId = extras.getLong("SHOPPING_LIST_ID");
+            populateList();
+            populateCategories();
+            setTitle();
+        } else {
+            String errorMessage = "List missing from database. Exiting...";
+
+            new AlertDialog.Builder(this)
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setTitle("Error")
+            .setMessage(errorMessage)
+            .setNeutralButton("OK", null)
+            .show();
+            finish();
+        }
+    }
     
     protected void setTitle() {
-        /*
-         * TODO use database to get the name of the shopping list using shoppingListId
-         */
         String title = "Obi Grocery - Purchase with List " + shoppingListId;
         this.setTitle(title);
     }
     
     protected void setInstructions() {
         TextView instructionText = (TextView) findViewById(R.id.instructionText);
-        instructionText.setText("First, check off the items that have been purchased.");
+        instructionText.setText("Check off the items that have been purchased.");
     }
 
     /******************************************************************

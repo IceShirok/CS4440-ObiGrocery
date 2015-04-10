@@ -54,6 +54,7 @@ public class EditGroceryListGen extends ActionBarActivity {
     protected ItemListAdapterGen adapter;
     
     protected ShoppingListDAO shoppingListDb;
+    protected ShoppingList shoppingListPOJO;
     protected ProductsDAO productDb;
     protected ListGroceryDAO listGroceryDb;
 
@@ -75,9 +76,6 @@ public class EditGroceryListGen extends ActionBarActivity {
         addGroceryButton.setEnabled(false);
 
         finishGroceryButton = (Button) findViewById(R.id.finishGroceryButton);
-        
-        chooseButton = (Button) findViewById(R.id.chooseButton);
-        chooseButton.setEnabled(false);
 
         suggestButton = (Button) findViewById(R.id.suggestButton);
         suggestButton.setEnabled(false);
@@ -417,8 +415,8 @@ public class EditGroceryListGen extends ActionBarActivity {
      ******************************************************************/
 
     protected long generateListId() {
-        ShoppingList list = shoppingListDb.createShoppingLIst();
-        return list.getId();
+        this.shoppingListPOJO = shoppingListDb.createShoppingLIst();
+        return this.shoppingListPOJO.getId();
     }
 
     protected ListGrocery addItemsToDatabase(String name, String category, float quantity, String unit) {
@@ -521,30 +519,26 @@ public class EditGroceryListGen extends ActionBarActivity {
      ******************************************************************/
 
     public void returnToMenu(View view) {
-        finish();
+        cancelListConfirm();
     }
     
     public void onBackPressed() {
-        finish();
+        cancelListConfirm();
     }
     
-//    protected void cancelListConfirm() {
-//        if (adapter.getList().size() > 0) {
-//            new AlertDialog.Builder(this)
-//                .setIcon(android.R.drawable.ic_dialog_alert)
-//                .setTitle("Returning to Menu")
-//                .setMessage("Are you sure you want to return? You will lose all changes.")
-//                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialog,
-//                            int which) {
-//                        finish();
-//                    }
-//                })
-//                .setNegativeButton("No", null)
-//                .show();
-//        } else {
-//            finish();
-//        }
-//    }
+    protected void cancelListConfirm() {
+        new AlertDialog.Builder(this)
+        .setIcon(android.R.drawable.ic_dialog_alert)
+        .setTitle("Cancel Confirmation")
+        .setMessage("Are you sure you want to cancel? You will lose all changes.")
+        .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                shoppingListDb.deleteShoppingList(shoppingListPOJO);
+                finish();
+            }
+        })
+        .setNegativeButton("No", null)
+        .show();
+    }
 }

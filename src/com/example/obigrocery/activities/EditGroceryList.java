@@ -2,14 +2,13 @@ package com.example.obigrocery.activities;
 
 import java.util.List;
 
-import com.example.obigrocery.sqlmodel.ListGrocery;
-import com.example.obigrocery.sqlmodel.ShoppingList;
-
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+
+import com.example.obigrocery.sqlmodel.ListGrocery;
 
 public class EditGroceryList extends EditGroceryListGen {
 

@@ -14,7 +14,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_weight="0.14"
-        android:text="Check off the items you&apos;ve purchased." />
+        android:text="" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal" >
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="86dp"
+            android:layout_height="wrap_content"
+            android:text="Category" />
+
+        <Spinner
+            android:id="@+id/categorySpinner"
+            android:layout_width="match_parent"
+            android:layout_height="36dp"
+            android:layout_gravity="right" />
+    </LinearLayout>
 
     <ListView
         android:id="@+id/itemView"
@@ -23,18 +41,18 @@
         android:layout_weight="0.85"
         android:fadeScrollbars="false" >
     </ListView>
-
+    
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
 
         <Button
-            android:id="@+id/menuButton"
+            android:id="@+id/listButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="38dp"
-            android:onClick="returnToMenu"
-            android:text="Menu" />
+            android:onClick="returnToLists"
+            android:text="Back" />
 
     </LinearLayout>
 
