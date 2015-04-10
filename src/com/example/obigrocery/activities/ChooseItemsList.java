@@ -6,7 +6,6 @@ import java.util.List;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -23,19 +22,14 @@ public class ChooseItemsList extends CheckPurchasedItems {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        Button editListButton = (Button) findViewById(R.id.editListButton);
-        editListButton.setVisibility(View.GONE);
-
-        Button shopButton = (Button) findViewById(R.id.shopButton);
-        shopButton.setVisibility(View.GONE);
+        setContentView(R.layout.activity_check_purchased_items);
     }
     
     /******************************************************************
      * Creating the display of a list, read-only
      ******************************************************************/    
     protected void setTitle() {
-        String title = "Obi Grocery - Choose Items " + shoppingListId;
+        String title = "Obi Grocery - Choose Items For List " + shoppingListId;
         this.setTitle(title);
     }
 
@@ -65,7 +59,8 @@ public class ChooseItemsList extends CheckPurchasedItems {
         ArrayList<String> list = new ArrayList<>();
         List<ListGrocery> temp = ((ItemListAdapterSelect) adapter).getCheckedList();
         for(ListGrocery item : temp) {
-            //list.add(item.getName()+","+item.getUnit()+","+item.getQuantity()+","+item.getCategory());
+            list.add(item.getProducts().getProductName()+","+item.getUnits()+","
+                    +item.getAmount()+","+item.getProducts().getCategoryId());
         }
         returnIntent.putStringArrayListExtra("result", list);
         setResult(RESULT_OK, returnIntent);

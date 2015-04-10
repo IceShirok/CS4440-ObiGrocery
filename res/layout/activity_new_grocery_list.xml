@@ -152,6 +152,7 @@
 	        style="@style/ObiItemsView"
 	        android:layout_width="wrap_content"
 	        android:layout_height="164dp"
+        	android:choiceMode="singleChoice"
 	        android:fadeScrollbars="false" >
 	    </ListView>
 

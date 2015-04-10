@@ -77,6 +77,9 @@ public class EditGroceryListGen extends ActionBarActivity {
 
         finishGroceryButton = (Button) findViewById(R.id.finishGroceryButton);
 
+        chooseButton = (Button) findViewById(R.id.chooseButton);
+        chooseButton.setEnabled(false);
+
         suggestButton = (Button) findViewById(R.id.suggestButton);
         suggestButton.setEnabled(false);
 

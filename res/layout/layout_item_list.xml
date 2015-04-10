@@ -9,8 +9,7 @@ android:layout_height="match_parent" >
     android:layout_height="wrap_content"
     android:layout_centerVertical="true"
     android:layout_alignParentLeft="true"
-    android:paddingLeft="8dp"
-    android:textSize="18sp"
-    android:textStyle="bold" />
+    android:textSize="20dp"
+    android:paddingLeft="8dp" />
 
 </RelativeLayout>
