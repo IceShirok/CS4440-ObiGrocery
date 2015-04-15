@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.example.obigrocery.adapters.ItemListAdapterSelect;
 import com.example.obigrocery.db.DBTools;
+import com.example.obigrocery.db.ListGroceryDAO;
 import com.example.obigrocery.sqlmodel.ListGrocery;
 
 
@@ -48,7 +49,11 @@ public class ChooseItemsList extends CheckPurchasedItems {
          * Use shoppingListId to retrieve
          * Want to have unique/distinct items here from all history, or part of it
          */
-
+        ListGroceryDAO groceryDB = new ListGroceryDAO(this.getBaseContext());
+        List<ListGrocery> items = groceryDB.getAllGroceries();
+        for(ListGrocery item : items) {
+            adapter.add(item);
+        }
         itemsView = (ListView) findViewById(R.id.itemView);
         itemsView.setAdapter(adapter);
     }

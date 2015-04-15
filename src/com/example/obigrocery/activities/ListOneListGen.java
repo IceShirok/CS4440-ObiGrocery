@@ -138,7 +138,7 @@ public class ListOneListGen extends ActionBarActivity {
             if (resultCode == RESULT_OK) {
                 Bundle extras = data.getExtras();
                 if(extras != null) {
-                    int shoppingListId = extras.getInt("SHOPPING_LIST_ID");
+                    long shoppingListId = extras.getLong("SHOPPING_LIST_ID");
                     System.out.println("List selected ID: " + shoppingListId);
                     categoryShift(Populator.ALL_CATEGORY);
                     populateList();

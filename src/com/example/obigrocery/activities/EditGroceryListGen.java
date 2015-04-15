@@ -211,7 +211,7 @@ public class EditGroceryListGen extends ActionBarActivity {
     
     protected float isValidQuantity(String quantity) {
         try {
-            return Integer.parseInt(quantity);
+            return Float.parseFloat(quantity);
         } catch (NumberFormatException e) {
             System.out.println(" problem: " + e);
             return -1;
@@ -369,7 +369,8 @@ public class EditGroceryListGen extends ActionBarActivity {
             @Override
             public void onClick(View v) {
                 String categoryText = cText.getSelectedItem().toString();
-                float amount = isValidQuantity(quantityTextbox.getText().toString());
+                float amount = isValidQuantity(qText.getText().toString());
+                System.out.println(amount);
         
                 if(amount > 0) {
                     ListGrocery newItem = new ListGrocery(listGrocery.getListId(),
@@ -436,6 +437,10 @@ public class EditGroceryListGen extends ActionBarActivity {
 
     protected void updateItemToDatabase(ListGrocery newItem) {
         System.out.println("***** Updating an item to the database. *****");
+        System.out.println(newItem.getListId());
+        productDb.updateProduct(newItem.getProductID(),
+                newItem.getProducts().getProductName(),
+                newItem.getProducts().getCategory());
         listGroceryDb.updateListGrocery(newItem.getId(), newItem.getListId(), newItem.getProductID(),
                 newItem.getUnits(), newItem.getAmount(), newItem.getIsPurchased());
         System.out.println("***** Finished updating an item to the database. *****");

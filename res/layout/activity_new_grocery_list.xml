@@ -52,8 +52,6 @@
                     android:background="#ffffff"
                     android:ems="10"
                     android:hint="Item name" >
-
-                    <requestFocus />
                 </EditText>
             </LinearLayout>
 
