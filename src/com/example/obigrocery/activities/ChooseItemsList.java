@@ -60,7 +60,7 @@ public class ChooseItemsList extends CheckPurchasedItems {
         List<ListGrocery> temp = ((ItemListAdapterSelect) adapter).getCheckedList();
         for(ListGrocery item : temp) {
             list.add(item.getProducts().getProductName()+","+item.getUnits()+","
-                    +item.getAmount()+","+item.getProducts().getCategoryId());
+                    +item.getAmount()+","+item.getProducts().getCategory());
         }
         returnIntent.putStringArrayListExtra("result", list);
         setResult(RESULT_OK, returnIntent);

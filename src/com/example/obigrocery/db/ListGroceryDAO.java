@@ -173,21 +173,23 @@ public class ListGroceryDAO {
 		
 	protected ListGrocery cursorToListGrocery(Cursor cursor) {		
 		ListGrocery listGrocery = new ListGrocery();
-		//listGrocery.setListId(cursor.getLong(0));
+
+        listGrocery.setId(cursor.getLong(0));
+		listGrocery.setListId(cursor.getLong(1));
 		listGrocery.setProductID(cursor.getLong(2));
-		listGrocery.setAmount(cursor.getFloat(2));
-		listGrocery.setUnits(cursor.getString(3));
-		listGrocery.setIsPurchased(cursor.getInt(4));
+        listGrocery.setUnits(cursor.getString(3));
+		listGrocery.setAmount(cursor.getFloat(4));
+		listGrocery.setIsPurchased(cursor.getInt(5));
 		
 		// FK1- get the ShoppingList by id
-		 long listId = cursor.getLong(1);
+		 long listId = listGrocery.getListId();
 		 ShoppingListDAO sdao = new ShoppingListDAO(context);
 		 ShoppingList shoppingList = sdao.getShoppingListById(listId);
 		 if(shoppingList != null)
 			 listGrocery.setShoppingList(shoppingList);
 		 
 		// FK2- get the Products by id
-		 long productId = cursor.getLong(2);
+		 long productId = listGrocery.getProductID();
 		 ProductsDAO pdao = new ProductsDAO(context);
 		 Products products = pdao.getProductsById(productId);
 		 if(products != null)

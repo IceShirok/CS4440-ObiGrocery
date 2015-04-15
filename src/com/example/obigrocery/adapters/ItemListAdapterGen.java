@@ -88,9 +88,8 @@ public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
                 temp.add(item);
             }
         } else {
-            List<String> categories = Populator.getCategories(false);
             for(ListGrocery item : list) {
-                if(categories.get((int)item.getProducts().getCategoryId()).equals(category)) {
+                if(item.getProducts().getCategory().equals(category)) {
                     temp.add(item);
                 }
             }

@@ -2,22 +2,20 @@ package com.example.obigrocery.sqlmodel;
 
 import java.io.Serializable;
 
-import com.example.obigrocery.activities.Populator;
-
 public class Products implements Serializable, Comparable<Products>{
 	public static final String TAG = "Products";
 	private static final long serialVersionUID = -7406082437623008161L;
 	
 	private long id;
 	private String productName;
-	private long categoryId;
+	private String category;
 	
 	public Products() {}
 	
-	public Products(long id, String productName, long categoryId) {
+	public Products(long id, String productName, String category) {
 	    this.id = id;
 	    this.productName = productName;
-	    this.categoryId = categoryId;
+	    this.category = category;
 	}
 	
 	public long getId() {
@@ -36,17 +34,17 @@ public class Products implements Serializable, Comparable<Products>{
 		 this.productName = productName;
 	}
 	
-	public long getCategoryId() {
-		return categoryId;
+	public String getCategory() {
+		return category;
 	}
 	
-	public void setCategoryId(long categoryId) {
-		 this.categoryId = categoryId;
+	public void setCategory(String category) {
+		 this.category = category;
 	}
     
     @Override
     public String toString() {
-        return productName + " (" + Populator.getCategories().get((int)categoryId) + ")";
+        return productName + " (" + category + ")";
     }
     
     @Override

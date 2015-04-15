@@ -352,9 +352,8 @@ public class EditGroceryListGen extends ActionBarActivity {
         cAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         cText.setAdapter(cAdapter);
 
-        List<String> categories = Populator.getCategories(false);
         for (int i=0; i < cText.getCount(); i++){
-            String category = categories.get((int)listGrocery.getProducts().getCategoryId());
+            String category = listGrocery.getProducts().getCategory();
             if (cText.getItemAtPosition(i).toString().equals(category)){
                 index = i;
                 break;
@@ -381,7 +380,7 @@ public class EditGroceryListGen extends ActionBarActivity {
                     newItem.setId(listGrocery.getId());
                     Products product = listGrocery.getProducts();
                     product.setProductName(nText.getText().toString());
-                    product.setCategoryId(0);
+                    product.setCategory(cText.getSelectedItem().toString());
                     newItem.setProducts(product);
                     newItem.setShoppingList(listGrocery.getShoppingList());
                     

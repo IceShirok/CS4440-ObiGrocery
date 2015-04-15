@@ -42,10 +42,10 @@ public class ItemListAdapterPurchase extends ItemListAdapterGen {
             @Override
             public void onClick(View v) {
                 ListGrocery item = getItem(position);
-                boolean isChecked = purchasedCheckbox.isChecked();
+                int isChecked = purchasedCheckbox.isChecked() ? 1 : 0;
                 checkItem(item, purchasedCheckbox.isChecked());
                 listGroceryDb.updateListGrocery(item.getId(), item.getListId(), item.getProductID(),
-                        item.getUnits(), item.getAmount(), isChecked ? 1 : 0);
+                        item.getUnits(), item.getAmount(), isChecked);
             }
         });
 

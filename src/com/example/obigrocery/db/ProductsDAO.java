@@ -3,14 +3,14 @@ package com.example.obigrocery.db;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.example.obigrocery.sqlmodel.*;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+
+import com.example.obigrocery.sqlmodel.Products;
 
 
 
@@ -122,7 +122,7 @@ public class ProductsDAO {
 		Products products = new Products();
 		products.setId(cursor.getLong(0));
 		products.setProductName(cursor.getString(1));
-		products.setCategoryId(cursor.getLong(2));
+		products.setCategory(cursor.getString(2));
 	
 		 return products;
 	}

@@ -19,6 +19,7 @@ public class Populator {
         categoryArray.add("Frozen Food");
         categoryArray.add("Houseware");
         categoryArray.add("Baked Goods");
+        categoryArray.add("Other");
         Collections.sort(categoryArray);
 
         unitArray = new ArrayList<String>();
