@@ -2,6 +2,8 @@ package com.example.obigrocery.sqlmodel;
 
 import java.io.Serializable;
 
+import com.example.obigrocery.activities.Populator;
+
 public class Products implements Serializable, Comparable<Products>{
 	public static final String TAG = "Products";
 	private static final long serialVersionUID = -7406082437623008161L;
@@ -44,7 +46,7 @@ public class Products implements Serializable, Comparable<Products>{
     
     @Override
     public String toString() {
-        return productName + " : " + categoryId;
+        return productName + " (" + Populator.getCategories().get((int)categoryId) + ")";
     }
     
     @Override

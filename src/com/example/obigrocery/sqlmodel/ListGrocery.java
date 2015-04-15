@@ -93,7 +93,7 @@ public class ListGrocery implements Serializable, Comparable<ListGrocery>{
     
     @Override
     public String toString() {
-        return products.toString();
+        return products.toString() + "\n" + amount + " " + units;
     }
     
     @Override

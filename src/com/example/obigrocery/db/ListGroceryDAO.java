@@ -71,7 +71,6 @@ public class ListGroceryDAO {
 
 	public void deleteListGroceryById(ListGrocery listGrocery) {
 		 long id = listGrocery.getId();
-		 System.out.println("the deleted listGrocery has the id: " + id);
 		 database.delete(DBTools.TABLE_LISTGROCERY, DBTools.COLUMN_LISTGROCERY_LISTGROCERYID 
 				 + " = " + id, null);
 	}
@@ -190,9 +189,6 @@ public class ListGroceryDAO {
 		// FK2- get the Products by id
 		 long productId = cursor.getLong(2);
 		 ProductsDAO pdao = new ProductsDAO(context);
-		 System.out.println("hi : " + cursor.getLong(0));
-         System.out.println("hi : " + cursor.getLong(1));
-         System.out.println("hi : " + cursor.getLong(2));
 		 Products products = pdao.getProductsById(productId);
 		 if(products != null)
 			 listGrocery.setProducts(products);

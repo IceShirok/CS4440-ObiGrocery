@@ -8,26 +8,20 @@ public class Populator {
     
     public final static String ALL_CATEGORY = "All";
     
-    public static List<String> getCategories(boolean needAll) {
-        List<String> categoryArray = new ArrayList<String>();
-        if(needAll) {
-            categoryArray.add(ALL_CATEGORY);
-        }
-
+    private static List<String> categoryArray;
+    private static List<String> unitArray;
+    
+    static {
+        categoryArray = new ArrayList<String>();
         categoryArray.add("Protein");
         categoryArray.add("Fruit & Vegetable");
         categoryArray.add("Drinks");
         categoryArray.add("Frozen Food");
         categoryArray.add("Houseware");
         categoryArray.add("Baked Goods");
-
         Collections.sort(categoryArray);
-        return categoryArray;
-    }
-    
-    public static List<String> getUnits() {
-        List<String> unitArray = new ArrayList<String>();
-        
+
+        unitArray = new ArrayList<String>();
         unitArray.add("unit");
         unitArray.add("oz");
         unitArray.add("lbs");
@@ -35,8 +29,23 @@ public class Populator {
         unitArray.add("pint");
         unitArray.add("quart");
         unitArray.add("gallon");
-        
         Collections.sort(unitArray);
+    }
+    
+    public static List<String> getCategories(boolean needAll) {
+        List<String> gimme = new ArrayList<String>();
+        if(needAll) {
+            gimme.add(ALL_CATEGORY);
+        }
+        gimme.addAll(categoryArray);
+        return gimme;
+    }
+    
+    public static List<String> getCategories() {
+        return categoryArray;
+    }
+    
+    public static List<String> getUnits() {
         return unitArray;
     }
 

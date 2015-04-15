@@ -374,11 +374,15 @@ public class EditGroceryListGen extends ActionBarActivity {
         
                 if(amount > 0) {
                     ListGrocery newItem = new ListGrocery(listGrocery.getListId(),
-                            listGrocery.getProductID(), amount, 
+                            listGrocery.getProductID(),
+                            amount, 
                             uText.getSelectedItem().toString(),
                             listGrocery.getIsPurchased());
                     newItem.setId(listGrocery.getId());
-                    newItem.setProducts(listGrocery.getProducts());
+                    Products product = listGrocery.getProducts();
+                    product.setProductName(nText.getText().toString());
+                    product.setCategoryId(0);
+                    newItem.setProducts(product);
                     newItem.setShoppingList(listGrocery.getShoppingList());
                     
                     categoryShift(categoryText);
