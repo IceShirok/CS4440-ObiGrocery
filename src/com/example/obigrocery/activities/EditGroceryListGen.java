@@ -1,5 +1,7 @@
 package com.example.obigrocery.activities;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import android.app.AlertDialog;
@@ -278,24 +280,32 @@ public class EditGroceryListGen extends ActionBarActivity {
         if (requestCode == CHOOSE_ITEM || requestCode == SUGGEST_ITEM) {
             if (resultCode == RESULT_OK) {
                 // not implemented
-                /*
+
                 System.out.println("Chose some items from a list");
                 Bundle extras = data.getExtras();
                 if(extras != null) {
-                    int shoppingListId = extras.getInt("SHOPPING_LIST_ID");
+                    long shoppingListId = extras.getLong("SHOPPING_LIST_ID");
                     System.out.println("List selected ID: " + shoppingListId);
-                    ArrayList<String> newItems = data.getStringArrayListExtra("result");
+                    List<String> newItems = data.getStringArrayListExtra("result");
                     for(String s : newItems) {
-                        String[] split = s.split(",");
-                        ItemPOJO item = isValidItem(split[0], split[1], split[2],split[3]);
+                        System.out.println(s);
+                    }
+                    for(String s : newItems) {
+                        String[] split = s.split("\\|");
+                        long productId = Long.parseLong(split[0]);
+                        String unit = split[1];
+                        float amount = Float.parseFloat(split[2]);
+                        
+                        ListGrocery item = listGroceryDb.createListGrocery(shoppingListId,
+                                productId, amount, unit, 0);
+
                         addItemsToDisplay(item);
-                        addItemsToDatabase(item);
                     }
                     categoryShift(Populator.ALL_CATEGORY);
                 } else {
                     System.out.println("error occurred when importing list...");
                 }
-                */
+
             }
         }
     }

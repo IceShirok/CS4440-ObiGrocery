@@ -4,27 +4,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.obigrocery.adapters.ItemListAdapterSelect;
 import com.example.obigrocery.db.DBTools;
-import com.example.obigrocery.db.ListGroceryDAO;
+import com.example.obigrocery.db.ProductsDAO;
 import com.example.obigrocery.sqlmodel.ListGrocery;
+import com.example.obigrocery.sqlmodel.Products;
 
 
 public class ChooseItemsList extends CheckPurchasedItems {
 	
 	// The object that allows to manipulate the database
 	DBTools dbTools = new DBTools(this);
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_check_purchased_items);
-    }
     
     /******************************************************************
      * Creating the display of a list, read-only
@@ -44,15 +38,13 @@ public class ChooseItemsList extends CheckPurchasedItems {
      ******************************************************************/
     protected void populateList() {
         adapter = new ItemListAdapterSelect(this, shoppingListId);
-        /*
-         * TODO use database to populate
-         * Use shoppingListId to retrieve
-         * Want to have unique/distinct items here from all history, or part of it
-         */
-        ListGroceryDAO groceryDB = new ListGroceryDAO(this.getBaseContext());
-        List<ListGrocery> items = groceryDB.getAllGroceries();
-        for(ListGrocery item : items) {
-            adapter.add(item);
+        ProductsDAO groceryDB = new ProductsDAO(this.getBaseContext());
+        List<Products> items = groceryDB.getAllGroceries();
+        for(Products item : items) {
+            ListGrocery i = new ListGrocery();
+            i.setProducts(item);
+            System.out.println(i);
+            adapter.add(i);
         }
         itemsView = (ListView) findViewById(R.id.itemView);
         itemsView.setAdapter(adapter);
@@ -64,10 +56,11 @@ public class ChooseItemsList extends CheckPurchasedItems {
         ArrayList<String> list = new ArrayList<>();
         List<ListGrocery> temp = ((ItemListAdapterSelect) adapter).getCheckedList();
         for(ListGrocery item : temp) {
-            list.add(item.getProducts().getProductName()+","+item.getUnits()+","
-                    +item.getAmount()+","+item.getProducts().getCategory());
+            list.add(item.getProductID()+"|"+item.getUnits()+"|"
+                    +item.getAmount());
         }
         returnIntent.putStringArrayListExtra("result", list);
+        returnIntent.putExtra("SHOPPING_LIST_ID", shoppingListId);
         setResult(RESULT_OK, returnIntent);
         finish();
     }

@@ -15,9 +15,6 @@ import com.example.obigrocery.activities.R;
 import com.example.obigrocery.sqlmodel.ListGrocery;
 
 public class ItemListAdapterSelect extends ItemListAdapterGen {
-    
-    private ArrayList<Boolean> checkedList;
-    private boolean isPopulated;
 
     public ItemListAdapterSelect(Context context, long shoppingListId) {
         super(context, shoppingListId);
@@ -42,14 +39,10 @@ public class ItemListAdapterSelect extends ItemListAdapterGen {
         selectCheckbox.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(!isPopulated) {
-                    checkedList = new ArrayList<>();
-                    for(int i=0; i<list.size(); i++) {
-                        checkedList.add(false);
-                    }
-                    isPopulated = true;
-                }
-                checkedList.add(position, selectCheckbox.isChecked());
+                ListGrocery item = display.get(position);
+                remove(item);
+                item.setIsPurchased(selectCheckbox.isChecked() ? 1 : 0);
+                add(item);
             }
         });
 
@@ -69,12 +62,10 @@ public class ItemListAdapterSelect extends ItemListAdapterGen {
     
     public List<ListGrocery> getCheckedList() {
         List<ListGrocery> temp = new ArrayList<>();
-            if(checkedList != null) {
-            for(int i=0; i<list.size(); i++) {
-                if(checkedList.get(i).booleanValue()) {
-                    temp.add(list.get(i));
-                    System.out.println(list.get(i));
-                }
+        for(int i=0; i<list.size(); i++) {
+            if(list.get(i).getIsPurchased() != 0) {
+                temp.add(list.get(i));
+                System.out.println("selected: "+list.get(i));
             }
         }
         return temp;

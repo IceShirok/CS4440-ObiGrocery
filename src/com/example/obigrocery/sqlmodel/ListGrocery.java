@@ -108,17 +108,17 @@ public class ListGrocery implements Serializable, Comparable<ListGrocery>{
             return false;
         }
         ListGrocery that = (ListGrocery)other;
-        return this.getId() == that.getId();
+        return this.getProducts().equals(that.getProducts());
     }
     
     @Override
     public int hashCode() {
-        return (int) (this.getId());
+        return (int) (this.getProducts().hashCode());
     }
 
     @Override
     public int compareTo(ListGrocery another) {
-        return (int) (this.getId() - another.getId());
+        return (int) (this.getProducts().compareTo(another.getProducts()));
     }
 
 }

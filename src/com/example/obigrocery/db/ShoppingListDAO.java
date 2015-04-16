@@ -106,9 +106,13 @@ public class ShoppingListDAO {
 	 
 	protected ShoppingList cursorToShoppingList(Cursor cursor) {
 		ShoppingList shoppingList = new ShoppingList();
-		shoppingList.setId(cursor.getLong(0));
-		shoppingList.setDateTime(cursor.getString(1));
-
+		try {
+    		shoppingList.setId(cursor.getLong(0));
+    		shoppingList.setDateTime(cursor.getString(1));
+		} catch(Exception e) {
+		    shoppingList = null;
+		    System.out.println("issues with adding stuff :P");
+		}
 		return shoppingList;
 	}
 

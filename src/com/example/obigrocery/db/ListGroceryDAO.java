@@ -167,21 +167,6 @@ public class ListGroceryDAO {
                 null) > 0;
     }
 
-    public List<ListGrocery> getAllGroceries() {
-        List<ListGrocery> listListGrocery = new ArrayList<ListGrocery>();
-
-        Cursor cursor = database.rawQuery("SELECT * FROM " + DBTools.TABLE_LISTGROCERY, null);
-
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            ListGrocery listGrocery = cursorToListGrocery(cursor);
-            listListGrocery.add(listGrocery);
-            cursor.moveToNext();
-        }
-        cursor.close();
-        return listListGrocery;
-    }
-
     protected ListGrocery cursorToListGrocery(Cursor cursor) {
         ListGrocery listGrocery = new ListGrocery();
 

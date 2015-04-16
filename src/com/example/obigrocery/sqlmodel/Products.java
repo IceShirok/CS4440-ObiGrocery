@@ -59,17 +59,22 @@ public class Products implements Serializable, Comparable<Products>{
             return false;
         }
         Products that = (Products)other;
-        return this.getId() == that.getId();
+        return this.getProductName().equals(that.getProductName())
+                && this.getCategory().equals(that.getCategory());
     }
     
     @Override
     public int hashCode() {
-        return (int) (this.getId());
+        return (int) (this.getProductName().hashCode()
+                + this.getCategory().hashCode());
     }
 
     @Override
     public int compareTo(Products another) {
-        return (int) (this.getId() - another.getId());
+        if(this.getProductName().compareTo(another.getProductName()) != 0) {
+            return this.getProductName().compareTo(another.getProductName());
+        }
+        return this.getCategory().compareTo(another.getCategory());
     }
 
 }
