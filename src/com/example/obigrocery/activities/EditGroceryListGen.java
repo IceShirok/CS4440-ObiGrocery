@@ -140,6 +140,7 @@ public class EditGroceryListGen extends ActionBarActivity {
      * Selecting between categories
      ******************************************************************/
     protected void categoryShift(String category) {
+        categorySpinner.setSelection(Populator.getCategories(true).indexOf(category));
         adapter.displayCategory(category);
         itemsView.invalidateViews();
         itemsView.setAdapter(adapter);
@@ -391,7 +392,7 @@ public class EditGroceryListGen extends ActionBarActivity {
                     newItem.setId(listGrocery.getId());
                     Products product = listGrocery.getProducts();
                     product.setProductName(nText.getText().toString());
-                    product.setCategory(cText.getSelectedItem().toString());
+                    product.setCategory(categoryText);
                     newItem.setProducts(product);
                     newItem.setShoppingList(listGrocery.getShoppingList());
                     
