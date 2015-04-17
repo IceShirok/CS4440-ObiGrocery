@@ -57,7 +57,7 @@ public class ListGroceryDAO {
         values.put(DBTools.COLUMN_LISTGROCERY_ISPURCHASED, isPurchased);
 
         long insertId = database
-                .insert(DBTools.TABLE_LISTGROCERY, null, values);
+                .insertOrThrow(DBTools.TABLE_LISTGROCERY, null, values);
 
         Cursor cursor = database.query(DBTools.TABLE_LISTGROCERY, allColumns,
                 DBTools.COLUMN_LISTGROCERY_LISTGROCERYID + " = " + insertId,

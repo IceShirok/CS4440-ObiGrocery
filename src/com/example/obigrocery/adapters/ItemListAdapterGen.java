@@ -43,6 +43,10 @@ public class ItemListAdapterGen extends BaseAdapter implements ListAdapter {
         return display.get(pos);
     }
 
+    public boolean contains(ListGrocery item) {
+        return display.contains(item);
+    }
+    
     @Override
     public long getItemId(int pos) {
         // not needed

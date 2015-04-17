@@ -48,7 +48,7 @@ public class ProductsDAO {
         values.put(DBTools.COLUMN_PRODUCTS_PRODUCTNAME, productName);
         values.put(DBTools.COLUMN_PRODUCTS_CATEGORYNAME, categoryName);
 
-        long insertId = database.insert(DBTools.TABLE_PRODUCTS, null, values);
+        long insertId = database.insertOrThrow(DBTools.TABLE_PRODUCTS, null, values);
 
         Cursor cursor = database.query(DBTools.TABLE_PRODUCTS, allColumns,
                 DBTools.COLUMN_PRODUCTS_PRODUCTID + " = " + insertId, null,
@@ -80,6 +80,18 @@ public class ProductsDAO {
             cursor.moveToFirst();
         }
 
+        Products products = cursorToProducts(cursor);
+        return products;
+    }
+
+
+    public Products getProductByName(String name, String category) {
+        System.out.println(name + " " + category);
+        Cursor cursor = database.query(DBTools.TABLE_PRODUCTS, allColumns,
+                DBTools.COLUMN_PRODUCTS_PRODUCTNAME + " = ?",
+                new String[]{String.valueOf(name)},
+                null, null, null);
+        cursor.moveToFirst();
         Products products = cursorToProducts(cursor);
         return products;
     }

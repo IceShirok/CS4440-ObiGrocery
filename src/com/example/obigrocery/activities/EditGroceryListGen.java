@@ -8,6 +8,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.database.sqlite.SQLiteConstraintException;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.text.Editable;
@@ -196,10 +197,21 @@ public class EditGroceryListGen extends ActionBarActivity {
                     categorySpinner.getSelectedItem().toString(),
                     amount,
                     unitSpinner.getSelectedItem().toString());
-            addItemsToDisplay(item);
-            quantityTextbox.setText("");
-            itemNameTextbox.setText("");
-            return true;
+            if(item != null) {
+                addItemsToDisplay(item);
+                quantityTextbox.setText("");
+                itemNameTextbox.setText("");
+                return true;
+            } else {
+                String errorMessage = "Item already in list!";
+                new AlertDialog.Builder(this)
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .setTitle("Error")
+                .setMessage(errorMessage)
+                .setNeutralButton("OK", null)
+                .show();
+                return false;
+            }
         } else {
             String errorMessage = "Input not valid!";
             new AlertDialog.Builder(this)
@@ -222,9 +234,19 @@ public class EditGroceryListGen extends ActionBarActivity {
     }
 
     protected void addItemsToDisplay(ListGrocery item) {
-        adapter.add(item);
-        itemsView.invalidateViews();
-        itemsView.setAdapter(adapter);
+        if(!adapter.contains(item)) {
+            adapter.add(item);
+            itemsView.invalidateViews();
+            itemsView.setAdapter(adapter);
+        } else {
+            String errorMessage = "Item already exists in list!";
+            new AlertDialog.Builder(this)
+            .setIcon(android.R.drawable.ic_dialog_alert)
+            .setTitle("Error")
+            .setMessage(errorMessage)
+            .setNeutralButton("OK", null)
+            .show();
+        }
     }
 
     protected boolean enableAdd() {
@@ -439,9 +461,16 @@ public class EditGroceryListGen extends ActionBarActivity {
 
     protected ListGrocery addItemsToDatabase(String name, String category, float quantity, String unit) {
         System.out.println("***** Adding an item to the database. *****");
-        Products product = productDb.createProducts(name, category);
-        System.out.println("product id should be: " + product.getId());
-        ListGrocery groceryItem = listGroceryDb.createListGrocery(shoppingListId, product.getId(), quantity, unit, 0);
+        Products product = null;
+        ListGrocery groceryItem = null;
+        try {
+            product = productDb.createProducts(name, category);
+            System.out.println("product id should be: " + product.getId());
+        } catch(SQLiteConstraintException e) {
+            System.out.println(e);
+            product = productDb.getProductByName(name, category);
+        }
+        groceryItem = listGroceryDb.createListGrocery(shoppingListId, product.getId(), quantity, unit, 0);
         System.out.println("***** Finished adding an item to the database. *****");
         return groceryItem;
     }
