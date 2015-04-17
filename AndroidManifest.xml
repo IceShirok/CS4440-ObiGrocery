@@ -60,6 +60,10 @@
             android:name=".SuggestItemsList"
             android:label="@string/title_activity_show_shopping_lists" >
         </activity>
+        <activity
+            android:name=".ReportListShopping"
+            android:label="@string/title_activity_report_summaries" >
+        </activity>
     </application>
 
 </manifest>

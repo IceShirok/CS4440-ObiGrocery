@@ -21,7 +21,7 @@ public class ObiGroceryMainActivity extends ActionBarActivity {
         setContentView(R.layout.activity_main_menu);
         
         Button reportButton = (Button) findViewById(R.id.genReportButton);
-        reportButton.setEnabled(false);
+        reportButton.setEnabled(true);
         //reportButton.setVisibility(View.GONE);
     }
 
@@ -63,8 +63,8 @@ public class ObiGroceryMainActivity extends ActionBarActivity {
     }
     
     public void gotoReports(View view) {
-        //Intent i = new Intent(getApplicationContext(), ReportInputActivity.class);
-        //startActivity(i);
+        Intent i = new Intent(getApplicationContext(), ReportListShopping.class);
+        startActivity(i);
     }
 
     public void exitApp(View view) {
