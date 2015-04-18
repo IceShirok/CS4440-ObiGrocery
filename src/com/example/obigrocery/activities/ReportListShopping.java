@@ -15,13 +15,20 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.obigrocery.db.ListGroceryDAO;
+import com.example.obigrocery.db.ProductsDAO;
 import com.example.obigrocery.db.ShoppingListDAO;
+import com.example.obigrocery.sqlmodel.ListGrocery;
 import com.example.obigrocery.sqlmodel.ShoppingList;
 
 public class ReportListShopping extends ActionBarActivity {
     
     protected ListView shoppingListView;
     protected ArrayAdapter<String> adapter;
+    
+    protected ShoppingListDAO shoppingListDb;
+    protected ProductsDAO productDb;
+    protected ListGroceryDAO listGroceryDb;
 
     /******************************************************************
      * Creating the list of shopping lists
@@ -30,6 +37,10 @@ public class ReportListShopping extends ActionBarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_shopping_lists);
+        
+        shoppingListDb = new ShoppingListDAO(this);
+        productDb = new ProductsDAO(this);
+        listGroceryDb = new ListGroceryDAO(this);
         
         setInstructions();
         setupListView();
@@ -64,12 +75,26 @@ public class ReportListShopping extends ActionBarActivity {
     /******************************************************************
      * Populating the list - a database story
      ******************************************************************/
-    protected void populateList() {
-        // TODO use db and create reports
+    protected void populateList() {    	 
+    	List<ShoppingList> lists = shoppingListDb.getAllShoppingLists();
     	List<String> values = new ArrayList<>();
-    	for(int i=0; i<10; i++) {
-	        values.add("String " + i);
+
+    	for (ShoppingList list: lists){
+    		List<ListGrocery> lGroceries = listGroceryDb.getListGeocerybyListId(list.getId());
+    		String timeStamp = list.getDateTime();
+    		int count = lGroceries.size();
+    		int notPurchased = count - (listGroceryDb.getPurchasedbyListId(list.getId()));
+    		values.add("*Shopping list " + list.getId());
+    		values.add("\t\t\u2022Created on " + timeStamp);
+    		values.add("\t\t\u2022" + count + " items- " + notPurchased + " not purchased");
+    		values.add("");
     	}
+    	
+    	//ListGrocery item = listGroceryDb.createListGrocery();
+    	
+    	//for(int i=0; i<10; i++) {
+	    //    values.add("String" + i);
+    	//}
         adapter = new ArrayAdapter<String>(this,
         		android.R.layout.simple_list_item_1, values);
         shoppingListView.setAdapter(adapter);

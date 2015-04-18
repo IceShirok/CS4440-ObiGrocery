@@ -91,6 +91,21 @@ public class ListGroceryDAO {
         cursor.close();
         return listListGrocery;
     }
+    
+    public int getPurchasedbyListId(long listId){
+    	int purchased = 0;    	
+    	
+    	List<ListGrocery> listGrocery = getListGeocerybyListId(listId);
+    	 
+    	 if (listGrocery != null && !listGrocery.isEmpty()) {
+            for (ListGrocery l : listGrocery) {
+                if (l.getIsPurchased() == 1){
+                	purchased++;
+                }
+            }
+    	 }    	
+    	return purchased;
+    }
 
     public List<ListGrocery> getListGeocerybyProductId(long productId) {
         List<ListGrocery> listListGrocery = new ArrayList<ListGrocery>();
