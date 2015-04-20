@@ -67,7 +67,7 @@ public class ListOneListGen extends ActionBarActivity {
     }
     
     protected void setTitle() {
-        String title = "Obi Grocery - Show List " + shoppingListId;
+        String title = "Smart Grocery - Show List " + shoppingListId;
         this.setTitle(title);
     }
 

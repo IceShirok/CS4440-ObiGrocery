@@ -48,7 +48,7 @@ public class CheckPurchasedItems extends ListOneListGen {
     }
     
     protected void setTitle() {
-        String title = "Obi Grocery - Purchase with List " + shoppingListId;
+        String title = "Smart Grocery - Purchase with List " + shoppingListId;
         this.setTitle(title);
     }
     
